@@ -1,0 +1,880 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Noto Sans JP","Inter",sans-serif;background:#ffffff;color:#0f172a;font-size:16px;line-height:1.8;letter-spacing:0.02em;word-break:break-all;overflow-wrap:break-word}
+
+/* ヒーロー */
+.hero{background:linear-gradient(135deg,#1e3a5f 0%,#06b6d4 100%);color:#f1f5f9;text-align:center;overflow:hidden}
+.hero-banner{width:100%;max-height:220px;object-fit:cover;display:block}
+.hero-body{padding:0 40px 56px;position:relative}
+.hero-body.no-banner{padding-top:64px}
+.hero-avatar{width:120px;height:120px;border-radius:50%;border:5px solid #fff;display:block;margin:0 auto 16px;background:#fff;object-fit:cover;box-shadow:0 6px 20px rgba(0,0,0,.35)}
+.hero-body:not(.no-banner) .hero-avatar{margin-top:-60px}
+.hero h1{font-size:36px;font-weight:800;line-height:1.3;letter-spacing:-0.01em;margin-bottom:10px}
+.hero .sub{font-size:15px;opacity:.85;letter-spacing:0.03em}
+.hero .ch-link{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:9px 22px;border-radius:999px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.45);color:#fff;font-weight:700;font-size:14px;text-decoration:none;transition:background .2s}
+.hero .ch-link:hover{background:rgba(255,255,255,.30)}
+.hero .meta{margin-top:24px;display:flex;gap:32px;justify-content:center;flex-wrap:wrap}
+.hero .meta-item{text-align:center}
+.hero .meta-item .val{font-size:28px;font-weight:700;display:block}
+.hero .meta-item .lbl{font-size:13px;opacity:.8}
+
+/* セクション（交互背景） */
+.sec-white{background:#ffffff;padding:64px 40px}
+.sec-grad{background:linear-gradient(135deg,#1e3a5f 0%,#06b6d4 100%);color:#f1f5f9;padding:64px 40px}
+.sec-gray{background:#f8fafc;padding:64px 40px}
+.sec-grad-rev{background:linear-gradient(135deg,#06b6d4 0%,#1e3a5f 100%);color:#f1f5f9;padding:64px 40px}
+
+.container{max-width:1120px;margin:0 auto}
+
+/* 見出し */
+.sec-white h2,.sec-gray h2{font-size:28px;font-weight:700;line-height:1.4;margin-bottom:24px;color:#1e3a5f;border-left:5px solid #06b6d4;padding-left:16px}
+.sec-grad h2,.sec-grad-rev h2{font-size:28px;font-weight:700;line-height:1.4;margin-bottom:24px;color:#f1f5f9;border-left:5px solid rgba(255,255,255,.6);padding-left:16px}
+h3{font-size:20px;font-weight:600;line-height:1.5;margin:32px 0 16px;color:#1e3a5f}
+.sec-grad h3,.sec-grad-rev h3{color:#f1f5f9}
+
+/* カード */
+.card{background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;padding:32px;box-shadow:0 4px 16px rgba(30,58,95,.08);transition:box-shadow .2s}
+.card:hover{box-shadow:0 8px 32px rgba(30,58,95,.14)}
+
+/* グリッド */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:24px}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-bottom:24px}
+@media(max-width:1023px){.grid-3{grid-template-columns:repeat(2,1fr)}.grid-2{grid-template-columns:1fr}}
+@media(max-width:767px){.grid-3,.grid-2{grid-template-columns:1fr}}
+
+/* 統計カード */
+.stat-card{background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;padding:24px;box-shadow:0 4px 16px rgba(30,58,95,.08);text-align:center}
+.stat-card .stat-val{font-size:32px;font-weight:700;color:#1e3a5f;display:block;margin-bottom:4px;font-family:"Inter","Noto Sans JP",sans-serif}
+.stat-card .stat-lbl{font-size:13px;color:#475569;font-weight:600;letter-spacing:.05em}
+.stat-card .stat-diff{font-size:13px;margin-top:8px;font-weight:600}
+.diff-up{color:#10b981}
+.diff-down{color:#ef4444}
+.diff-flat{color:#94a3b8}
+
+/* グラジエント背景上の統計カード */
+.sec-grad .stat-card,.sec-grad-rev .stat-card{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25);color:#f1f5f9}
+.sec-grad .stat-card .stat-val,.sec-grad-rev .stat-card .stat-val{color:#f1f5f9}
+.sec-grad .stat-card .stat-lbl,.sec-grad-rev .stat-card .stat-lbl{color:rgba(241,245,249,.75)}
+
+/* 比較テーブル */
+.cmp-table{width:100%;border-collapse:collapse;margin-bottom:24px;font-size:15px}
+.cmp-table th{background:#1e3a5f;color:#f1f5f9;padding:12px 16px;text-align:left;font-weight:600;white-space:nowrap}
+.cmp-table td{padding:12px 16px;border-bottom:1px solid #e2e8f0;vertical-align:middle}
+.cmp-table tr:nth-child(even) td{background:#f8fafc}
+.cmp-table .num{text-align:right;font-family:"Inter","Noto Sans JP",sans-serif;font-weight:600}
+.cmp-table .up{color:#10b981;font-weight:700}
+.cmp-table .down{color:#ef4444;font-weight:700}
+
+/* タブ */
+.tab-wrapper{margin-bottom:32px}
+.tab-btns{display:flex;gap:0;border-bottom:2px solid #e2e8f0;margin-bottom:24px}
+.tab-btn{padding:12px 24px;font-size:15px;font-weight:600;cursor:pointer;background:none;border:none;color:#475569;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s}
+.tab-btn.active{color:#1e3a5f;border-bottom-color:#06b6d4}
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* トップ10テーブル */
+.top-table{width:100%;border-collapse:collapse;margin-bottom:16px}
+.top-table th{background:#1e3a5f;color:#f1f5f9;padding:10px 14px;font-size:14px;font-weight:600;white-space:nowrap;text-align:left}
+.top-table td{padding:10px 14px;border-bottom:1px solid #e2e8f0;vertical-align:middle;font-size:14px}
+.top-table tr:nth-child(even) td{background:#f8fafc}
+.top-table .rank{font-size:18px;font-weight:700;color:#1e3a5f;text-align:center;width:40px}
+.top-table .thumb-cell img{width:100px;height:auto;border-radius:6px;display:block}
+.top-table .num{text-align:right;font-family:"Inter","Noto Sans JP",sans-serif;font-weight:600}
+.top-table a{color:#0369a1;text-decoration:none}
+.top-table a:hover{text-decoration:underline}
+
+/* 動画カード（個別分析） */
+.video-analysis-card{background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;margin-bottom:32px;box-shadow:0 4px 16px rgba(30,58,95,.08);overflow:hidden}
+.vcard-header{display:flex;gap:20px;padding:24px;align-items:flex-start;border-bottom:1px solid #e2e8f0}
+.vcard-thumb{flex-shrink:0;width:160px}
+.vcard-thumb img{width:100%;border-radius:8px}
+.vcard-info{flex:1}
+.vcard-info h3{font-size:18px;font-weight:700;margin-bottom:8px;line-height:1.4}
+.vcard-info h3 a{color:#0f172a;text-decoration:none}
+.vcard-info h3 a:hover{color:#06b6d4}
+.vcard-meta{font-size:13px;color:#475569;margin-bottom:8px}
+.badge{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:20px;letter-spacing:.05em}
+.badge-long{background:#dbeafe;color:#1e40af}
+.badge-short{background:#d1fae5;color:#065f46}
+.badge-tr{background:#fef3c7;color:#92400e}
+.badge-pending{background:#e2e8f0;color:#475569}
+.badge-carry{background:#ede9fe;color:#6d28d9}
+
+.vcard-metrics{padding:20px 24px;background:#f8fafc;border-bottom:1px solid #e2e8f0}
+.metrics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
+.metric-item{text-align:center}
+.metric-item .m-val{font-size:18px;font-weight:700;color:#1e3a5f;font-family:"Inter","Noto Sans JP",sans-serif}
+.metric-item .m-lbl{font-size:12px;color:#475569;font-weight:600}
+
+
+.vcard-analysis{padding:24px}
+.vcard-summary{background:#eff6ff;border-left:4px solid #3b82f6;padding:12px 16px;border-radius:0 8px 8px 0;margin-bottom:16px;font-size:14px;line-height:1.7}
+.vcard-reason{background:#f0fdf4;border-left:4px solid #10b981;padding:12px 16px;border-radius:0 8px 8px 0;margin-bottom:12px;font-size:14px;line-height:1.7}
+.vcard-improve{background:#fff7ed;border-left:4px solid #f59e0b;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14px;line-height:1.7}
+.vcard-label{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;display:block}
+.vcard-label-blue{color:#3b82f6}
+.vcard-label-green{color:#10b981}
+.vcard-label-orange{color:#f59e0b}
+
+/* 総括ボックス */
+.summary-box{background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;padding:32px;margin-bottom:24px;box-shadow:0 4px 16px rgba(30,58,95,.08);color:#1e293b}
+.summary-box h3{color:#1e3a5f;font-size:18px;font-weight:700;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid #e2e8f0}
+.summary-box p{font-size:15px;line-height:1.9;color:#1e293b;margin-bottom:12px}
+.summary-box ul{margin:0 0 12px 20px}
+.summary-box ul li{font-size:15px;line-height:1.9;margin-bottom:6px;color:#1e293b}
+
+/* グラフ */
+.chart-wrap{background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;padding:24px;margin-bottom:24px;box-shadow:0 4px 16px rgba(30,58,95,.08)}
+.chart-wrap h3{font-size:16px;font-weight:700;color:#1e3a5f;margin-bottom:16px}
+.sec-grad .chart-wrap,.sec-grad-rev .chart-wrap{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2)}
+.sec-grad .chart-wrap h3,.sec-grad-rev .chart-wrap h3{color:#f1f5f9}
+
+/* フッター */
+footer{background:#1e3a5f;color:#f1f5f9;text-align:center;padding:32px;font-size:14px;opacity:.9}
+
+a{color:#0369a1}
+a:hover{text-decoration:underline}
+.no-data{color:#94a3b8;font-style:italic;font-size:14px}
+.note{font-size:13px;color:#64748b;margin-bottom:8px}
+</style>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+  <title>歌舞伎町TV 分析レポート 2026年5月</title>
+</head>
+<body>
+
+<section class="hero">
+  <img class="hero-banner" src="https://yt3.googleusercontent.com/b248jdoOdItqDOyoqlBeZM7JPcKh6nQNbqlwWuHFqUD0SHL2ixmpAnY84FsEuON-S0Sa7JEFFA=w1280" alt="バナー">
+  <div class="hero-body">
+    <div class="container">
+      <a href="https://www.youtube.com/@tv-ki3dh" target="_blank" rel="noopener" style="text-decoration:none"><img class="hero-avatar" src="https://yt3.ggpht.com/G_AWj3ySKTU4LvtngzbEoD49TfWNf6ZkCJHElpuXFJtygLBK8n3gpffotiOjS5P_ffGKeafOKpo=s800-c-k-c0x00ffffff-no-rj" alt="アイコン"></a>
+      <h1>歌舞伎町TV 月次分析レポート 2026年5月</h1>
+      <p class="sub">生成日: 2026-06-04 | チャンネルID: UCqfff3-82N8Gjm_YPBmy9NA</p>
+      <a class="ch-link" href="https://www.youtube.com/@tv-ki3dh" target="_blank" rel="noopener">▶ YouTubeでチャンネルを見る（@tv-ki3dh）</a>
+      <div class="meta">
+        <div class="meta-item">
+          <span class="val">44,000</span>
+          <span class="lbl">登録者数</span>
+        </div>
+        <div class="meta-item">
+          <span class="val">26,055,053</span>
+          <span class="lbl">総再生回数</span>
+        </div>
+        <div class="meta-item">
+          <span class="val">837</span>
+          <span class="lbl">公開動画数</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="sec-white">
+  <div class="container">
+    <h2>全体サマリー</h2>
+    <div class="grid-3"><div class="stat-card" style="border:2px solid #06b6d4"><div style="font-weight:700;font-size:16px;margin-bottom:12px">2026年5月 <span class="badge badge-long">当月</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">月間再生</span><span style="font-weight:700;font-family:Inter,sans-serif">392,265 回</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">総視聴時間</span><span style="font-weight:700;font-family:Inter,sans-serif">56,673時間</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">平均維持率</span><span style="font-weight:700;font-family:Inter,sans-serif">42.8%</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">平均視聴時間</span><span style="font-weight:700;font-family:Inter,sans-serif">9:09</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">登録純増</span><span style="font-weight:700;font-family:Inter,sans-serif">181 人</span></div></div><div class="stat-card" ><div style="font-weight:700;font-size:16px;margin-bottom:12px">2026年4月</div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">月間再生</span><span style="font-weight:700;font-family:Inter,sans-serif">293,623 回</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">総視聴時間</span><span style="font-weight:700;font-family:Inter,sans-serif">38,547時間</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">平均維持率</span><span style="font-weight:700;font-family:Inter,sans-serif">43.3%</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">平均視聴時間</span><span style="font-weight:700;font-family:Inter,sans-serif">8:37</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">登録純増</span><span style="font-weight:700;font-family:Inter,sans-serif">145 人</span></div></div><div class="stat-card" ><div style="font-weight:700;font-size:16px;margin-bottom:12px">2026年3月</div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">月間再生</span><span style="font-weight:700;font-family:Inter,sans-serif">365,427 回</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">総視聴時間</span><span style="font-weight:700;font-family:Inter,sans-serif">51,772時間</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">平均維持率</span><span style="font-weight:700;font-family:Inter,sans-serif">43.9%</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">平均視聴時間</span><span style="font-weight:700;font-family:Inter,sans-serif">9:01</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">登録純増</span><span style="font-weight:700;font-family:Inter,sans-serif">295 人</span></div></div></div>
+
+    <h3>当月 vs 前月 比較（2026年5月 vs 2026年4月）</h3>
+    <table class="cmp-table">
+      <tr><th>指標</th><th>2026年5月（当月）</th><th>2026年4月（前月）</th><th>前月比</th></tr>
+      <tr><td>月間再生</td><td class='num'>392,265 回</td><td class='num'>293,623 回</td><td class='num up'>+33.6%</td></tr>
+<tr><td>登録純増</td><td class='num'>181 人</td><td class='num'>145 人</td><td class='num up'>+24.8%</td></tr>
+<tr><td>総視聴時間</td><td class='num'>56,673時間</td><td class='num'>38,547時間</td><td class='num up'>+47.0%</td></tr>
+<tr><td>平均維持率</td><td class='num'>42.8%</td><td class='num'>43.3%</td><td class='num down'>-1.2%</td></tr>
+<tr><td>平均視聴時間</td><td class='num'>9:09</td><td class='num'>8:37</td><td class='num up'>+6.2%</td></tr>
+
+    </table>
+
+    <div class="card" style="margin-top:8px">
+      <p style="font-size:14px;font-weight:700;color:#1e3a5f;margin-bottom:12px">所感・仮説</p>
+      <p style="font-size:15px;line-height:1.9">再生数は前月比+33.6%増と好調。初動の強い企画が全体を牽引した可能性が高い。サムネ・タイトルの訴求が機能しているうちに投稿本数を維持したい。</p>
+    </div>
+  </div>
+</section>
+
+
+<section class="sec-grad">
+  <div class="container">
+    <h2>月次トレンドグラフ</h2>
+    <div class="grid-2">
+      <div class="chart-wrap">
+        <h3>日別再生数（2026年5月）</h3>
+        <canvas id="chartDaily" height="220"></canvas>
+      </div>
+      <div class="chart-wrap">
+        <h3>月次再生数推移（3ヶ月）</h3>
+        <canvas id="chartMonthly" height="220"></canvas>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="chart-wrap">
+        <h3>月次 登録純増 推移</h3>
+        <canvas id="chartSubs" height="220"></canvas>
+      </div>
+      <div class="chart-wrap">
+        <h3>月次 平均視聴維持率 推移</h3>
+        <canvas id="chartRet" height="220"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var NAVY='#1e3a5f', CYAN='#06b6d4', GREEN='#10b981', AMBER='#f59e0b';
+  var baseOpts = {
+    responsive:true,
+    plugins:{legend:{display:false}},
+    scales:{x:{ticks:{color:'#475569',font:{size:11}}},y:{ticks:{color:'#475569',font:{size:11}}}}
+  };
+
+  // 日別折れ線
+  new Chart(document.getElementById('chartDaily'),{
+    type:'line',
+    data:{
+      labels:["01日", "02日", "03日", "04日", "05日", "06日", "07日", "08日", "09日", "10日", "11日", "12日", "13日", "14日", "15日", "16日", "17日", "18日", "19日", "20日", "21日", "22日", "23日", "24日", "25日", "26日", "27日", "28日", "29日", "30日", "31日"],
+      datasets:[{
+        label:'再生数',
+        data:[8912, 7033, 8456, 6730, 8326, 9013, 7938, 11985, 9179, 13079, 10469, 13169, 12855, 10451, 8498, 14071, 10776, 9902, 24030, 15787, 14498, 14899, 14960, 12632, 10986, 14477, 11661, 17581, 24406, 19231, 16275],
+        borderColor:CYAN,
+        backgroundColor:'rgba(6,182,212,.12)',
+        borderWidth:2,
+        pointRadius:3,
+        tension:.3,
+        fill:true
+      }]
+    },
+    options:{...baseOpts, plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.parsed.y.toLocaleString()+'回'}}}}}
+  });
+
+  // 月次棒
+  new Chart(document.getElementById('chartMonthly'),{
+    type:'bar',
+    data:{
+      labels:["2026年3月", "2026年4月", "2026年5月"],
+      datasets:[{
+        label:'月間再生数',
+        data:[365427, 293623, 392265],
+        backgroundColor:[NAVY, CYAN, AMBER].slice(0,3),
+        borderRadius:6
+      }]
+    },
+    options:{...baseOpts, plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.parsed.y.toLocaleString()+'回'}}}}}
+  });
+
+  // 登録純増
+  new Chart(document.getElementById('chartSubs'),{
+    type:'bar',
+    data:{
+      labels:["2026年3月", "2026年4月", "2026年5月"],
+      datasets:[{
+        label:'登録純増',
+        data:[295, 145, 181],
+        backgroundColor:[GREEN, CYAN, AMBER].slice(0,3),
+        borderRadius:6
+      }]
+    },
+    options:{...baseOpts, plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.parsed.y.toLocaleString()+'人'}}}}}
+  });
+
+  // 維持率
+  new Chart(document.getElementById('chartRet'),{
+    type:'line',
+    data:{
+      labels:["2026年3月", "2026年4月", "2026年5月"],
+      datasets:[{
+        label:'平均維持率',
+        data:[43.9, 43.3, 42.8],
+        borderColor:AMBER,
+        backgroundColor:'rgba(245,158,11,.12)',
+        borderWidth:2,
+        pointRadius:5,
+        tension:.3,
+        fill:true
+      }]
+    },
+    options:{...baseOpts, plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.parsed.y.toFixed(1)+'%'}}}}}
+  });
+})();
+</script>
+
+
+<section class="sec-gray">
+  <div class="container">
+    <h2>視聴回数トップ10</h2>
+    <p class="note">当月（2026年5月）の月間再生数上位。長尺・短尺別に表示。</p>
+    <div class="tab-wrapper">
+      <div class="tab-btns">
+        <button class="tab-btn active" onclick="switchTab(event,'long')">長尺 (Long)</button>
+        <button class="tab-btn" onclick="switchTab(event,'short')">短尺 (Short)</button>
+      </div>
+      
+<div class="tab-content  active" id="tab-long">
+  <table class="top-table">
+    <tr>
+      <th style="width:40px">#</th>
+      <th style="width:110px">サムネ</th>
+      <th>タイトル</th>
+      <th style="width:96px">公開日</th>
+      <th style="width:100px">当月再生</th>
+      <th style="width:80px">視聴維持率</th>
+      <th style="width:70px">尺</th>
+    </tr>
+    <tr><td class='rank'>1</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/TnhUkHycfx0/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=TnhUkHycfx0" target="_blank">【修羅場】ホストの異常な言動に姫が恐怖…幹部へ密告で爆弾発覚？！反省ゼロの舐めた態度に太陽社長ブチギ</a></td><td class='num' style='white-space:nowrap'>2026-05-16</td><td class='num'>35,347 回</td><td class='num'>48.7%</td><td class='num'>23:35</td></tr>
+<tr><td class='rank'>2</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/zw36I3xYhY0/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=zw36I3xYhY0" target="_blank">【ぶーちゃんねるコラボ】ホストクラブで初回接客恵中瞳ワールド全開…予測不能すぎる接客で空気が一変、翻</a></td><td class='num' style='white-space:nowrap'>2026-04-30</td><td class='num'>32,416 回</td><td class='num'>33.2%</td><td class='num'>28:57</td></tr>
+<tr><td class='rank'>3</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/3jn5Zn4TqWI/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=3jn5Zn4TqWI" target="_blank">【爆弾】昇格目前で“爆弾行為”が発覚…執行猶予付き処分で全て白紙に？</a></td><td class='num' style='white-space:nowrap'>2026-05-19</td><td class='num'>16,859 回</td><td class='num'>55.1%</td><td class='num'>17:28</td></tr>
+<tr><td class='rank'>4</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/4LuKWMCMQ2g/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=4LuKWMCMQ2g" target="_blank">【1日密着】売れないホストの寮へ行くとゴミ屋敷だったことが判明し密着どころではなくなってしまう…</a></td><td class='num' style='white-space:nowrap'>2026-05-26</td><td class='num'>15,600 回</td><td class='num'>49.5%</td><td class='num'>25:36</td></tr>
+<tr><td class='rank'>5</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/ZGrQInr6dfU/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=ZGrQInr6dfU" target="_blank">【修羅場】新人歓迎会で制御不能の大暴れ｜ホスト達のカバンの中身チェックしたらとんでもないモノが…また</a></td><td class='num' style='white-space:nowrap'>2026-05-10</td><td class='num'>14,744 回</td><td class='num'>50.6%</td><td class='num'>20:50</td></tr>
+<tr><td class='rank'>6</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/7ulBxWHPLGs/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=7ulBxWHPLGs" target="_blank">【限界】新人ホストが姫にボロクソ言われる地獄の現場…｜降格となりアドバイスを受けるが反応がなく…</a></td><td class='num' style='white-space:nowrap'>2026-05-08</td><td class='num'>14,082 回</td><td class='num'>50.6%</td><td class='num'>18:18</td></tr>
+<tr><td class='rank'>7</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/P6QitOYIfk0/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=P6QitOYIfk0" target="_blank">【前編】姫の不満が限界突破…コスプレイベントで告発、ホストに処分か</a></td><td class='num' style='white-space:nowrap'>2026-05-29</td><td class='num'>6,603 回</td><td class='num'>58.2%</td><td class='num'>17:35</td></tr>
+<tr><td class='rank'>8</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/mRAS7noFJ_k/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=mRAS7noFJ_k" target="_blank">【爆弾】またしても爆弾が発覚。舐めたホストに怒りが爆発し激怒…</a></td><td class='num' style='white-space:nowrap'>2024-07-26</td><td class='num'>5,915 回</td><td class='num'>43.4%</td><td class='num'>21:23</td></tr>
+<tr><td class='rank'>9</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/uBSZzVTLZ6o/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=uBSZzVTLZ6o" target="_blank">【タブー】先輩のお客様に手を出してしまった男をクビにしました。【爆弾】</a></td><td class='num' style='white-space:nowrap'>2023-07-09</td><td class='num'>5,670 回</td><td class='num'>39.8%</td><td class='num'>25:51</td></tr>
+<tr><td class='rank'>10</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/L-Mci7i5Nbs/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=L-Mci7i5Nbs" target="_blank">【麗】サプライズ来店、とんでもないプレゼントで後輩を祝福｜借金ホスト入店確定…過去の戦友と再会</a></td><td class='num' style='white-space:nowrap'>2026-03-13</td><td class='num'>4,756 回</td><td class='num'>40.6%</td><td class='num'>27:37</td></tr>
+
+  </table>
+</div>
+
+      
+<div class="tab-content" id="tab-short">
+  <table class="top-table">
+    <tr>
+      <th style="width:40px">#</th>
+      <th style="width:110px">サムネ</th>
+      <th>タイトル</th>
+      <th style="width:96px">公開日</th>
+      <th style="width:100px">当月再生</th>
+      <th style="width:80px">視聴維持率</th>
+      <th style="width:70px">尺</th>
+    </tr>
+    <tr><td class='rank'>1</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/zOyJwQyYxu8/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=zOyJwQyYxu8" target="_blank">パワハラ指導、苦言の声　#歌舞伎町 #ホスト #ホスロジ</a></td><td class='num' style='white-space:nowrap'>2026-05-28</td><td class='num'>8,234 回</td><td class='num'>75.5%</td><td class='num'>1:01</td></tr>
+<tr><td class='rank'>2</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/eG1lRqTrehk/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=eG1lRqTrehk" target="_blank">歯がない新人ホスト　#ホスロジ #ホスト #歌舞伎町</a></td><td class='num' style='white-space:nowrap'>2025-04-27</td><td class='num'>4,819 回</td><td class='num'>85.2%</td><td class='num'>0:57</td></tr>
+<tr><td class='rank'>3</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/AqVPxzkjML0/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=AqVPxzkjML0" target="_blank">遠隔しか予定がない　#ホスロジ #ホスト #歌舞伎町</a></td><td class='num' style='white-space:nowrap'>2026-05-29</td><td class='num'>3,921 回</td><td class='num'>71.2%</td><td class='num'>1:02</td></tr>
+<tr><td class='rank'>4</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/x5x6F7pQcBA/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=x5x6F7pQcBA" target="_blank">5年ぶりの大台　#ホスロジ #ホスト #歌舞伎町</a></td><td class='num' style='white-space:nowrap'>2026-05-31</td><td class='num'>3,123 回</td><td class='num'>63.2%</td><td class='num'>0:47</td></tr>
+<tr><td class='rank'>5</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/ngwgt50mu9Q/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=ngwgt50mu9Q" target="_blank">大成功のバースデー　#ホスト #ホスロジ #歌舞伎町</a></td><td class='num' style='white-space:nowrap'>2026-05-30</td><td class='num'>2,736 回</td><td class='num'>54.6%</td><td class='num'>1:09</td></tr>
+
+  </table>
+</div>
+
+    </div>
+  </div>
+</section>
+<script>
+function switchTab(e, key) {
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  e.target.classList.add('active');
+  document.getElementById('tab-'+key).classList.add('active');
+}
+// ページ読込時: 長尺を表示
+document.getElementById('tab-long').classList.add('active');
+</script>
+
+
+<section class="sec-white">
+  <div class="container">
+    <h2>個別分析（2026年5月公開 計15本）</h2>
+    <p class="note">考察は考察_202605.json（CEO手書き）から読み込み。
+      JSONに該当動画IDがない場合は「（CEO考察 準備中）」と表示。
+      サムネCTRはAPI取得不可のためStudio参照。</p>
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/x5x6F7pQcBA/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=x5x6F7pQcBA" target="_blank">5年ぶりの大台　#ホスロジ #ホスト #歌舞伎町</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-31 &nbsp;|&nbsp; 尺: 0:47</p>
+      <span class="badge badge-short">Short（短尺）</span> <span class="badge badge-tr">文字起こしあり</span> <span class="badge badge-pending">7日未経過</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <p class="note" style="margin-bottom:12px">公開から7日未経過のため初動指標は未確定（—表示）。次回レポートで確定値を反映。</p><div class="metrics-grid"><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      公開から7日が経過していないため、初動指標は未確定です。7日経過後にデータが揃い次第、数値と考察を反映します。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      （7日経過後に評価）
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      （7日経過後に評価）
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/ngwgt50mu9Q/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=ngwgt50mu9Q" target="_blank">大成功のバースデー　#ホスト #ホスロジ #歌舞伎町</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-30 &nbsp;|&nbsp; 尺: 1:09</p>
+      <span class="badge badge-short">Short（短尺）</span> <span class="badge badge-tr">文字起こしあり</span> <span class="badge badge-pending">7日未経過</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <p class="note" style="margin-bottom:12px">公開から7日未経過のため初動指標は未確定（—表示）。次回レポートで確定値を反映。</p><div class="metrics-grid"><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      公開から7日が経過していないため、初動指標は未確定です。7日経過後にデータが揃い次第、数値と考察を反映します。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      （7日経過後に評価）
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      （7日経過後に評価）
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/P6QitOYIfk0/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=P6QitOYIfk0" target="_blank">【前編】姫の不満が限界突破…コスプレイベントで告発、ホストに処分か</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-29 &nbsp;|&nbsp; 尺: 17:35</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">9,953 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">59.0%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">10:22</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">2 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">38</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">163</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">5</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      学生服コスプレイベントで、姫（客）がホスト・タイヨウへの不満を限界突破させ告発。ホストに処分が下るかという“前編”。店内の権力関係とトラブルの行方を追う長尺回。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      d7再生9,953・維持59.0%は長尺として当月トップ級。コメント38・高評価163とエンゲージも高い。『姫の告発→処分』という権力ドラマがコア層の関心を強く掴み最後まで見られた。登録純増+2は低めで、内輪の人間関係が主題のため新規には入りにくい。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      高い維持を生む“告発・処分”の権力ドラマは主力型。後編・その後を必ず用意しコア層の連続視聴に育てる。新規登録を取るにはサムネ・タイトルで『誰が何をやらかし、どう裁かれるか』を一般視聴者にも伝わる形にする。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/AqVPxzkjML0/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=AqVPxzkjML0" target="_blank">遠隔しか予定がない　#ホスロジ #ホスト #歌舞伎町</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-29 &nbsp;|&nbsp; 尺: 1:02</p>
+      <span class="badge badge-short">Short（短尺）</span> <span class="badge badge-tr">文字起こしあり</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">4,133 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">74.8%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">0:45</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">1 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">6</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">35</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">0</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      ホスト・タイヨウとジムリーダー博米の短尺トーク。イベントや大台の話、最近の不調についての本音の絡みを切り出した日常回。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      d7再生4,133・維持73.9%で短尺として維持は標準域。ホスト同士の素の絡み・本音トークがコア層に刺さるが、再生・登録（+1）は伸び切らず、テーマの引きがやや弱い。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      短尺は1本1フックが鉄則。状況説明より本音の衝突・告白の瞬間を冒頭に置くと再生が伸びる。長尺の権力ドラマのハイライトを短尺へ切り出す運用が有効。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/zOyJwQyYxu8/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=zOyJwQyYxu8" target="_blank">パワハラ指導、苦言の声　#歌舞伎町 #ホスト #ホスロジ</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-28 &nbsp;|&nbsp; 尺: 1:01</p>
+      <span class="badge badge-short">Short（短尺）</span> <span class="badge badge-tr">文字起こしあり</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">8,518 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">75.5%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">0:46</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">0 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">4</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">75</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">0</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      先輩ホストが後輩はやてを詰める“指導”シーン。失敗の責任は誰かを巡る緊張のやり取りと、それに対する苦言の声を切り出した短尺回。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      d7再生8,518・維持75.5%は短尺として上位。『詰め・指導』の緊張感とパワハラ是非という賛否の分かれるテーマが視聴と滞在を強く引いた。登録純増0は、生々しい内輪のやり取りが新規より既存コア層に刺さったため。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      賛否が割れる“指導・詰め”の緊張シーンは短尺の強い武器。ただし嫌悪に傾くと登録に繋がらないので、最後に救い（本人の納得・成長の兆し）を一言添え読後感を整えると、高い視聴を登録に変換しやすい。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/4LuKWMCMQ2g/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=4LuKWMCMQ2g" target="_blank">【1日密着】売れないホストの寮へ行くとゴミ屋敷だったことが判明し密着どころではなくなってしまう…</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-26 &nbsp;|&nbsp; 尺: 25:36</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">16,361 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">49.0%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">12:33</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">6 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">63</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">219</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">3</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      売れないホストの寮へ1日密着したらゴミ屋敷だったことが判明し、密着どころではなくなる生活密着系の回。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生16,361・維持49.03%・登録純増6は当月で堅調。『売れないホスト×ゴミ屋敷』という生活感とギャップのフックが効いた。私生活の覗き見は親近感を生み登録に繋がりやすい。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      『ホストの私生活ギャップ（部屋・金銭・食生活）』は密着の鉄板。寮・買い物・休日などシリーズ化し、売上の世界とのギャップを軸にすると登録が伸びる。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/dfrc1xCELE0/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=dfrc1xCELE0" target="_blank">オジチームで営業後にライブ配信するよ～！</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-24 &nbsp;|&nbsp; 尺: 1:08:26</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">1,106 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">16.9%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">11:32</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">-1 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">3</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">19</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">0</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      オジチームが営業後に行うライブ配信のアーカイブ。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日維持率16.87%・登録純増-1（流出）。X64jVdTui3oと同じくライブアーカイブ特有の低維持。後から見る視聴者の離脱が早く、登録はむしろ微減した。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      ライブアーカイブは通常の企画動画と性質が違う。ダイジェスト化・限定公開化で本編の平均値を守る。ライブはチャンネルの“素”を見せる価値はあるので、ファン向けの別導線として位置づける。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/3jn5Zn4TqWI/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=3jn5Zn4TqWI" target="_blank">【爆弾】昇格目前で“爆弾行為”が発覚…執行猶予付き処分で全て白紙に？</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-19 &nbsp;|&nbsp; 尺: 17:28</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">15,324 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">56.1%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">9:47</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">2 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">32</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">196</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">1</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      昇格目前のホストに“爆弾行為”が発覚し、執行猶予付き処分で全てが白紙になりかける緊迫の処分回。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日維持率56.07%は当月の長尺でトップクラス。『昇格目前での転落』というドラマ性が強く、結末（執行猶予）まで視聴者を引っ張った。一方で7日再生15,324・登録純増2は中位＝題材が内部処分寄りで、既存コア層には刺さるが新規が入りにくい。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      高い維持率は『転落ドラマ』が効く証拠。これを新規に届けるには、サムネで『昇格目前で何をやらかしたのか』の引きを一般にも分かる形にする。処分の重さ＝視聴者の納得感を冒頭で設計する。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/TnhUkHycfx0/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=TnhUkHycfx0" target="_blank">【修羅場】ホストの異常な言動に姫が恐怖…幹部へ密告で爆弾発覚？！反省ゼロの舐めた態度に太陽社長ブチギレ。</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-16 &nbsp;|&nbsp; 尺: 23:35</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">25,531 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">51.6%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">12:09</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">18 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">48</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">298</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">6</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      ホストの異常な言動に姫が恐怖し、幹部へ密告。そこから爆弾（重大な隠し事）が発覚するという二段構えの修羅場回。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日登録純増18は当月の最高。『異常な言動→姫の恐怖→幹部密告→爆弾発覚』と緊張が段階的に上がる構成が、最後まで見せて(維持51.56%)新規ファン化まで運んだ。歌舞伎町TVの視聴者はホストクラブ内のリアルなトラブル・権力構造に強く反応する。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      この『姫の告発→組織の制裁』という権力ドラマの型は登録の主軸。サムネ・タイトルで『誰が何をやらかし、どう裁かれるか』を一般にも伝わる形にすると再生も伸びる。爆弾発覚は中盤に置き、結末（処分）まで見せ切る。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/ZGrQInr6dfU/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=ZGrQInr6dfU" target="_blank">【修羅場】新人歓迎会で制御不能の大暴れ｜ホスト達のカバンの中身チェックしたらとんでもないモノが…またもやホストの本名続々大公開！？</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-10 &nbsp;|&nbsp; 尺: 20:50</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">11,773 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">52.1%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">10:51</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">7 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">28</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">163</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">5</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      新人歓迎会で制御不能の大暴れが発生。ホスト達のカバンの中身チェックで“とんでもないもの”が出てくる暴露系の修羅場回。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日登録純増7は当月上位、維持52.15%も良好。『歓迎会の大暴れ』『持ち物から出るとんでもないもの』という二つの好奇心フックが効いた。身内のカオスを覗き見る面白さがコア層に刺さっている。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      『持ち物チェック』のような暴露ギミックは再現価値が高い。毎回1つ“出てはいけないもの”を仕込み、誰のものかを引っ張ると維持と話題性が両立する。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/7ulBxWHPLGs/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=7ulBxWHPLGs" target="_blank">【限界】新人ホストが姫にボロクソ言われる地獄の現場…｜降格となりアドバイスを受けるが反応がなく…</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-08 &nbsp;|&nbsp; 尺: 18:18</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">11,200 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">52.5%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">9:36</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">3 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">29</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">123</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">2</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      新人ホストが姫にボロクソに言われる地獄の現場。降格処分となり、幹部からアドバイスを受ける成長・指導系の回。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生11,200・維持52.46%は当月の長尺で標準〜上位。『姫にボロクソ』『降格』というネガティブな緊張で最後まで見せた。登録純増3は中位＝新人の不憫さは共感を呼ぶが、ファン化の決定打にはやや弱い。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      新人の『どん底→這い上がり』を縦軸シリーズにすると登録が伸びる。今回の降格がその後どうなったかを追う続編を匂わせ、連続視聴に繋げる。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/X64jVdTui3o/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=X64jVdTui3o" target="_blank">ヤングチームで営業後にライブ配信するよ～！</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-07 &nbsp;|&nbsp; 尺: 1:05:20</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">853 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">15.2%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">9:54</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">0 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">0</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">6</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">0</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      ヤングチームが営業後に行うライブ配信のアーカイブ。リアルタイム視聴者との雑談が中心。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日維持率15.16%・登録純増0は通常動画として極端に低い。ライブ配信アーカイブは長時間・無編集で、リアルタイム視聴前提のため、後から見る視聴者には冗長で初動の維持・登録に寄与しない。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      ライブ配信は素のアーカイブで本数に混ぜると平均維持率を下げる。盛り上がった部分だけをダイジェスト編集して別途投稿するか、アーカイブは限定公開にして通常動画の分析母数から外すのが望ましい。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/zw36I3xYhY0/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=zw36I3xYhY0" target="_blank">【ぶーちゃんねるコラボ】ホストクラブで初回接客恵中瞳ワールド全開…予測不能すぎる接客で空気が一変、翻弄されたホストの結末。</a></h3>
+      <p class="vcard-meta">公開日: 2026-04-30 &nbsp;|&nbsp; 尺: 28:57</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span> <span class="badge badge-carry">前月末公開・確定反映</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">17,225 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">37.7%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">10:54</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">14 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">86</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">346</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">19</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      ぶーちゃんねるとのコラボ回。ホストクラブで恵中瞳が初回接客し、予測不能のワールド全開となるコラボ企画。（4月末公開・確定反映）
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生17,225・登録純増14は当月上位。『ぶーちゃんねるコラボ×予測不能の初回接客』という他チャンネルのファン流入と意外性が新規登録を生んだ。維持率37.67%は低めで、初回接客の長尺シーンが間延びした。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      コラボは新規流入の好機。相手チャンネルのファンに刺さる見せ場（恵中瞳の予測不能さ）を冒頭に凝縮し、ダレる接客シーンは編集で間引く。コラボ相互送客の導線（概要欄・テロップ）を強化する。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/0_J6vSM3S3k/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=0_J6vSM3S3k" target="_blank">オジチームで営業後にライブ配信するよ～！</a></h3>
+      <p class="vcard-meta">公開日: 2026-04-27 &nbsp;|&nbsp; 尺: 1:03:10</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span> <span class="badge badge-carry">前月末公開・確定反映</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">2,014 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">18.2%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">11:29</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">-1 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">10</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">31</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">0</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      オジチームが営業後に行うライブ配信のアーカイブ。（4月末公開・確定反映）
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日維持率18.2%・登録純増-1。ライブ配信アーカイブ特有の低維持で、当月のライブ配信回と同じ傾向。無編集の長時間アーカイブが後から見る視聴者に冗長。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      ライブアーカイブはダイジェスト編集か限定公開にし、通常企画の平均維持率を守る方針を徹底する。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/scYbkjn_WJ0/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=scYbkjn_WJ0" target="_blank">【緊迫】ホストクラブ締日の現実…ナンバー争いの裏で「失敗しろ」と言われる先輩…その結果はいかに…</a></h3>
+      <p class="vcard-meta">公開日: 2026-04-25 &nbsp;|&nbsp; 尺: 25:07</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span> <span class="badge badge-carry">前月末公開・確定反映</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">10,294 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">51.5%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">12:55</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">11 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">25</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">190</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">7</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      ホストクラブ締日の現実。ナンバー争いの裏で先輩から『失敗しろ』と言われる足の引っ張り合いの修羅場回。（4月末公開・確定反映）
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生10,294・維持51.45%・登録純増11は当月上位級。『締日のナンバー争い』『失敗しろという妨害』というホストクラブ内の生々しい権力闘争が、最後まで見せて新規ファン化に繋がった。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      『ナンバー争い×妨害・裏切り』は歌舞伎町TVの強い縦軸。誰が誰を蹴落とそうとしているかをサムネ・冒頭で明示し、締日の結果（順位）まで見せ切ると維持と登録が両立する。
+    </div>
+  </div>
+</div>
+</div></section>
+
+<section class="sec-grad-rev">
+  <div class="container">
+    <h2>2026年5月 総括</h2>
+
+    <div class="summary-box">
+      <h3>当月の仮説・考察</h3>
+      <p>【仮説1・修羅場と権力ドラマが登録の主軸】当月の登録最高は『姫の恐怖→幹部密告→爆弾発覚』(登録+18)、次いで『新人歓迎会の大暴れ』(登録+7)。ホストクラブ内のトラブル・姫の告発・組織の制裁という“権力ドラマ”が、維持(51〜56%)と登録を同時に牽引している。視聴者は店内のリアルな人間関係と裁きの行方に最も反応する。</p><p>【仮説2・転落/成長ドラマは維持が高いが新規が薄い】『昇格目前の爆弾行為→処分』は維持56%で当月トップだが登録+2と低い。内部処分の題材はコア層に深く刺さる一方、サムネ・タイトルが内輪寄りで新規が入りにくい。維持を取る企画と新規を取る企画でレバーが違う。</p><p>【仮説3・ライブ配信アーカイブが平均値を下げている】営業後ライブ配信のアーカイブ2本は維持15〜17%・登録0〜-1と、通常動画の1/3の維持率。リアルタイム前提の無編集アーカイブが分析母数に混ざり、チャンネル全体の平均維持率を押し下げている。</p>
+    </div>
+
+    <div class="summary-box">
+      <h3>来月以降の改善点</h3>
+      <ul><li>1. 『姫の告発→組織の制裁』という権力ドラマの型を主軸に増やす。サムネ・タイトルで『誰が何をやらかし、どう裁かれるか』を一般視聴者にも伝わる形にすると、高い維持を新規登録に変換できる（TnhUkHycfx0が登録+18で当月最高）。</li><li>2. 転落・処分系（3jn5Zn4TqWI 維持56%）は維持が高いので、その後どうなったかを追う続編を必ず作り、コア層の高い視聴を連続視聴・登録に育てる。</li><li>3. 売れないホストの寮・私生活密着（4LuKWMCMQ2g 登録+6）は『売上の世界とのギャップ』が刺さる。部屋・金銭・休日のギャップ密着をシリーズ化する。</li><li>4. ライブ配信アーカイブ（維持15〜17%）はダイジェスト編集して投稿するか限定公開にし、通常企画の平均維持率を守る。素のアーカイブを本編に混ぜない。</li></ul>
+    </div>
+
+    <div class="summary-box">
+      <h3>仮説から生まれる新規アイデア</h3>
+      <ul><li>A. 『問題児ホストその後』追跡シリーズ：降格・処分された新人のリベンジを毎月追う。転落で取った高い維持を、成長ストーリーで登録に変える。</li><li>B. 『持ち物・私生活暴露』ギミックの定番化：カバンの中身チェック・寮密着など、毎回1つ“出てはいけないもの”を仕込む暴露構成。維持と話題性が両立する。</li><li>C. 『姫視点』回：姫側の本音・不満・告発を主役にした回。権力ドラマの当事者視点は当月最強フック（密告→爆弾発覚）の再現になる。</li><li>D. ライブ配信のダイジェスト枠：盛り上がった瞬間だけを3〜5分に編集した短尺枠を新設し、ライブの素の魅力を低リスクで活かす。</li></ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>歌舞伎町TV 月次分析レポート 2026年5月 | 生成: 2026-06-04 | camys CEO AI</p>
+</footer>
+</body>
+</html>

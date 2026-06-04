@@ -1,0 +1,1133 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Noto Sans JP","Inter",sans-serif;background:#ffffff;color:#0f172a;font-size:16px;line-height:1.8;letter-spacing:0.02em;word-break:break-all;overflow-wrap:break-word}
+
+/* ヒーロー */
+.hero{background:linear-gradient(135deg,#1e3a5f 0%,#06b6d4 100%);color:#f1f5f9;text-align:center;overflow:hidden}
+.hero-banner{width:100%;max-height:220px;object-fit:cover;display:block}
+.hero-body{padding:0 40px 56px;position:relative}
+.hero-body.no-banner{padding-top:64px}
+.hero-avatar{width:120px;height:120px;border-radius:50%;border:5px solid #fff;display:block;margin:0 auto 16px;background:#fff;object-fit:cover;box-shadow:0 6px 20px rgba(0,0,0,.35)}
+.hero-body:not(.no-banner) .hero-avatar{margin-top:-60px}
+.hero h1{font-size:36px;font-weight:800;line-height:1.3;letter-spacing:-0.01em;margin-bottom:10px}
+.hero .sub{font-size:15px;opacity:.85;letter-spacing:0.03em}
+.hero .ch-link{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:9px 22px;border-radius:999px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.45);color:#fff;font-weight:700;font-size:14px;text-decoration:none;transition:background .2s}
+.hero .ch-link:hover{background:rgba(255,255,255,.30)}
+.hero .meta{margin-top:24px;display:flex;gap:32px;justify-content:center;flex-wrap:wrap}
+.hero .meta-item{text-align:center}
+.hero .meta-item .val{font-size:28px;font-weight:700;display:block}
+.hero .meta-item .lbl{font-size:13px;opacity:.8}
+
+/* セクション（交互背景） */
+.sec-white{background:#ffffff;padding:64px 40px}
+.sec-grad{background:linear-gradient(135deg,#1e3a5f 0%,#06b6d4 100%);color:#f1f5f9;padding:64px 40px}
+.sec-gray{background:#f8fafc;padding:64px 40px}
+.sec-grad-rev{background:linear-gradient(135deg,#06b6d4 0%,#1e3a5f 100%);color:#f1f5f9;padding:64px 40px}
+
+.container{max-width:1120px;margin:0 auto}
+
+/* 見出し */
+.sec-white h2,.sec-gray h2{font-size:28px;font-weight:700;line-height:1.4;margin-bottom:24px;color:#1e3a5f;border-left:5px solid #06b6d4;padding-left:16px}
+.sec-grad h2,.sec-grad-rev h2{font-size:28px;font-weight:700;line-height:1.4;margin-bottom:24px;color:#f1f5f9;border-left:5px solid rgba(255,255,255,.6);padding-left:16px}
+h3{font-size:20px;font-weight:600;line-height:1.5;margin:32px 0 16px;color:#1e3a5f}
+.sec-grad h3,.sec-grad-rev h3{color:#f1f5f9}
+
+/* カード */
+.card{background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;padding:32px;box-shadow:0 4px 16px rgba(30,58,95,.08);transition:box-shadow .2s}
+.card:hover{box-shadow:0 8px 32px rgba(30,58,95,.14)}
+
+/* グリッド */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:24px}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-bottom:24px}
+@media(max-width:1023px){.grid-3{grid-template-columns:repeat(2,1fr)}.grid-2{grid-template-columns:1fr}}
+@media(max-width:767px){.grid-3,.grid-2{grid-template-columns:1fr}}
+
+/* 統計カード */
+.stat-card{background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;padding:24px;box-shadow:0 4px 16px rgba(30,58,95,.08);text-align:center}
+.stat-card .stat-val{font-size:32px;font-weight:700;color:#1e3a5f;display:block;margin-bottom:4px;font-family:"Inter","Noto Sans JP",sans-serif}
+.stat-card .stat-lbl{font-size:13px;color:#475569;font-weight:600;letter-spacing:.05em}
+.stat-card .stat-diff{font-size:13px;margin-top:8px;font-weight:600}
+.diff-up{color:#10b981}
+.diff-down{color:#ef4444}
+.diff-flat{color:#94a3b8}
+
+/* グラジエント背景上の統計カード */
+.sec-grad .stat-card,.sec-grad-rev .stat-card{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25);color:#f1f5f9}
+.sec-grad .stat-card .stat-val,.sec-grad-rev .stat-card .stat-val{color:#f1f5f9}
+.sec-grad .stat-card .stat-lbl,.sec-grad-rev .stat-card .stat-lbl{color:rgba(241,245,249,.75)}
+
+/* 比較テーブル */
+.cmp-table{width:100%;border-collapse:collapse;margin-bottom:24px;font-size:15px}
+.cmp-table th{background:#1e3a5f;color:#f1f5f9;padding:12px 16px;text-align:left;font-weight:600;white-space:nowrap}
+.cmp-table td{padding:12px 16px;border-bottom:1px solid #e2e8f0;vertical-align:middle}
+.cmp-table tr:nth-child(even) td{background:#f8fafc}
+.cmp-table .num{text-align:right;font-family:"Inter","Noto Sans JP",sans-serif;font-weight:600}
+.cmp-table .up{color:#10b981;font-weight:700}
+.cmp-table .down{color:#ef4444;font-weight:700}
+
+/* タブ */
+.tab-wrapper{margin-bottom:32px}
+.tab-btns{display:flex;gap:0;border-bottom:2px solid #e2e8f0;margin-bottom:24px}
+.tab-btn{padding:12px 24px;font-size:15px;font-weight:600;cursor:pointer;background:none;border:none;color:#475569;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s}
+.tab-btn.active{color:#1e3a5f;border-bottom-color:#06b6d4}
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* トップ10テーブル */
+.top-table{width:100%;border-collapse:collapse;margin-bottom:16px}
+.top-table th{background:#1e3a5f;color:#f1f5f9;padding:10px 14px;font-size:14px;font-weight:600;white-space:nowrap;text-align:left}
+.top-table td{padding:10px 14px;border-bottom:1px solid #e2e8f0;vertical-align:middle;font-size:14px}
+.top-table tr:nth-child(even) td{background:#f8fafc}
+.top-table .rank{font-size:18px;font-weight:700;color:#1e3a5f;text-align:center;width:40px}
+.top-table .thumb-cell img{width:100px;height:auto;border-radius:6px;display:block}
+.top-table .num{text-align:right;font-family:"Inter","Noto Sans JP",sans-serif;font-weight:600}
+.top-table a{color:#0369a1;text-decoration:none}
+.top-table a:hover{text-decoration:underline}
+
+/* 動画カード（個別分析） */
+.video-analysis-card{background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;margin-bottom:32px;box-shadow:0 4px 16px rgba(30,58,95,.08);overflow:hidden}
+.vcard-header{display:flex;gap:20px;padding:24px;align-items:flex-start;border-bottom:1px solid #e2e8f0}
+.vcard-thumb{flex-shrink:0;width:160px}
+.vcard-thumb img{width:100%;border-radius:8px}
+.vcard-info{flex:1}
+.vcard-info h3{font-size:18px;font-weight:700;margin-bottom:8px;line-height:1.4}
+.vcard-info h3 a{color:#0f172a;text-decoration:none}
+.vcard-info h3 a:hover{color:#06b6d4}
+.vcard-meta{font-size:13px;color:#475569;margin-bottom:8px}
+.badge{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:20px;letter-spacing:.05em}
+.badge-long{background:#dbeafe;color:#1e40af}
+.badge-short{background:#d1fae5;color:#065f46}
+.badge-tr{background:#fef3c7;color:#92400e}
+.badge-pending{background:#e2e8f0;color:#475569}
+.badge-carry{background:#ede9fe;color:#6d28d9}
+
+.vcard-metrics{padding:20px 24px;background:#f8fafc;border-bottom:1px solid #e2e8f0}
+.metrics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
+.metric-item{text-align:center}
+.metric-item .m-val{font-size:18px;font-weight:700;color:#1e3a5f;font-family:"Inter","Noto Sans JP",sans-serif}
+.metric-item .m-lbl{font-size:12px;color:#475569;font-weight:600}
+
+
+.vcard-analysis{padding:24px}
+.vcard-summary{background:#eff6ff;border-left:4px solid #3b82f6;padding:12px 16px;border-radius:0 8px 8px 0;margin-bottom:16px;font-size:14px;line-height:1.7}
+.vcard-reason{background:#f0fdf4;border-left:4px solid #10b981;padding:12px 16px;border-radius:0 8px 8px 0;margin-bottom:12px;font-size:14px;line-height:1.7}
+.vcard-improve{background:#fff7ed;border-left:4px solid #f59e0b;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14px;line-height:1.7}
+.vcard-label{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;display:block}
+.vcard-label-blue{color:#3b82f6}
+.vcard-label-green{color:#10b981}
+.vcard-label-orange{color:#f59e0b}
+
+/* 総括ボックス */
+.summary-box{background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;padding:32px;margin-bottom:24px;box-shadow:0 4px 16px rgba(30,58,95,.08);color:#1e293b}
+.summary-box h3{color:#1e3a5f;font-size:18px;font-weight:700;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid #e2e8f0}
+.summary-box p{font-size:15px;line-height:1.9;color:#1e293b;margin-bottom:12px}
+.summary-box ul{margin:0 0 12px 20px}
+.summary-box ul li{font-size:15px;line-height:1.9;margin-bottom:6px;color:#1e293b}
+
+/* グラフ */
+.chart-wrap{background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;padding:24px;margin-bottom:24px;box-shadow:0 4px 16px rgba(30,58,95,.08)}
+.chart-wrap h3{font-size:16px;font-weight:700;color:#1e3a5f;margin-bottom:16px}
+.sec-grad .chart-wrap,.sec-grad-rev .chart-wrap{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2)}
+.sec-grad .chart-wrap h3,.sec-grad-rev .chart-wrap h3{color:#f1f5f9}
+
+/* フッター */
+footer{background:#1e3a5f;color:#f1f5f9;text-align:center;padding:32px;font-size:14px;opacity:.9}
+
+a{color:#0369a1}
+a:hover{text-decoration:underline}
+.no-data{color:#94a3b8;font-style:italic;font-size:14px}
+.note{font-size:13px;color:#64748b;margin-bottom:8px}
+</style>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+  <title>ぶーちゃんねる 分析レポート 2026年5月</title>
+</head>
+<body>
+
+<section class="hero">
+  <img class="hero-banner" src="https://yt3.googleusercontent.com/Ir7Y-YWBmhwTj1HpAdD2QE02cH5q9Ure4zSDVAqaTn9GCT7TuuVGyH8qRS5j15tibvgwgRPAkw=w1280" alt="バナー">
+  <div class="hero-body">
+    <div class="container">
+      <a href="https://www.youtube.com/@bu-ch.y" target="_blank" rel="noopener" style="text-decoration:none"><img class="hero-avatar" src="https://yt3.ggpht.com/wqc4jeXEksshrAVx0dhbIe0P_nz5l-wFi6e4nG_FACGRahpREaejLMtvtYxpbImAVTlrohSfMw=s800-c-k-c0x00ffffff-no-rj" alt="アイコン"></a>
+      <h1>ぶーちゃんねる 月次分析レポート 2026年5月</h1>
+      <p class="sub">生成日: 2026-06-04 | チャンネルID: UCoRQR1PGRZ_ugFOgkktPSXg</p>
+      <a class="ch-link" href="https://www.youtube.com/@bu-ch.y" target="_blank" rel="noopener">▶ YouTubeでチャンネルを見る（@bu-ch.y）</a>
+      <div class="meta">
+        <div class="meta-item">
+          <span class="val">252,000</span>
+          <span class="lbl">登録者数</span>
+        </div>
+        <div class="meta-item">
+          <span class="val">201,004,395</span>
+          <span class="lbl">総再生回数</span>
+        </div>
+        <div class="meta-item">
+          <span class="val">1,038</span>
+          <span class="lbl">公開動画数</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="sec-white">
+  <div class="container">
+    <h2>全体サマリー</h2>
+    <div class="grid-3"><div class="stat-card" style="border:2px solid #06b6d4"><div style="font-weight:700;font-size:16px;margin-bottom:12px">2026年5月 <span class="badge badge-long">当月</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">月間再生</span><span style="font-weight:700;font-family:Inter,sans-serif">3,536,969 回</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">総視聴時間</span><span style="font-weight:700;font-family:Inter,sans-serif">416,284時間</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">平均維持率</span><span style="font-weight:700;font-family:Inter,sans-serif">37.7%</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">平均視聴時間</span><span style="font-weight:700;font-family:Inter,sans-serif">8:59</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">登録純増</span><span style="font-weight:700;font-family:Inter,sans-serif">156 人</span></div></div><div class="stat-card" ><div style="font-weight:700;font-size:16px;margin-bottom:12px">2026年4月</div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">月間再生</span><span style="font-weight:700;font-family:Inter,sans-serif">2,748,478 回</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">総視聴時間</span><span style="font-weight:700;font-family:Inter,sans-serif">281,548時間</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">平均維持率</span><span style="font-weight:700;font-family:Inter,sans-serif">37.2%</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">平均視聴時間</span><span style="font-weight:700;font-family:Inter,sans-serif">7:51</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">登録純増</span><span style="font-weight:700;font-family:Inter,sans-serif">223 人</span></div></div><div class="stat-card" ><div style="font-weight:700;font-size:16px;margin-bottom:12px">2026年3月</div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">月間再生</span><span style="font-weight:700;font-family:Inter,sans-serif">5,064,917 回</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">総視聴時間</span><span style="font-weight:700;font-family:Inter,sans-serif">474,256時間</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">平均維持率</span><span style="font-weight:700;font-family:Inter,sans-serif">39.0%</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">平均視聴時間</span><span style="font-weight:700;font-family:Inter,sans-serif">7:24</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">登録純増</span><span style="font-weight:700;font-family:Inter,sans-serif">1,458 人</span></div></div></div>
+
+    <h3>当月 vs 前月 比較（2026年5月 vs 2026年4月）</h3>
+    <table class="cmp-table">
+      <tr><th>指標</th><th>2026年5月（当月）</th><th>2026年4月（前月）</th><th>前月比</th></tr>
+      <tr><td>月間再生</td><td class='num'>3,536,969 回</td><td class='num'>2,748,478 回</td><td class='num up'>+28.7%</td></tr>
+<tr><td>登録純増</td><td class='num'>156 人</td><td class='num'>223 人</td><td class='num down'>-30.0%</td></tr>
+<tr><td>総視聴時間</td><td class='num'>416,284時間</td><td class='num'>281,548時間</td><td class='num up'>+47.9%</td></tr>
+<tr><td>平均維持率</td><td class='num'>37.7%</td><td class='num'>37.2%</td><td class='num up'>+1.3%</td></tr>
+<tr><td>平均視聴時間</td><td class='num'>8:59</td><td class='num'>7:51</td><td class='num up'>+14.4%</td></tr>
+
+    </table>
+
+    <div class="card" style="margin-top:8px">
+      <p style="font-size:14px;font-weight:700;color:#1e3a5f;margin-bottom:12px">所感・仮説</p>
+      <p style="font-size:15px;line-height:1.9">再生数は前月比+28.7%増と好調。初動の強い企画が全体を牽引した可能性が高い。サムネ・タイトルの訴求が機能しているうちに投稿本数を維持したい。</p>
+    </div>
+  </div>
+</section>
+
+
+<section class="sec-grad">
+  <div class="container">
+    <h2>月次トレンドグラフ</h2>
+    <div class="grid-2">
+      <div class="chart-wrap">
+        <h3>日別再生数（2026年5月）</h3>
+        <canvas id="chartDaily" height="220"></canvas>
+      </div>
+      <div class="chart-wrap">
+        <h3>月次再生数推移（3ヶ月）</h3>
+        <canvas id="chartMonthly" height="220"></canvas>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="chart-wrap">
+        <h3>月次 登録純増 推移</h3>
+        <canvas id="chartSubs" height="220"></canvas>
+      </div>
+      <div class="chart-wrap">
+        <h3>月次 平均視聴維持率 推移</h3>
+        <canvas id="chartRet" height="220"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var NAVY='#1e3a5f', CYAN='#06b6d4', GREEN='#10b981', AMBER='#f59e0b';
+  var baseOpts = {
+    responsive:true,
+    plugins:{legend:{display:false}},
+    scales:{x:{ticks:{color:'#475569',font:{size:11}}},y:{ticks:{color:'#475569',font:{size:11}}}}
+  };
+
+  // 日別折れ線
+  new Chart(document.getElementById('chartDaily'),{
+    type:'line',
+    data:{
+      labels:["01日", "02日", "03日", "04日", "05日", "06日", "07日", "08日", "09日", "10日", "11日", "12日", "13日", "14日", "15日", "16日", "17日", "18日", "19日", "20日", "21日", "22日", "23日", "24日", "25日", "26日", "27日", "28日", "29日", "30日", "31日"],
+      datasets:[{
+        label:'再生数',
+        data:[153026, 191685, 178379, 114249, 112072, 109886, 129309, 167196, 122132, 119927, 85134, 130585, 152038, 102458, 116465, 83137, 127167, 102749, 95485, 104674, 73671, 108819, 78230, 119083, 64531, 93619, 115489, 89617, 129066, 88810, 78281],
+        borderColor:CYAN,
+        backgroundColor:'rgba(6,182,212,.12)',
+        borderWidth:2,
+        pointRadius:3,
+        tension:.3,
+        fill:true
+      }]
+    },
+    options:{...baseOpts, plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.parsed.y.toLocaleString()+'回'}}}}}
+  });
+
+  // 月次棒
+  new Chart(document.getElementById('chartMonthly'),{
+    type:'bar',
+    data:{
+      labels:["2026年3月", "2026年4月", "2026年5月"],
+      datasets:[{
+        label:'月間再生数',
+        data:[5064917, 2748478, 3536969],
+        backgroundColor:[NAVY, CYAN, AMBER].slice(0,3),
+        borderRadius:6
+      }]
+    },
+    options:{...baseOpts, plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.parsed.y.toLocaleString()+'回'}}}}}
+  });
+
+  // 登録純増
+  new Chart(document.getElementById('chartSubs'),{
+    type:'bar',
+    data:{
+      labels:["2026年3月", "2026年4月", "2026年5月"],
+      datasets:[{
+        label:'登録純増',
+        data:[1458, 223, 156],
+        backgroundColor:[GREEN, CYAN, AMBER].slice(0,3),
+        borderRadius:6
+      }]
+    },
+    options:{...baseOpts, plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.parsed.y.toLocaleString()+'人'}}}}}
+  });
+
+  // 維持率
+  new Chart(document.getElementById('chartRet'),{
+    type:'line',
+    data:{
+      labels:["2026年3月", "2026年4月", "2026年5月"],
+      datasets:[{
+        label:'平均維持率',
+        data:[39.0, 37.2, 37.7],
+        borderColor:AMBER,
+        backgroundColor:'rgba(245,158,11,.12)',
+        borderWidth:2,
+        pointRadius:5,
+        tension:.3,
+        fill:true
+      }]
+    },
+    options:{...baseOpts, plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.parsed.y.toFixed(1)+'%'}}}}}
+  });
+})();
+</script>
+
+
+<section class="sec-gray">
+  <div class="container">
+    <h2>視聴回数トップ10</h2>
+    <p class="note">当月（2026年5月）の月間再生数上位。長尺・短尺別に表示。</p>
+    <div class="tab-wrapper">
+      <div class="tab-btns">
+        <button class="tab-btn active" onclick="switchTab(event,'long')">長尺 (Long)</button>
+        <button class="tab-btn" onclick="switchTab(event,'short')">短尺 (Short)</button>
+      </div>
+      
+<div class="tab-content  active" id="tab-long">
+  <table class="top-table">
+    <tr>
+      <th style="width:40px">#</th>
+      <th style="width:110px">サムネ</th>
+      <th>タイトル</th>
+      <th style="width:96px">公開日</th>
+      <th style="width:100px">当月再生</th>
+      <th style="width:80px">視聴維持率</th>
+      <th style="width:70px">尺</th>
+    </tr>
+    <tr><td class='rank'>1</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/PChv7TqSelc/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=PChv7TqSelc" target="_blank">【愛内アイラ】初めての麻辣湯食べてみた！【ホームレスまなみ】</a></td><td class='num' style='white-space:nowrap'>2026-05-08</td><td class='num'>109,477 回</td><td class='num'>41.4%</td><td class='num'>35:54</td></tr>
+<tr><td class='rank'>2</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/k06umv6z-g8/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=k06umv6z-g8" target="_blank">【ホームレスまなみ】「私の服は希少価値高いからアイラちゃんのより高いのよ!」殿様商売のぶーちゃんねる</a></td><td class='num' style='white-space:nowrap'>2026-05-02</td><td class='num'>108,532 回</td><td class='num'>28.5%</td><td class='num'>1:30:36</td></tr>
+<tr><td class='rank'>3</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/QJqAt8RyO6M/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=QJqAt8RyO6M" target="_blank">【匂いのクレーム】コンカフェゲスト出勤前にクレーム対応と腹ごしらえ</a></td><td class='num' style='white-space:nowrap'>2026-05-22</td><td class='num'>104,813 回</td><td class='num'>44.9%</td><td class='num'>37:48</td></tr>
+<tr><td class='rank'>4</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/Z74e55onnAw/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=Z74e55onnAw" target="_blank">【100の質問】ぶーちゃんねるオールスター？で100の質問答えてみた</a></td><td class='num' style='white-space:nowrap'>2026-05-03</td><td class='num'>102,300 回</td><td class='num'>37.3%</td><td class='num'>47:17</td></tr>
+<tr><td class='rank'>5</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/KgGngyfFq-I/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=KgGngyfFq-I" target="_blank">【コンカフェ】ゲスト出勤で対決する2人！ホームレスまなみと愛内アイラの熾烈なバトル！！ｗ</a></td><td class='num' style='white-space:nowrap'>2026-05-24</td><td class='num'>94,759 回</td><td class='num'>41.5%</td><td class='num'>35:31</td></tr>
+<tr><td class='rank'>6</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/3sBfELp5r2Q/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=3sBfELp5r2Q" target="_blank">【お仕事1日密着】ホス狂いあおいは現在何をしているのか？密着してみました</a></td><td class='num' style='white-space:nowrap'>2026-05-15</td><td class='num'>93,002 回</td><td class='num'>36.3%</td><td class='num'>47:00</td></tr>
+<tr><td class='rank'>7</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/tEcS2E6VoGs/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=tEcS2E6VoGs" target="_blank">【新大久保】愛内アイラとホームレスまなみが行く！新大久保食べ歩き！</a></td><td class='num' style='white-space:nowrap'>2026-05-13</td><td class='num'>88,053 回</td><td class='num'>47.3%</td><td class='num'>33:33</td></tr>
+<tr><td class='rank'>8</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/5rqnjk02lE8/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=5rqnjk02lE8" target="_blank">【喧嘩】お金を受け取ったのに受け取っていないと主張するホームレスまなみに謝罪の説得をする…</a></td><td class='num' style='white-space:nowrap'>2026-05-17</td><td class='num'>87,826 回</td><td class='num'>44.7%</td><td class='num'>26:12</td></tr>
+<tr><td class='rank'>9</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/9abr1L6o9WE/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=9abr1L6o9WE" target="_blank">怖いです💦○○予告の話とついでにホームレスまなみの買い物ルーティン密着！</a></td><td class='num' style='white-space:nowrap'>2026-05-29</td><td class='num'>76,217 回</td><td class='num'>55.0%</td><td class='num'>24:37</td></tr>
+<tr><td class='rank'>10</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/7J2CFUfjcMU/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=7J2CFUfjcMU" target="_blank">【休日1日密着】愛内アイラの休日ルーティンに1日密着！平成ギャル服を買いに109がある渋谷へ！</a></td><td class='num' style='white-space:nowrap'>2026-04-27</td><td class='num'>47,293 回</td><td class='num'>30.1%</td><td class='num'>48:04</td></tr>
+
+  </table>
+</div>
+
+      
+<div class="tab-content" id="tab-short">
+  <table class="top-table">
+    <tr>
+      <th style="width:40px">#</th>
+      <th style="width:110px">サムネ</th>
+      <th>タイトル</th>
+      <th style="width:96px">公開日</th>
+      <th style="width:100px">当月再生</th>
+      <th style="width:80px">視聴維持率</th>
+      <th style="width:70px">尺</th>
+    </tr>
+    <tr><td class='rank'>1</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/8ZG3UiKwNvM/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=8ZG3UiKwNvM" target="_blank">児相が子供を返してくれない #ぶーちゃんねる #歌舞伎町 #児童相談所</a></td><td class='num' style='white-space:nowrap'>2026-02-26</td><td class='num'>368,019 回</td><td class='num'>78.8%</td><td class='num'>1:15</td></tr>
+<tr><td class='rank'>2</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/6-Db7BJz6iE/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=6-Db7BJz6iE" target="_blank">匂いのクレーム #クレーム #ホームレスまなみ #ホームレス</a></td><td class='num' style='white-space:nowrap'>2026-05-26</td><td class='num'>131,894 回</td><td class='num'>87.6%</td><td class='num'>1:36</td></tr>
+<tr><td class='rank'>3</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/s-N6fjjjNFs/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=s-N6fjjjNFs" target="_blank">子供の年金で生活してる #ぶーちゃんねる #ホームレスまなみ #歌舞伎町</a></td><td class='num' style='white-space:nowrap'>2026-03-12</td><td class='num'>115,328 回</td><td class='num'>98.6%</td><td class='num'>1:15</td></tr>
+<tr><td class='rank'>4</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/9l0Q98DLClw/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=9l0Q98DLClw" target="_blank">都営住宅に住みたい #愛内アイラ #歌舞伎町  #生活保護</a></td><td class='num' style='white-space:nowrap'>2026-04-30</td><td class='num'>86,192 回</td><td class='num'>71.1%</td><td class='num'>2:21</td></tr>
+<tr><td class='rank'>5</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/alHsBaHqH-Y/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=alHsBaHqH-Y" target="_blank">ゆきのさんの新事実続々 #ぶーちゃんねる #歌舞伎町 #学歴</a></td><td class='num' style='white-space:nowrap'>2026-05-08</td><td class='num'>83,879 回</td><td class='num'>103.5%</td><td class='num'>0:56</td></tr>
+<tr><td class='rank'>6</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/kidZlCxAdcw/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=kidZlCxAdcw" target="_blank">ホームレスまなみ喫茶店でカスハラ　#ホームレスまなみ #歌舞伎町 #カスハラ</a></td><td class='num' style='white-space:nowrap'>2026-03-13</td><td class='num'>62,393 回</td><td class='num'>81.6%</td><td class='num'>1:15</td></tr>
+<tr><td class='rank'>7</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/MvLDPRM-_Fw/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=MvLDPRM-_Fw" target="_blank">まなみちゃん揉め事 #ホームレスまなみ #歌舞伎町 #ぶーちゃんねる</a></td><td class='num' style='white-space:nowrap'>2026-05-20</td><td class='num'>51,508 回</td><td class='num'>74.7%</td><td class='num'>1:43</td></tr>
+<tr><td class='rank'>8</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/fx_zncVITb0/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=fx_zncVITb0" target="_blank">#ぶーちゃんねる#歌舞伎町#ホスト#ホス狂い#ホームレス#生活保護</a></td><td class='num' style='white-space:nowrap'>2024-05-28</td><td class='num'>48,986 回</td><td class='num'>107.3%</td><td class='num'>0:48</td></tr>
+<tr><td class='rank'>9</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/543Ml8zRCsA/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=543Ml8zRCsA" target="_blank">あおいちゃんの恋愛事情 #ホス狂いあおい #歌舞伎町 #恋バナ</a></td><td class='num' style='white-space:nowrap'>2026-05-19</td><td class='num'>48,972 回</td><td class='num'>78.8%</td><td class='num'>1:30</td></tr>
+<tr><td class='rank'>10</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/WyrwOfz_GVM/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=WyrwOfz_GVM" target="_blank">毒づくまなみちゃん　#ホームレスまなみ #ぶーちゃんねる #歌舞伎町</a></td><td class='num' style='white-space:nowrap'>2026-05-07</td><td class='num'>48,646 回</td><td class='num'>74.7%</td><td class='num'>1:01</td></tr>
+
+  </table>
+</div>
+
+    </div>
+  </div>
+</section>
+<script>
+function switchTab(e, key) {
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  e.target.classList.add('active');
+  document.getElementById('tab-'+key).classList.add('active');
+}
+// ページ読込時: 長尺を表示
+document.getElementById('tab-long').classList.add('active');
+</script>
+
+
+<section class="sec-white">
+  <div class="container">
+    <h2>個別分析（2026年5月公開 計23本）</h2>
+    <p class="note">考察は考察_202605.json（CEO手書き）から読み込み。
+      JSONに該当動画IDがない場合は「（CEO考察 準備中）」と表示。
+      サムネCTRはAPI取得不可のためStudio参照。</p>
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/ySLS82RkHs0/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=ySLS82RkHs0" target="_blank">ゆきのさん離婚と子供との再会 | そして今後の生活について語る【ホームレスまなみ】</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-31 &nbsp;|&nbsp; 尺: 41:29</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span> <span class="badge badge-pending">7日未経過</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <p class="note" style="margin-bottom:12px">公開から7日未経過のため初動指標は未確定（—表示）。次回レポートで確定値を反映。</p><div class="metrics-grid"><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      公開から7日が経過していないため、初動指標は未確定です。7日経過後にデータが揃い次第、数値と考察を反映します。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      （7日経過後に評価）
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      （7日経過後に評価）
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/9abr1L6o9WE/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=9abr1L6o9WE" target="_blank">怖いです💦○○予告の話とついでにホームレスまなみの買い物ルーティン密着！</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-29 &nbsp;|&nbsp; 尺: 24:37</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span> <span class="badge badge-pending">7日未経過</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <p class="note" style="margin-bottom:12px">公開から7日未経過のため初動指標は未確定（—表示）。次回レポートで確定値を反映。</p><div class="metrics-grid"><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      公開から7日が経過していないため、初動指標は未確定です。7日経過後にデータが揃い次第、数値と考察を反映します。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      （7日経過後に評価）
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      （7日経過後に評価）
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/xrte3u3Zfp0/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=xrte3u3Zfp0" target="_blank">まなみちゃんシャンパン開栓 #シャンパン #ホームレスまなみ #コンカフェ</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-27 &nbsp;|&nbsp; 尺: 2:06</p>
+      <span class="badge badge-short">Short（短尺）</span> <span class="badge badge-pending">7日未経過</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <p class="note" style="margin-bottom:12px">公開から7日未経過のため初動指標は未確定（—表示）。次回レポートで確定値を反映。</p><div class="metrics-grid"><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">—</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      公開から7日が経過していないため、初動指標は未確定です。7日経過後にデータが揃い次第、数値と考察を反映します。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      （7日経過後に評価）
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      （7日経過後に評価）
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/6-Db7BJz6iE/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=6-Db7BJz6iE" target="_blank">匂いのクレーム #クレーム #ホームレスまなみ #ホームレス</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-26 &nbsp;|&nbsp; 尺: 1:36</p>
+      <span class="badge badge-short">Short（短尺）</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">108,331 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">86.8%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">1:24</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">17 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">65</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">866</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">16</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      長尺『匂いのクレーム』回からの切り出し短尺。まなみへのクレーム対応のハイライト。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生108,331は当月の短尺でトップ、維持86.85%・登録純増17も短尺で突出。元の長尺（匂いのクレーム＝当月登録最高）の最も強いフックを短尺化したことで、ネガティブ×まなみの素が短尺でも最大効果を発揮した。短尺が長尺へのトラフィックと登録を同時に生んだ好例。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      『当たった長尺の最強シーンを短尺化』は再現性の高い勝ちパターン。今後もヒット長尺は最も生々しいクレーム・トラブル部分を短尺で切り出し、本編誘導テロップを付けて登録とクロス再生を最大化する。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/KgGngyfFq-I/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=KgGngyfFq-I" target="_blank">【コンカフェ】ゲスト出勤で対決する2人！ホームレスまなみと愛内アイラの熾烈なバトル！！ｗ</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-24 &nbsp;|&nbsp; 尺: 35:31</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">91,900 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">41.6%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">14:45</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">21 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">415</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">1,363</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">41</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      まなみとアイラがコンカフェにゲスト出勤し、接客で売上対決をするバラエティ企画。遅刻いじり、来店客とのやり取り、お絵描きドリンク提供など、店舗でのリアルな接客風景が中心。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生91,900回と当月上位だが、維持率41.61%はこの数値群の中ではやや低め。『対決』という縦軸はあるものの、接客シーンの細切れな会話が続き、視聴者が状況を追いにくい構成が中盤の離脱を招いたと見られる。登録純増21は中位。看板2人＋コンカフェという題材の強さで再生は取れたが、勝敗の盛り上がりが伝わりにくく、ファン化の決定打に欠けた。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      対決の『ルール・点数・勝敗』を冒頭と要所でテロップ等で明示し、視聴者が結果を追える設計にすると維持率が上がる。接客の細切れ会話は編集で間引き、2人のキャラが立つ瞬間（張り合い・本音）に寄せると良い。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/QJqAt8RyO6M/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=QJqAt8RyO6M" target="_blank">【匂いのクレーム】コンカフェゲスト出勤前にクレーム対応と腹ごしらえ</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-22 &nbsp;|&nbsp; 尺: 37:48</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">97,986 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">45.5%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">17:12</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">58 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">535</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">1,074</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">37</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      まなみに寄せられた『匂いが強い』というクレームへの対応と、コンカフェゲスト出勤前の腹ごしらえを追う回。まなみのオムツいじりや売上対決の前振りなど、生活感とバラエティが混在する。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日登録純増58は当月の長尺で最高クラス。『匂いのクレーム』という生々しくネガティブなフックがクリックを強く誘い、まなみの隠さない素（オムツ等）が視聴者の好奇心と親近感を同時に刺激して新規ファン化に繋がった。7日再生97,986も当月トップ級。維持率45.53%は標準で、クレーム話から腹ごしらえへ流れがやや散漫なため中盤は緩む。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      登録を最も生んだ『ネガティブ×まなみの素』の型は再現価値が高い。クレーム・トラブル系のテーマを意図的に増やすと新規獲得が伸びる。一方で話題が散らからないよう、1本1テーマ（クレームならクレームの顛末）に絞ると維持率も上がる。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/MvLDPRM-_Fw/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=MvLDPRM-_Fw" target="_blank">まなみちゃん揉め事 #ホームレスまなみ #歌舞伎町 #ぶーちゃんねる</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-20 &nbsp;|&nbsp; 尺: 1:43</p>
+      <span class="badge badge-short">Short（短尺）</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">43,592 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">76.7%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">1:18</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">8 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">59</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">298</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">7</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      まなみの揉め事の場面を切り出した短尺。トラブル・口論の緊張感を前面に出す。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生43,592・維持76.7%は短尺で良好、登録純増8は短尺として高め。『揉め事』というネガティブフックが短尺でも有効で、緊張感が最後までの視聴と新規ファン化を引いた。長尺の喧嘩・揉め事回と同じ勝ち筋。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      揉め事短尺は登録貢献が高いので本数を増やす。『何で揉めているか』を冒頭で一言提示し、決着や感情のピークを切り出すと短尺単体でも満足度が上がりファン化する。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/543Ml8zRCsA/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=543Ml8zRCsA" target="_blank">あおいちゃんの恋愛事情 #ホス狂いあおい #歌舞伎町 #恋バナ</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-19 &nbsp;|&nbsp; 尺: 1:30</p>
+      <span class="badge badge-short">Short（短尺）</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">41,096 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">79.2%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">1:11</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">3 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">57</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">278</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">6</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      ホス狂いあおいの恋愛事情を語る短尺。あおいの私生活・恋バナにフォーカス。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生41,096・維持79.25%は短尺の標準〜やや上。恋愛・私生活というプライベート開示が興味を引いた。登録純増3は低め＝あおいは看板2人に比べ単独での登録吸引力がまだ弱い。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      あおいの恋バナは需要があるので長尺密着への誘導に使う。固有の『ホス狂い』属性を恋愛トークに絡めると彼女ならではの中毒性が出て登録に繋がる。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/keEh5FIqCsU/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=keEh5FIqCsU" target="_blank">化粧品売り場でまなみんワールド #ホームレスまなみ #歌舞伎町 #ぶーちゃんねる</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-18 &nbsp;|&nbsp; 尺: 0:47</p>
+      <span class="badge badge-short">Short（短尺）</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">37,275 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">83.8%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">0:39</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">2 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">23</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">233</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">3</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      化粧品売り場でまなみが自由に振る舞う『まなみんワールド』の短尺。店頭での天然な言動が中心。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生37,275・維持83.78%は短尺で良好。まなみの天然キャラが日常ロケで素直に出て、最後まで見られている。登録純増2は低めで、ほのぼの系は新規のファン化までは弱い。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      日常系短尺は維持が高いので本編誘導と組み合わせて回遊を増やす。まなみの『予想外の一言』をサムネ・冒頭に置くとクリックと初速がさらに伸びる。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/5rqnjk02lE8/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=5rqnjk02lE8" target="_blank">【喧嘩】お金を受け取ったのに受け取っていないと主張するホームレスまなみに謝罪の説得をする…</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-17 &nbsp;|&nbsp; 尺: 26:12</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">82,311 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">45.2%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">11:51</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">17 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">578</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">815</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">28</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      まなみが『お金を受け取ったのに受け取っていない』と主張し、周囲が謝罪を説得する喧嘩・揉め事回。コラボ撮影に行く/行かない、謝る/謝らないの押し問答が生々しく続く。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生82,311は揉め事・喧嘩というネガティブフックで取れた。ぶーちゃんねるの視聴者はトラブル・本音のぶつかり合いに強く反応する。維持率45.23%は標準。登録純増17は中位＝揉め事は再生を呼ぶが、後味の悪さで新規のファン化までは至りにくい。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      揉め事は『どちらに非があるか・どう決着するか』を視聴者が判断できる構成にすると維持と納得感が上がる。冒頭で対立の構図を整理し、結末（謝罪したか）まで見せ切ると、単なる炎上消費でなくファン化に繋がる。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/3sBfELp5r2Q/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=3sBfELp5r2Q" target="_blank">【お仕事1日密着】ホス狂いあおいは現在何をしているのか？密着してみました</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-15 &nbsp;|&nbsp; 尺: 47:00</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">81,692 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">37.1%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">17:27</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">21 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">274</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">736</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">27</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      ホス狂いあおいの仕事1日に密着するドキュメンタリー。新宿の住居（4階・階段がきつい）や生活ぶり、ホスト・売上・名刺コレクション等、彼女の日常と内面を生活感たっぷりに追う。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生81,692回は密着系として堅調だが、維持率37.15%は当月の長尺群で低い部類。密着ドキュメンタリーは没入できる反面、序盤の生活雑談（住居・体型の話）が長く、視聴者が『この回の見どころ』を掴む前に離脱した可能性が高い。あおいは看板2人（まなみ・アイラ）に比べ単独での集客力がまだ弱く、登録純増21も題材の重さの割に伸び切らなかった。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      冒頭に『今日のあおいの何を見せるのか（ホス狂いの実態・金銭事情など）』の結論的フックを置き、生活雑談は後半に回す。看板2人を絡めるか、あおい固有の強い葛藤・事件性を軸に据えると、密着の没入と登録が両立する。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/tEcS2E6VoGs/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=tEcS2E6VoGs" target="_blank">【新大久保】愛内アイラとホームレスまなみが行く！新大久保食べ歩き！</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-13 &nbsp;|&nbsp; 尺: 33:33</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">78,039 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">48.1%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">16:07</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">39 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">327</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">1,012</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">38</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      アイラとまなみが新大久保を食べ歩く2人回。道中『最初は2人コラボに乗り気でなかったが、リスナーから2人の絡みが面白いと言われ前向きになった』という関係性の本音も挟まる。グルメ＋2人の距離感が主題。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生78,039・登録純増39は当月の中〜上位。新大久保ロケのトレンド性＋2人の自然な掛け合いが効いた。維持率48.06%は当月の長尺で上位＝食べ歩きという『動きのある絵』と関係性トークが中盤の離脱を抑えた。登録39が高めなのは、2人の素の関係性が見えてファンの好感に繋がったため。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      この『2人の関係性が深まる過程』をシリーズの縦軸にすると登録が伸びる。食レポは絵が持つので、トーク内容を『2人にしか出せない本音・衝突』に寄せるとさらに維持が上がる。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/MwnjeLsN-hM/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=MwnjeLsN-hM" target="_blank">アンチはファン？！　#ぶーちゃんねる #ホームレスまなみ #愛内アイラ</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-12 &nbsp;|&nbsp; 尺: 2:28</p>
+      <span class="badge badge-short">Short（短尺）</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">19,433 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">58.8%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">1:27</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">2 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">38</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">223</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">10</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      『アンチはファン？』というテーマで、アンチコメントとの向き合い方を語る短尺。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生19,433は当月の短尺で最も低い。『アンチ』という内輪・メタな話題は一般視聴者の関心が薄く、維持58.8%も短尺としては低め＝冒頭の引きが弱く離脱した。登録純増2も伸びず。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      メタ・内輪ネタは短尺向きでない。短尺は『事件・暴露・強いキャラの瞬間』に絞る。アンチ話をやるなら具体的なやり取りや反撃の決め台詞など、絵と感情が動く瞬間を切り出す。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/PChv7TqSelc/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=PChv7TqSelc" target="_blank">【愛内アイラ】初めての麻辣湯食べてみた！【ホームレスまなみ】</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-08 &nbsp;|&nbsp; 尺: 35:54</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">93,268 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">42.4%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">15:12</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">28 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">396</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">1,095</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">60</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      愛内アイラとホームレスまなみが、女子の間で流行中の『麻辣湯』を新大久保に食べに行く密着グルメ回。他チャンネルでバズったテーマを追う形で企画され、終始2人の食レポと軽い掛け合いで進行する。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生93,268回は当月の長尺で上位グループ。『流行グルメ×新大久保ロケ』というトレンド性と、アイラ・まなみの二枚看板が新規流入を引いた。維持率42.37%は30分級の長尺として標準ライン。大きな事件・展開のない雑談グルメのため中盤の引きは弱めだが、テーマの軽さで離脱が深くならず再生は伸びた。登録純増28は中位で、既存ファンが安心して見る回。新規をファン化させる強さまでは出ていない。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      『流行を追う』だけで終えず、ぶーちゃんねる固有の逸脱（まなみの金銭感覚・破天荒な言動）を1つ仕込むと維持と登録が伸びる。冒頭30秒で『なぜ今あえてこれを食べるのか』のフックを置くと中盤離脱を抑えられる。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/alHsBaHqH-Y/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=alHsBaHqH-Y" target="_blank">ゆきのさんの新事実続々 #ぶーちゃんねる #歌舞伎町 #学歴</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-08 &nbsp;|&nbsp; 尺: 0:56</p>
+      <span class="badge badge-short">Short（短尺）</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">56,305 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">104.9%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">0:58</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">12 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">20</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">265</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">4</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      ゆきのの『新事実』が続々明かされる短尺。学歴など意外な一面を小出しにする暴露系。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生56,305・維持104.87%は当月の短尺で上位。100%超は繰り返し視聴・ループが多い証拠で、『新事実』という暴露フックが好奇心を強く引いた。登録純増12も短尺として高く、人物への興味が登録に繋がった。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      人物の『意外な事実』は短尺の鉄板。ゆきの以外の演者でも『ギャップ・隠れた経歴』を定期的に短尺化するとバズと登録が両立する。続編を匂わせて連続視聴を狙う。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/WyrwOfz_GVM/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=WyrwOfz_GVM" target="_blank">毒づくまなみちゃん　#ホームレスまなみ #ぶーちゃんねる #歌舞伎町</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-07 &nbsp;|&nbsp; 尺: 1:01</p>
+      <span class="badge badge-short">Short（短尺）</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">39,137 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">75.1%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">0:45</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">2 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">27</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">242</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">4</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      まなみが毒づく場面を切り出した短尺。歯に衣着せぬ物言いでまなみのキャラを前面に出す。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生39,137・維持75.14%は短尺の標準ライン。まなみの毒舌は短尺と相性が良く最後まで見られているが、登録純増2は低い＝単発の毒づきだけでは新規の登録動機まで作れていない。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      毒舌短尺は『誰に・何に毒づいたか』を冒頭1秒で示すと伸びる。長尺本編への誘導テロップを入れ、短尺で掴んだ視聴者を本編・登録へ流す導線を作る。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/Z74e55onnAw/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=Z74e55onnAw" target="_blank">【100の質問】ぶーちゃんねるオールスター？で100の質問答えてみた</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-03 &nbsp;|&nbsp; 尺: 47:17</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">84,117 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">38.1%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">18:01</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">13 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">321</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">838</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">47</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      ぶーちゃんねるオールスター5人（まなみ・アイラ・せりの・ゆきの等）で100の質問に答えるお祭り企画。コンカフェゲスト出勤の告知も兼ねる。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生84,117は『オールスター』の話題性で取れたが、維持率38.12%は当月の長尺で低い部類。100問形式は1問ごとの密度が薄く、中盤で視聴者が飽きて離脱しやすい。登録純増13も低め＝お祭り回は既存ファンが楽しむ内容で、新規を引き込む強い縦軸が無い。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      質問形式は『答えで事件が起きる質問』に絞って数を減らし、1問あたりの掘り下げを深くする。5人いる強みを活かし、誰かの暴露・衝突が生まれる質問を中盤・終盤に配置して離脱を防ぐ。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/k06umv6z-g8/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=k06umv6z-g8" target="_blank">【ホームレスまなみ】「私の服は希少価値高いからアイラちゃんのより高いのよ!」殿様商売のぶーちゃんねるメンバーがフリーマーケット参戦!</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-02 &nbsp;|&nbsp; 尺: 1:30:36</p>
+      <span class="badge badge-long">Long（長尺）</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">88,918 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">28.9%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">26:08</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">32 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">301</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">960</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">47</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      ぶーちゃんねるメンバーがフリーマーケットに参戦し、まなみが『私の服は希少価値が高い』と殿様商売を展開するバラエティ回。出品・値付け・接客のやり取りが中心。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生88,918は長尺で中位。フリマという分かりやすい舞台＋まなみの強気キャラで再生は取れた。維持率28.85%は当月の長尺で低い部類＝作業シーンが間延びし山場が分散、中盤離脱が大きい。一方で登録純増32は良好で、まなみの『殿様商売』キャラの面白さが新規のファン化に効いた。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      物販・フリマ系は『売れる/売れない』の緊張と、まなみの強気が裏目に出る瞬間を山場として編集で前に出す。段取りパートは間引き、キャラが立つ掛け合いに尺を寄せると維持率が上がる。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/9l0Q98DLClw/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=9l0Q98DLClw" target="_blank">都営住宅に住みたい #愛内アイラ #歌舞伎町  #生活保護</a></h3>
+      <p class="vcard-meta">公開日: 2026-04-30 &nbsp;|&nbsp; 尺: 2:21</p>
+      <span class="badge badge-short">Short（短尺）</span> <span class="badge badge-carry">前月末公開・確定反映</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">104,451 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">73.9%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">1:44</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">22 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">155</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">853</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">25</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      『都営住宅に住みたい』生活保護をテーマにした愛内アイラの短尺。（4月末公開・確定反映）
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生104,451・維持73.89%・登録22は短尺で突出。『生活保護・都営住宅』という生々しいお金と暮らしのテーマが強い好奇心を引き、73.89%の高維持と登録22を同時に達成した。当月の短尺で最も成功したパターン。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      『お金・生活保護・住居』のリアルなお金事情は短尺の最強フック。演者の本音の金銭事情をシリーズ化し、本編の生活密着へ誘導すると登録が伸び続ける。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/VNZth0b4hZA/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=VNZth0b4hZA" target="_blank">ビルをトイレ代わりに #ホームレスまなみ #ホームレス #歌舞伎町</a></h3>
+      <p class="vcard-meta">公開日: 2026-04-29 &nbsp;|&nbsp; 尺: 2:32</p>
+      <span class="badge badge-short">Short（短尺）</span> <span class="badge badge-carry">前月末公開・確定反映</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">36,549 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">62.0%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">1:34</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">5 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">34</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">230</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">5</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      まなみが『ビルをトイレ代わりにする』破天荒な行動を切り出した短尺。（4月末公開・確定反映）
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生36,549・維持62.0%・登録5。まなみの常識外れの行動という強烈なフックで、短尺の高い維持を獲得した。破天荒キャラの瞬間的なインパクトが効いている。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      まなみの破天荒行動は短尺の鉄板フック。『常識からの逸脱』を1秒で見せ、本編誘導テロップで長尺・登録に流す。インパクト単発で終わらせず文脈を一言添える。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/SIHbLSaItBE/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=SIHbLSaItBE" target="_blank">秋に多い飛び降り #トー横界隈 #トー横 #駆け込み寺</a></h3>
+      <p class="vcard-meta">公開日: 2026-04-28 &nbsp;|&nbsp; 尺: 2:09</p>
+      <span class="badge badge-short">Short（短尺）</span> <span class="badge badge-carry">前月末公開・確定反映</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">17,510 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">56.6%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">1:13</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">9 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">3</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">163</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">2</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      『秋に多い飛び降り』というトー横界隈・駆け込み寺の重いテーマを扱った短尺。（4月末公開・確定反映）
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生17,510・維持56.62%・登録9。社会性の強い重いテーマで、短尺としては維持・登録ともに堅調。トー横界隈という時事性・社会問題への関心が視聴を集めた。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      社会問題系の短尺は関心を集めるが扱いが難しい。事実の提示に留め、チャンネルの立ち位置（駆け込み寺・支援）を明確にすると信頼と登録に繋がる。センシティブなので表現は慎重に。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/7J2CFUfjcMU/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=7J2CFUfjcMU" target="_blank">【休日1日密着】愛内アイラの休日ルーティンに1日密着！平成ギャル服を買いに109がある渋谷へ！</a></h3>
+      <p class="vcard-meta">公開日: 2026-04-27 &nbsp;|&nbsp; 尺: 48:04</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-carry">前月末公開・確定反映</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">105,510 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">38.3%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">18:24</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">40 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">370</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">1,091</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">56</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      愛内アイラの休日に1日密着。平成ギャル服を買いに109へ行く、私生活・ファッションのルーティン回。（4月末公開・確定値を当月レポートに反映）
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生105,510は当月級の高さ、登録純増40は非常に高い。看板アイラの『休日の素顔×ギャル服ショッピング』という私生活開示が新規のファン化を強く生んだ。維持率38.29%は長尺で低めで、買い物の段取りシーンが中盤の離脱を招いた。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      看板演者の私生活密着は登録を最も生む型。買い物の段取りは間引き、アイラの素のリアクション・本音トークに尺を寄せると維持も上がる。ファッション系は『なぜそれを買うのか』のストーリーを足すと中盤が締まる。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/MTn_YtIAUYM/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=MTn_YtIAUYM" target="_blank">【ホームレス新規へ】ホームレスを経験したまなみとアイラがホームレスになった時のためのアドバイスをする！</a></h3>
+      <p class="vcard-meta">公開日: 2026-04-24 &nbsp;|&nbsp; 尺: 30:06</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-carry">前月末公開・確定反映</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">55,903 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">44.8%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">13:28</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">16 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">210</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">695</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">32</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      ホームレス経験者のまなみ・アイラが、ホームレスになった時の知恵・対処法を新規向けに伝える回（4月末公開・確定反映）
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      再生55903・維持44.77%・登録16は堅調。当事者ならではのリアルな実用情報＋社会性が新規の興味と登録を引いた
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      経験者の実用知識系は信頼と登録を生む。シリーズ化し横展開すると信頼性と登録が伸びる
+    </div>
+  </div>
+</div>
+</div></section>
+
+<section class="sec-grad-rev">
+  <div class="container">
+    <h2>2026年5月 総括</h2>
+
+    <div class="summary-box">
+      <h3>当月の仮説・考察</h3>
+      <p>【仮説1・ネガティブフックが新規登録の最強ドライバー】当月の長尺で登録純増が最も伸びたのは『匂いのクレーム』回（登録+58・当月最高）。次いで再生・話題性で取れたのは喧嘩金銭(+17)・コンカフェ対決(+21)。クレーム・トラブル・揉め事という『ネガティブ×まなみ/アイラの素』のフックがクリックと新規ファン化を同時に引いている。ぶーちゃんねるの視聴者は綺麗な企画より生々しい人間関係に反応するという従来の勝ち筋が、5月も明確に再現された。</p><p>【仮説2・維持率と登録は別軸で動く】最高維持率は『怖いです密着』(58.03%)だが登録は+11と低く、再生も50,925と当月最低クラス。逆に登録最高の『匂いのクレーム』は維持45.53%と標準。つまり〈内輪の不穏フック=コアファンの維持〉と〈一般にも伝わるネガティブフック=新規登録〉は効くレバーが違う。維持を取りに行く企画と、新規を取りに行く企画を意図的に撃ち分ける必要がある。</p><p>【仮説3・お祭り型と単独密着は伸び悩む】『100の質問』(維持38.12%)や『あおい密着』(維持37.15%)は当月の維持率ワースト帯。100問形式は1問の密度が薄く中盤離脱、あおいは看板2人に比べ単独集客力がまだ弱い。話題性で再生は取れても、縦軸（事件性・関係性）が弱い企画は維持・登録ともに伸びないという傾向が出た。</p>
+    </div>
+
+    <div class="summary-box">
+      <h3>来月以降の改善点</h3>
+      <ul><li>1. 『ネガティブフック×演者の素』が新規登録を最も生んだ（匂いのクレーム回が登録+58で当月最高）。クレーム・トラブル系のテーマを意図的に増やし、新規獲得の主軸にする。ただし1本1テーマに絞り、話題が散らからないようにすると維持率も両立できる。</li><li>2. 内輪のゴタゴタ予告は維持率が最高（怖いです回58%）だが再生・登録は伸びにくい。サムネ・タイトルで『誰が誰と揉めているか』を一般視聴者にも伝わる形にし、高い維持を新規流入に変える。</li><li>3. 食べ歩き・グルメ系は2人の関係性トークで維持が安定（新大久保回48%・登録+39／麻辣湯回も再生93,268）。『2人の関係が深まる過程』をシリーズの縦軸にして、食レポは絵で持たせつつトークを本音・衝突に寄せる。</li><li>4. お祭り・100の質問系は維持率が低い（38%）。質問は『答えで事件が起きるもの』に絞り、暴露・衝突を中盤〜終盤に配置して離脱を防ぐ。対決企画はルール・点数・勝敗を冒頭と要所でテロップ明示し、視聴者が結果を追える設計にする（コンカフェ対決の維持41.6%改善策）。</li><li>5. あおい等の単独密着は冒頭に『今日の見どころ＝結論的フック』を置き、生活雑談は後半へ。看板2人を絡めるか、固有の強い葛藤・事件性を軸に据えて、密着の没入と登録を両立させる。</li></ul>
+    </div>
+
+    <div class="summary-box">
+      <h3>仮説から生まれる新規アイデア</h3>
+      <ul><li>A. クレーム・トラブル解決シリーズの定番化：登録を最も生んだ『匂いのクレーム』の型を月1〜2本の固定枠にする。視聴者から寄せられた苦情・指摘にまなみ/アイラが向き合う構成は、ネガティブフックで新規を引きつつ、解決パートでファン化まで運べる。</li><li>B. 『2人の関係性』縦軸シリーズ：新大久保・麻辣湯で機能した愛内アイラ×まなみの食べ歩き×本音トークを連続企画化。『最初は乗り気でなかった2人が…』の関係性の変化を縦軸にすると登録が伸びる。回ごとに本音・小さな衝突を1つ仕込む。</li><li>C. 揉め事の『決着まで見せる』2部構成：喧嘩金銭回（再生82,311）のように揉め事は再生を呼ぶが後味で新規が離れる。前編で対立の構図、後編で謝罪・和解まで描き切ると、炎上消費でなくファン化に繋がる。</li><li>D. 新演者『初密着』枠＋看板2人の絡め：あおい単独が伸び切らなかった反省から、新演者紹介は必ず看板2人のどちらかと絡め、固有の事件性（金銭事情・葛藤）を冒頭フックに置く。新規層開拓と既存ファンの好奇心を同時に満たす。</li></ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>ぶーちゃんねる 月次分析レポート 2026年5月 | 生成: 2026-06-04 | camys CEO AI</p>
+</footer>
+</body>
+</html>
