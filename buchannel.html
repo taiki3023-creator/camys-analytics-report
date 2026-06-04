@@ -109,6 +109,10 @@ h3{font-size:20px;font-weight:600;line-height:1.5;margin:32px 0 16px;color:#1e3a
 .badge-tr{background:#fef3c7;color:#92400e}
 .badge-pending{background:#e2e8f0;color:#475569}
 .badge-carry{background:#ede9fe;color:#6d28d9}
+.badge-asset{background:#fde68a;color:#92400e}
+.top-note-box{background:#fff;border:1px solid #e2e8f0;border-left:4px solid #06b6d4;border-radius:0 10px 10px 0;padding:20px 24px;margin-top:18px;box-shadow:0 2px 10px rgba(30,58,95,.06)}
+.top-note-box h3{color:#1e3a5f;font-size:16px;font-weight:700;margin-bottom:10px}
+.top-note-box p{font-size:15px;line-height:1.9;color:#1e293b}
 
 .vcard-metrics{padding:20px 24px;background:#f8fafc;border-bottom:1px solid #e2e8f0}
 .metrics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
@@ -146,6 +150,58 @@ a{color:#0369a1}
 a:hover{text-decoration:underline}
 .no-data{color:#94a3b8;font-style:italic;font-size:14px}
 .note{font-size:13px;color:#64748b;margin-bottom:8px}
+
+/* 横長テーブルはこのラッパー内だけで横スクロールさせ、ページ全体の崩れを防ぐ */
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:24px}
+.table-scroll .cmp-table,.table-scroll .top-table{margin-bottom:0}
+
+/* ============ スマホ最適化（640px以下） ============ */
+@media(max-width:640px){
+  body{font-size:15px;line-height:1.75;word-break:normal;overflow-wrap:anywhere}
+  /* ヒーロー */
+  .hero-banner{max-height:150px}
+  .hero-body{padding:0 20px 40px}
+  .hero-body.no-banner{padding-top:44px}
+  .hero-avatar{width:88px;height:88px;margin-bottom:12px}
+  .hero-body:not(.no-banner) .hero-avatar{margin-top:-44px}
+  .hero h1{font-size:23px;margin-bottom:8px}
+  .hero .sub{font-size:13px}
+  .hero .ch-link{font-size:13px;padding:8px 18px;margin-top:12px}
+  .hero .meta{gap:16px 24px;margin-top:18px}
+  .hero .meta-item .val{font-size:22px}
+  /* セクション余白を圧縮 */
+  .sec-white,.sec-grad,.sec-gray,.sec-grad-rev{padding:40px 16px}
+  .sec-white h2,.sec-gray h2,.sec-grad h2,.sec-grad-rev h2{font-size:21px;margin-bottom:18px;padding-left:12px;border-left-width:4px}
+  h3{font-size:17px;margin:24px 0 12px}
+  /* カード・統計 */
+  .card{padding:20px}
+  .summary-box{padding:20px}
+  .summary-box h3{font-size:16px}
+  .stat-card{padding:18px}
+  .stat-card .stat-val{font-size:26px}
+  .grid-3,.grid-2{gap:14px;margin-bottom:16px}
+  /* テーブルは横スクロール（潰さず読める） */
+  .table-scroll{margin-bottom:16px;border:1px solid #e2e8f0;border-radius:8px}
+  .cmp-table{font-size:13px}
+  .cmp-table th,.cmp-table td{padding:9px 10px}
+  .top-table{font-size:12px}
+  .top-table th,.top-table td{padding:7px 9px;font-size:12px}
+  .top-table .thumb-cell img{width:64px}
+  .top-table .rank{font-size:14px;width:28px}
+  /* 個別分析カードは縦積みに */
+  .vcard-header{flex-direction:column;gap:12px;padding:18px}
+  .vcard-thumb{width:100%}
+  .vcard-thumb img{max-height:210px;object-fit:cover}
+  .vcard-info h3{font-size:16px}
+  .vcard-metrics,.vcard-analysis{padding:16px}
+  .metrics-grid{grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px}
+  /* タブ */
+  .tab-btns{overflow-x:auto}
+  .tab-btn{padding:10px 14px;font-size:14px;white-space:nowrap}
+  /* 所感ボックス */
+  .top-note-box{padding:16px 18px}
+  footer{padding:24px 16px;font-size:13px}
+}
 </style>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
@@ -186,6 +242,7 @@ a:hover{text-decoration:underline}
     <div class="grid-3"><div class="stat-card" style="border:2px solid #06b6d4"><div style="font-weight:700;font-size:16px;margin-bottom:12px">2026年5月 <span class="badge badge-long">当月</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">月間再生</span><span style="font-weight:700;font-family:Inter,sans-serif">3,536,969 回</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">総視聴時間</span><span style="font-weight:700;font-family:Inter,sans-serif">416,284時間</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">平均維持率</span><span style="font-weight:700;font-family:Inter,sans-serif">37.7%</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">平均視聴時間</span><span style="font-weight:700;font-family:Inter,sans-serif">8:59</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">登録純増</span><span style="font-weight:700;font-family:Inter,sans-serif">156 人</span></div></div><div class="stat-card" ><div style="font-weight:700;font-size:16px;margin-bottom:12px">2026年4月</div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">月間再生</span><span style="font-weight:700;font-family:Inter,sans-serif">2,748,478 回</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">総視聴時間</span><span style="font-weight:700;font-family:Inter,sans-serif">281,548時間</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">平均維持率</span><span style="font-weight:700;font-family:Inter,sans-serif">37.2%</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">平均視聴時間</span><span style="font-weight:700;font-family:Inter,sans-serif">7:51</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">登録純増</span><span style="font-weight:700;font-family:Inter,sans-serif">223 人</span></div></div><div class="stat-card" ><div style="font-weight:700;font-size:16px;margin-bottom:12px">2026年3月</div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">月間再生</span><span style="font-weight:700;font-family:Inter,sans-serif">5,064,917 回</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">総視聴時間</span><span style="font-weight:700;font-family:Inter,sans-serif">474,256時間</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">平均維持率</span><span style="font-weight:700;font-family:Inter,sans-serif">39.0%</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">平均視聴時間</span><span style="font-weight:700;font-family:Inter,sans-serif">7:24</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">登録純増</span><span style="font-weight:700;font-family:Inter,sans-serif">1,458 人</span></div></div></div>
 
     <h3>当月 vs 前月 比較（2026年5月 vs 2026年4月）</h3>
+    <div class="table-scroll">
     <table class="cmp-table">
       <tr><th>指標</th><th>2026年5月（当月）</th><th>2026年4月（前月）</th><th>前月比</th></tr>
       <tr><td>月間再生</td><td class='num'>3,536,969 回</td><td class='num'>2,748,478 回</td><td class='num up'>+28.7%</td></tr>
@@ -195,6 +252,7 @@ a:hover{text-decoration:underline}
 <tr><td>平均視聴時間</td><td class='num'>8:59</td><td class='num'>7:51</td><td class='num up'>+14.4%</td></tr>
 
     </table>
+    </div>
 
     <div class="card" style="margin-top:8px">
       <p style="font-size:14px;font-weight:700;color:#1e3a5f;margin-bottom:12px">所感・仮説</p>
@@ -311,8 +369,8 @@ a:hover{text-decoration:underline}
 
 <section class="sec-gray">
   <div class="container">
-    <h2>視聴回数トップ10</h2>
-    <p class="note">当月（2026年5月）の月間再生数上位。長尺・短尺別に表示。</p>
+    <h2>視聴回数トップ15</h2>
+    <p class="note">当月（2026年5月）の月間再生数上位。長尺・短尺別に表示。黄色＝「資産」＝公開3ヶ月以上前でも当月トップに残るロングテール資産動画。</p>
     <div class="tab-wrapper">
       <div class="tab-btns">
         <button class="tab-btn active" onclick="switchTab(event,'long')">長尺 (Long)</button>
@@ -320,54 +378,69 @@ a:hover{text-decoration:underline}
       </div>
       
 <div class="tab-content  active" id="tab-long">
+  <div class="table-scroll">
   <table class="top-table">
     <tr>
       <th style="width:40px">#</th>
       <th style="width:110px">サムネ</th>
       <th>タイトル</th>
       <th style="width:96px">公開日</th>
+      <th style="width:70px">経過</th>
       <th style="width:100px">当月再生</th>
       <th style="width:80px">視聴維持率</th>
       <th style="width:70px">尺</th>
     </tr>
-    <tr><td class='rank'>1</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/PChv7TqSelc/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=PChv7TqSelc" target="_blank">【愛内アイラ】初めての麻辣湯食べてみた！【ホームレスまなみ】</a></td><td class='num' style='white-space:nowrap'>2026-05-08</td><td class='num'>109,477 回</td><td class='num'>41.4%</td><td class='num'>35:54</td></tr>
-<tr><td class='rank'>2</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/k06umv6z-g8/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=k06umv6z-g8" target="_blank">【ホームレスまなみ】「私の服は希少価値高いからアイラちゃんのより高いのよ!」殿様商売のぶーちゃんねる</a></td><td class='num' style='white-space:nowrap'>2026-05-02</td><td class='num'>108,532 回</td><td class='num'>28.5%</td><td class='num'>1:30:36</td></tr>
-<tr><td class='rank'>3</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/QJqAt8RyO6M/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=QJqAt8RyO6M" target="_blank">【匂いのクレーム】コンカフェゲスト出勤前にクレーム対応と腹ごしらえ</a></td><td class='num' style='white-space:nowrap'>2026-05-22</td><td class='num'>104,813 回</td><td class='num'>44.9%</td><td class='num'>37:48</td></tr>
-<tr><td class='rank'>4</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/Z74e55onnAw/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=Z74e55onnAw" target="_blank">【100の質問】ぶーちゃんねるオールスター？で100の質問答えてみた</a></td><td class='num' style='white-space:nowrap'>2026-05-03</td><td class='num'>102,300 回</td><td class='num'>37.3%</td><td class='num'>47:17</td></tr>
-<tr><td class='rank'>5</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/KgGngyfFq-I/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=KgGngyfFq-I" target="_blank">【コンカフェ】ゲスト出勤で対決する2人！ホームレスまなみと愛内アイラの熾烈なバトル！！ｗ</a></td><td class='num' style='white-space:nowrap'>2026-05-24</td><td class='num'>94,759 回</td><td class='num'>41.5%</td><td class='num'>35:31</td></tr>
-<tr><td class='rank'>6</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/3sBfELp5r2Q/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=3sBfELp5r2Q" target="_blank">【お仕事1日密着】ホス狂いあおいは現在何をしているのか？密着してみました</a></td><td class='num' style='white-space:nowrap'>2026-05-15</td><td class='num'>93,002 回</td><td class='num'>36.3%</td><td class='num'>47:00</td></tr>
-<tr><td class='rank'>7</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/tEcS2E6VoGs/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=tEcS2E6VoGs" target="_blank">【新大久保】愛内アイラとホームレスまなみが行く！新大久保食べ歩き！</a></td><td class='num' style='white-space:nowrap'>2026-05-13</td><td class='num'>88,053 回</td><td class='num'>47.3%</td><td class='num'>33:33</td></tr>
-<tr><td class='rank'>8</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/5rqnjk02lE8/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=5rqnjk02lE8" target="_blank">【喧嘩】お金を受け取ったのに受け取っていないと主張するホームレスまなみに謝罪の説得をする…</a></td><td class='num' style='white-space:nowrap'>2026-05-17</td><td class='num'>87,826 回</td><td class='num'>44.7%</td><td class='num'>26:12</td></tr>
-<tr><td class='rank'>9</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/9abr1L6o9WE/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=9abr1L6o9WE" target="_blank">怖いです💦○○予告の話とついでにホームレスまなみの買い物ルーティン密着！</a></td><td class='num' style='white-space:nowrap'>2026-05-29</td><td class='num'>76,217 回</td><td class='num'>55.0%</td><td class='num'>24:37</td></tr>
-<tr><td class='rank'>10</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/7J2CFUfjcMU/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=7J2CFUfjcMU" target="_blank">【休日1日密着】愛内アイラの休日ルーティンに1日密着！平成ギャル服を買いに109がある渋谷へ！</a></td><td class='num' style='white-space:nowrap'>2026-04-27</td><td class='num'>47,293 回</td><td class='num'>30.1%</td><td class='num'>48:04</td></tr>
+    <tr><td class='rank'>1</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/PChv7TqSelc/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=PChv7TqSelc" target="_blank">【愛内アイラ】初めての麻辣湯食べてみた！【ホームレスまなみ】</a></td><td class='num' style='white-space:nowrap'>2026-05-08</td><td class='num' style='white-space:nowrap'>当月</td><td class='num'>109,477 回</td><td class='num'>41.4%</td><td class='num'>35:54</td></tr>
+<tr><td class='rank'>2</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/k06umv6z-g8/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=k06umv6z-g8" target="_blank">【ホームレスまなみ】「私の服は希少価値高いからアイラちゃんのより高いのよ!」殿様商売のぶーちゃんねる</a></td><td class='num' style='white-space:nowrap'>2026-05-02</td><td class='num' style='white-space:nowrap'>当月</td><td class='num'>108,526 回</td><td class='num'>28.5%</td><td class='num'>1:30:36</td></tr>
+<tr><td class='rank'>3</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/QJqAt8RyO6M/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=QJqAt8RyO6M" target="_blank">【匂いのクレーム】コンカフェゲスト出勤前にクレーム対応と腹ごしらえ</a></td><td class='num' style='white-space:nowrap'>2026-05-22</td><td class='num' style='white-space:nowrap'>当月</td><td class='num'>104,809 回</td><td class='num'>44.9%</td><td class='num'>37:48</td></tr>
+<tr><td class='rank'>4</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/Z74e55onnAw/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=Z74e55onnAw" target="_blank">【100の質問】ぶーちゃんねるオールスター？で100の質問答えてみた</a></td><td class='num' style='white-space:nowrap'>2026-05-03</td><td class='num' style='white-space:nowrap'>当月</td><td class='num'>102,299 回</td><td class='num'>37.3%</td><td class='num'>47:17</td></tr>
+<tr><td class='rank'>5</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/KgGngyfFq-I/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=KgGngyfFq-I" target="_blank">【コンカフェ】ゲスト出勤で対決する2人！ホームレスまなみと愛内アイラの熾烈なバトル！！ｗ</a></td><td class='num' style='white-space:nowrap'>2026-05-24</td><td class='num' style='white-space:nowrap'>当月</td><td class='num'>94,756 回</td><td class='num'>41.5%</td><td class='num'>35:31</td></tr>
+<tr><td class='rank'>6</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/3sBfELp5r2Q/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=3sBfELp5r2Q" target="_blank">【お仕事1日密着】ホス狂いあおいは現在何をしているのか？密着してみました</a></td><td class='num' style='white-space:nowrap'>2026-05-15</td><td class='num' style='white-space:nowrap'>当月</td><td class='num'>92,999 回</td><td class='num'>36.3%</td><td class='num'>47:00</td></tr>
+<tr><td class='rank'>7</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/tEcS2E6VoGs/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=tEcS2E6VoGs" target="_blank">【新大久保】愛内アイラとホームレスまなみが行く！新大久保食べ歩き！</a></td><td class='num' style='white-space:nowrap'>2026-05-13</td><td class='num' style='white-space:nowrap'>当月</td><td class='num'>88,051 回</td><td class='num'>47.3%</td><td class='num'>33:33</td></tr>
+<tr><td class='rank'>8</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/5rqnjk02lE8/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=5rqnjk02lE8" target="_blank">【喧嘩】お金を受け取ったのに受け取っていないと主張するホームレスまなみに謝罪の説得をする…</a></td><td class='num' style='white-space:nowrap'>2026-05-17</td><td class='num' style='white-space:nowrap'>当月</td><td class='num'>87,824 回</td><td class='num'>44.7%</td><td class='num'>26:12</td></tr>
+<tr><td class='rank'>9</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/9abr1L6o9WE/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=9abr1L6o9WE" target="_blank">怖いです💦○○予告の話とついでにホームレスまなみの買い物ルーティン密着！</a></td><td class='num' style='white-space:nowrap'>2026-05-29</td><td class='num' style='white-space:nowrap'>当月</td><td class='num'>76,140 回</td><td class='num'>55.0%</td><td class='num'>24:37</td></tr>
+<tr><td class='rank'>10</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/7J2CFUfjcMU/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=7J2CFUfjcMU" target="_blank">【休日1日密着】愛内アイラの休日ルーティンに1日密着！平成ギャル服を買いに109がある渋谷へ！</a></td><td class='num' style='white-space:nowrap'>2026-04-27</td><td class='num' style='white-space:nowrap'>1ヶ月</td><td class='num'>47,292 回</td><td class='num'>30.1%</td><td class='num'>48:04</td></tr>
+<tr><td class='rank'>11</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/88-LgQaIvdg/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=88-LgQaIvdg" target="_blank">【一日密着】まなみのお仕事の日ルーティンを追っかけてみたら…</a></td><td class='num' style='white-space:nowrap'>2026-03-08</td><td class='num' style='white-space:nowrap'>2ヶ月</td><td class='num'>25,279 回</td><td class='num'>34.7%</td><td class='num'>24:06</td></tr>
+<tr><td class='rank'>12</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/P8hOjRCdF5w/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=P8hOjRCdF5w" target="_blank">【密着】ホスト遊びに密着し、遊ぶ理由を聞いたら子供の話になり…</a></td><td class='num' style='white-space:nowrap'>2026-04-19</td><td class='num' style='white-space:nowrap'>1ヶ月</td><td class='num'>23,165 回</td><td class='num'>34.1%</td><td class='num'>38:08</td></tr>
 
   </table>
+  </div>
+  <div class="top-note-box"><h3>所感（長尺(Long)）</h3><p>上位は全て当月公開の新作が占有し、100万再生級が複数本並んだ。ロングは過去資産より「毎月の打席数と企画力」で順位が決まるフォーマットで、当月のコンテンツ力がそのまま結果に出ている。維持率は密着・1日ルーティン系（休日密着・怖いですシリーズ）が50%超と高く、対立・喧嘩系は再生は取れても維持率は30〜45%にとどまる傾向。打ち手は、維持率の高い密着・ルーティン系を本数の軸に据えつつ、瞬発力のある対立企画を上に乗せる二段構え。</p></div>
 </div>
 
       
 <div class="tab-content" id="tab-short">
+  <div class="table-scroll">
   <table class="top-table">
     <tr>
       <th style="width:40px">#</th>
       <th style="width:110px">サムネ</th>
       <th>タイトル</th>
       <th style="width:96px">公開日</th>
+      <th style="width:70px">経過</th>
       <th style="width:100px">当月再生</th>
       <th style="width:80px">視聴維持率</th>
       <th style="width:70px">尺</th>
     </tr>
-    <tr><td class='rank'>1</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/8ZG3UiKwNvM/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=8ZG3UiKwNvM" target="_blank">児相が子供を返してくれない #ぶーちゃんねる #歌舞伎町 #児童相談所</a></td><td class='num' style='white-space:nowrap'>2026-02-26</td><td class='num'>368,019 回</td><td class='num'>78.8%</td><td class='num'>1:15</td></tr>
-<tr><td class='rank'>2</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/6-Db7BJz6iE/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=6-Db7BJz6iE" target="_blank">匂いのクレーム #クレーム #ホームレスまなみ #ホームレス</a></td><td class='num' style='white-space:nowrap'>2026-05-26</td><td class='num'>131,894 回</td><td class='num'>87.6%</td><td class='num'>1:36</td></tr>
-<tr><td class='rank'>3</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/s-N6fjjjNFs/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=s-N6fjjjNFs" target="_blank">子供の年金で生活してる #ぶーちゃんねる #ホームレスまなみ #歌舞伎町</a></td><td class='num' style='white-space:nowrap'>2026-03-12</td><td class='num'>115,328 回</td><td class='num'>98.6%</td><td class='num'>1:15</td></tr>
-<tr><td class='rank'>4</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/9l0Q98DLClw/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=9l0Q98DLClw" target="_blank">都営住宅に住みたい #愛内アイラ #歌舞伎町  #生活保護</a></td><td class='num' style='white-space:nowrap'>2026-04-30</td><td class='num'>86,192 回</td><td class='num'>71.1%</td><td class='num'>2:21</td></tr>
-<tr><td class='rank'>5</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/alHsBaHqH-Y/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=alHsBaHqH-Y" target="_blank">ゆきのさんの新事実続々 #ぶーちゃんねる #歌舞伎町 #学歴</a></td><td class='num' style='white-space:nowrap'>2026-05-08</td><td class='num'>83,879 回</td><td class='num'>103.5%</td><td class='num'>0:56</td></tr>
-<tr><td class='rank'>6</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/kidZlCxAdcw/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=kidZlCxAdcw" target="_blank">ホームレスまなみ喫茶店でカスハラ　#ホームレスまなみ #歌舞伎町 #カスハラ</a></td><td class='num' style='white-space:nowrap'>2026-03-13</td><td class='num'>62,393 回</td><td class='num'>81.6%</td><td class='num'>1:15</td></tr>
-<tr><td class='rank'>7</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/MvLDPRM-_Fw/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=MvLDPRM-_Fw" target="_blank">まなみちゃん揉め事 #ホームレスまなみ #歌舞伎町 #ぶーちゃんねる</a></td><td class='num' style='white-space:nowrap'>2026-05-20</td><td class='num'>51,508 回</td><td class='num'>74.7%</td><td class='num'>1:43</td></tr>
-<tr><td class='rank'>8</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/fx_zncVITb0/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=fx_zncVITb0" target="_blank">#ぶーちゃんねる#歌舞伎町#ホスト#ホス狂い#ホームレス#生活保護</a></td><td class='num' style='white-space:nowrap'>2024-05-28</td><td class='num'>48,986 回</td><td class='num'>107.3%</td><td class='num'>0:48</td></tr>
-<tr><td class='rank'>9</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/543Ml8zRCsA/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=543Ml8zRCsA" target="_blank">あおいちゃんの恋愛事情 #ホス狂いあおい #歌舞伎町 #恋バナ</a></td><td class='num' style='white-space:nowrap'>2026-05-19</td><td class='num'>48,972 回</td><td class='num'>78.8%</td><td class='num'>1:30</td></tr>
-<tr><td class='rank'>10</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/WyrwOfz_GVM/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=WyrwOfz_GVM" target="_blank">毒づくまなみちゃん　#ホームレスまなみ #ぶーちゃんねる #歌舞伎町</a></td><td class='num' style='white-space:nowrap'>2026-05-07</td><td class='num'>48,646 回</td><td class='num'>74.7%</td><td class='num'>1:01</td></tr>
+    <tr style="background:#fffbeb"><td class='rank'>1</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/8ZG3UiKwNvM/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=8ZG3UiKwNvM" target="_blank">児相が子供を返してくれない #ぶーちゃんねる #歌舞伎町 #児童相談所</a> <span class="badge badge-asset">資産</span></td><td class='num' style='white-space:nowrap'>2026-02-26</td><td class='num' style='white-space:nowrap'>3ヶ月</td><td class='num'>368,019 回</td><td class='num'>78.8%</td><td class='num'>1:15</td></tr>
+<tr><td class='rank'>2</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/6-Db7BJz6iE/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=6-Db7BJz6iE" target="_blank">匂いのクレーム #クレーム #ホームレスまなみ #ホームレス</a></td><td class='num' style='white-space:nowrap'>2026-05-26</td><td class='num' style='white-space:nowrap'>当月</td><td class='num'>131,885 回</td><td class='num'>87.6%</td><td class='num'>1:36</td></tr>
+<tr><td class='rank'>3</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/s-N6fjjjNFs/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=s-N6fjjjNFs" target="_blank">子供の年金で生活してる #ぶーちゃんねる #ホームレスまなみ #歌舞伎町</a></td><td class='num' style='white-space:nowrap'>2026-03-12</td><td class='num' style='white-space:nowrap'>2ヶ月</td><td class='num'>115,329 回</td><td class='num'>98.6%</td><td class='num'>1:15</td></tr>
+<tr><td class='rank'>4</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/9l0Q98DLClw/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=9l0Q98DLClw" target="_blank">都営住宅に住みたい #愛内アイラ #歌舞伎町  #生活保護</a></td><td class='num' style='white-space:nowrap'>2026-04-30</td><td class='num' style='white-space:nowrap'>1ヶ月</td><td class='num'>86,192 回</td><td class='num'>71.1%</td><td class='num'>2:21</td></tr>
+<tr><td class='rank'>5</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/alHsBaHqH-Y/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=alHsBaHqH-Y" target="_blank">ゆきのさんの新事実続々 #ぶーちゃんねる #歌舞伎町 #学歴</a></td><td class='num' style='white-space:nowrap'>2026-05-08</td><td class='num' style='white-space:nowrap'>当月</td><td class='num'>83,879 回</td><td class='num'>103.5%</td><td class='num'>0:56</td></tr>
+<tr><td class='rank'>6</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/kidZlCxAdcw/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=kidZlCxAdcw" target="_blank">ホームレスまなみ喫茶店でカスハラ　#ホームレスまなみ #歌舞伎町 #カスハラ</a></td><td class='num' style='white-space:nowrap'>2026-03-13</td><td class='num' style='white-space:nowrap'>2ヶ月</td><td class='num'>62,393 回</td><td class='num'>81.6%</td><td class='num'>1:15</td></tr>
+<tr><td class='rank'>7</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/MvLDPRM-_Fw/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=MvLDPRM-_Fw" target="_blank">まなみちゃん揉め事 #ホームレスまなみ #歌舞伎町 #ぶーちゃんねる</a></td><td class='num' style='white-space:nowrap'>2026-05-20</td><td class='num' style='white-space:nowrap'>当月</td><td class='num'>51,507 回</td><td class='num'>74.7%</td><td class='num'>1:43</td></tr>
+<tr style="background:#fffbeb"><td class='rank'>8</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/fx_zncVITb0/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=fx_zncVITb0" target="_blank">#ぶーちゃんねる#歌舞伎町#ホスト#ホス狂い#ホームレス#生活保護</a> <span class="badge badge-asset">資産</span></td><td class='num' style='white-space:nowrap'>2024-05-28</td><td class='num' style='white-space:nowrap'>24ヶ月</td><td class='num'>48,986 回</td><td class='num'>107.3%</td><td class='num'>0:48</td></tr>
+<tr><td class='rank'>9</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/543Ml8zRCsA/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=543Ml8zRCsA" target="_blank">あおいちゃんの恋愛事情 #ホス狂いあおい #歌舞伎町 #恋バナ</a></td><td class='num' style='white-space:nowrap'>2026-05-19</td><td class='num' style='white-space:nowrap'>当月</td><td class='num'>48,972 回</td><td class='num'>78.8%</td><td class='num'>1:30</td></tr>
+<tr><td class='rank'>10</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/WyrwOfz_GVM/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=WyrwOfz_GVM" target="_blank">毒づくまなみちゃん　#ホームレスまなみ #ぶーちゃんねる #歌舞伎町</a></td><td class='num' style='white-space:nowrap'>2026-05-07</td><td class='num' style='white-space:nowrap'>当月</td><td class='num'>48,645 回</td><td class='num'>74.7%</td><td class='num'>1:01</td></tr>
+<tr><td class='rank'>11</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/keEh5FIqCsU/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=keEh5FIqCsU" target="_blank">化粧品売り場でまなみんワールド #ホームレスまなみ #歌舞伎町 #ぶーちゃんねる</a></td><td class='num' style='white-space:nowrap'>2026-05-18</td><td class='num' style='white-space:nowrap'>当月</td><td class='num'>46,914 回</td><td class='num'>83.4%</td><td class='num'>0:47</td></tr>
+<tr style="background:#fffbeb"><td class='rank'>12</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/uQpwVCxrVPQ/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=uQpwVCxrVPQ" target="_blank">生活保護 #ホスト #ホストtv #歌舞伎町 #ホームレスが大富豪になるまで #ホームレス #ホス狂</a> <span class="badge badge-asset">資産</span></td><td class='num' style='white-space:nowrap'>2023-03-02</td><td class='num' style='white-space:nowrap'>38ヶ月</td><td class='num'>45,535 回</td><td class='num'>104.9%</td><td class='num'>0:52</td></tr>
+<tr><td class='rank'>13</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/WqZVdGjRTIk/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=WqZVdGjRTIk" target="_blank">生活保護でホストへ行く #生活保護 #歌舞伎町 #ホスト</a></td><td class='num' style='white-space:nowrap'>2026-04-23</td><td class='num' style='white-space:nowrap'>1ヶ月</td><td class='num'>44,863 回</td><td class='num'>84.9%</td><td class='num'>1:15</td></tr>
+<tr><td class='rank'>14</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/xrte3u3Zfp0/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=xrte3u3Zfp0" target="_blank">まなみちゃんシャンパン開栓 #シャンパン #ホームレスまなみ #コンカフェ</a></td><td class='num' style='white-space:nowrap'>2026-05-27</td><td class='num' style='white-space:nowrap'>当月</td><td class='num'>37,225 回</td><td class='num'>57.1%</td><td class='num'>2:06</td></tr>
+<tr style="background:#fffbeb"><td class='rank'>15</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/FUAAbGseCWo/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=FUAAbGseCWo" target="_blank">＃ぶーちゃんねる＃歌舞伎町＃ホスト＃ホス狂い＃ホームレス</a> <span class="badge badge-asset">資産</span></td><td class='num' style='white-space:nowrap'>2024-03-08</td><td class='num' style='white-space:nowrap'>26ヶ月</td><td class='num'>33,791 回</td><td class='num'>107.5%</td><td class='num'>0:57</td></tr>
 
   </table>
+  </div>
+  <div class="top-note-box"><h3>所感（短尺(Short)）</h3><p>長尺と対照的に、上位は資産（ロングテール）動画が支配。トップは2〜3ヶ月前の「児相」「子供の年金」「生活保護」など社会保障×歌舞伎町の社会派フックが継続再生し、維持率も70〜100%超と非常に高い。1年前（2024年5月）の動画まで上位に残っており、当たれば長期で回収できるのがショートの強み。打ち手は、伸びた社会派テーマ（制度・福祉・家族）の切り口を横展開で量産し、ショート資産の本数を厚くすること。</p></div>
 </div>
 
     </div>

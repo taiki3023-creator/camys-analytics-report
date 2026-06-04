@@ -109,6 +109,10 @@ h3{font-size:20px;font-weight:600;line-height:1.5;margin:32px 0 16px;color:#1e3a
 .badge-tr{background:#fef3c7;color:#92400e}
 .badge-pending{background:#e2e8f0;color:#475569}
 .badge-carry{background:#ede9fe;color:#6d28d9}
+.badge-asset{background:#fde68a;color:#92400e}
+.top-note-box{background:#fff;border:1px solid #e2e8f0;border-left:4px solid #06b6d4;border-radius:0 10px 10px 0;padding:20px 24px;margin-top:18px;box-shadow:0 2px 10px rgba(30,58,95,.06)}
+.top-note-box h3{color:#1e3a5f;font-size:16px;font-weight:700;margin-bottom:10px}
+.top-note-box p{font-size:15px;line-height:1.9;color:#1e293b}
 
 .vcard-metrics{padding:20px 24px;background:#f8fafc;border-bottom:1px solid #e2e8f0}
 .metrics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
@@ -146,6 +150,58 @@ a{color:#0369a1}
 a:hover{text-decoration:underline}
 .no-data{color:#94a3b8;font-style:italic;font-size:14px}
 .note{font-size:13px;color:#64748b;margin-bottom:8px}
+
+/* 横長テーブルはこのラッパー内だけで横スクロールさせ、ページ全体の崩れを防ぐ */
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:24px}
+.table-scroll .cmp-table,.table-scroll .top-table{margin-bottom:0}
+
+/* ============ スマホ最適化（640px以下） ============ */
+@media(max-width:640px){
+  body{font-size:15px;line-height:1.75;word-break:normal;overflow-wrap:anywhere}
+  /* ヒーロー */
+  .hero-banner{max-height:150px}
+  .hero-body{padding:0 20px 40px}
+  .hero-body.no-banner{padding-top:44px}
+  .hero-avatar{width:88px;height:88px;margin-bottom:12px}
+  .hero-body:not(.no-banner) .hero-avatar{margin-top:-44px}
+  .hero h1{font-size:23px;margin-bottom:8px}
+  .hero .sub{font-size:13px}
+  .hero .ch-link{font-size:13px;padding:8px 18px;margin-top:12px}
+  .hero .meta{gap:16px 24px;margin-top:18px}
+  .hero .meta-item .val{font-size:22px}
+  /* セクション余白を圧縮 */
+  .sec-white,.sec-grad,.sec-gray,.sec-grad-rev{padding:40px 16px}
+  .sec-white h2,.sec-gray h2,.sec-grad h2,.sec-grad-rev h2{font-size:21px;margin-bottom:18px;padding-left:12px;border-left-width:4px}
+  h3{font-size:17px;margin:24px 0 12px}
+  /* カード・統計 */
+  .card{padding:20px}
+  .summary-box{padding:20px}
+  .summary-box h3{font-size:16px}
+  .stat-card{padding:18px}
+  .stat-card .stat-val{font-size:26px}
+  .grid-3,.grid-2{gap:14px;margin-bottom:16px}
+  /* テーブルは横スクロール（潰さず読める） */
+  .table-scroll{margin-bottom:16px;border:1px solid #e2e8f0;border-radius:8px}
+  .cmp-table{font-size:13px}
+  .cmp-table th,.cmp-table td{padding:9px 10px}
+  .top-table{font-size:12px}
+  .top-table th,.top-table td{padding:7px 9px;font-size:12px}
+  .top-table .thumb-cell img{width:64px}
+  .top-table .rank{font-size:14px;width:28px}
+  /* 個別分析カードは縦積みに */
+  .vcard-header{flex-direction:column;gap:12px;padding:18px}
+  .vcard-thumb{width:100%}
+  .vcard-thumb img{max-height:210px;object-fit:cover}
+  .vcard-info h3{font-size:16px}
+  .vcard-metrics,.vcard-analysis{padding:16px}
+  .metrics-grid{grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px}
+  /* タブ */
+  .tab-btns{overflow-x:auto}
+  .tab-btn{padding:10px 14px;font-size:14px;white-space:nowrap}
+  /* 所感ボックス */
+  .top-note-box{padding:16px 18px}
+  footer{padding:24px 16px;font-size:13px}
+}
 </style>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
@@ -186,6 +242,7 @@ a:hover{text-decoration:underline}
     <div class="grid-3"><div class="stat-card" style="border:2px solid #06b6d4"><div style="font-weight:700;font-size:16px;margin-bottom:12px">2026年5月 <span class="badge badge-long">当月</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">月間再生</span><span style="font-weight:700;font-family:Inter,sans-serif">392,265 回</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">総視聴時間</span><span style="font-weight:700;font-family:Inter,sans-serif">56,673時間</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">平均維持率</span><span style="font-weight:700;font-family:Inter,sans-serif">42.8%</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">平均視聴時間</span><span style="font-weight:700;font-family:Inter,sans-serif">9:09</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">登録純増</span><span style="font-weight:700;font-family:Inter,sans-serif">181 人</span></div></div><div class="stat-card" ><div style="font-weight:700;font-size:16px;margin-bottom:12px">2026年4月</div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">月間再生</span><span style="font-weight:700;font-family:Inter,sans-serif">293,623 回</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">総視聴時間</span><span style="font-weight:700;font-family:Inter,sans-serif">38,547時間</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">平均維持率</span><span style="font-weight:700;font-family:Inter,sans-serif">43.3%</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">平均視聴時間</span><span style="font-weight:700;font-family:Inter,sans-serif">8:37</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">登録純増</span><span style="font-weight:700;font-family:Inter,sans-serif">145 人</span></div></div><div class="stat-card" ><div style="font-weight:700;font-size:16px;margin-bottom:12px">2026年3月</div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">月間再生</span><span style="font-weight:700;font-family:Inter,sans-serif">365,427 回</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">総視聴時間</span><span style="font-weight:700;font-family:Inter,sans-serif">51,772時間</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">平均維持率</span><span style="font-weight:700;font-family:Inter,sans-serif">43.9%</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">平均視聴時間</span><span style="font-weight:700;font-family:Inter,sans-serif">9:01</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e2e8f0;font-size:14px"><span style="color:#475569">登録純増</span><span style="font-weight:700;font-family:Inter,sans-serif">295 人</span></div></div></div>
 
     <h3>当月 vs 前月 比較（2026年5月 vs 2026年4月）</h3>
+    <div class="table-scroll">
     <table class="cmp-table">
       <tr><th>指標</th><th>2026年5月（当月）</th><th>2026年4月（前月）</th><th>前月比</th></tr>
       <tr><td>月間再生</td><td class='num'>392,265 回</td><td class='num'>293,623 回</td><td class='num up'>+33.6%</td></tr>
@@ -195,6 +252,7 @@ a:hover{text-decoration:underline}
 <tr><td>平均視聴時間</td><td class='num'>9:09</td><td class='num'>8:37</td><td class='num up'>+6.2%</td></tr>
 
     </table>
+    </div>
 
     <div class="card" style="margin-top:8px">
       <p style="font-size:14px;font-weight:700;color:#1e3a5f;margin-bottom:12px">所感・仮説</p>
@@ -311,8 +369,8 @@ a:hover{text-decoration:underline}
 
 <section class="sec-gray">
   <div class="container">
-    <h2>視聴回数トップ10</h2>
-    <p class="note">当月（2026年5月）の月間再生数上位。長尺・短尺別に表示。</p>
+    <h2>視聴回数トップ15</h2>
+    <p class="note">当月（2026年5月）の月間再生数上位。長尺・短尺別に表示。黄色＝「資産」＝公開3ヶ月以上前でも当月トップに残るロングテール資産動画。</p>
     <div class="tab-wrapper">
       <div class="tab-btns">
         <button class="tab-btn active" onclick="switchTab(event,'long')">長尺 (Long)</button>
@@ -320,49 +378,62 @@ a:hover{text-decoration:underline}
       </div>
       
 <div class="tab-content  active" id="tab-long">
+  <div class="table-scroll">
   <table class="top-table">
     <tr>
       <th style="width:40px">#</th>
       <th style="width:110px">サムネ</th>
       <th>タイトル</th>
       <th style="width:96px">公開日</th>
+      <th style="width:70px">経過</th>
       <th style="width:100px">当月再生</th>
       <th style="width:80px">視聴維持率</th>
       <th style="width:70px">尺</th>
     </tr>
-    <tr><td class='rank'>1</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/TnhUkHycfx0/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=TnhUkHycfx0" target="_blank">【修羅場】ホストの異常な言動に姫が恐怖…幹部へ密告で爆弾発覚？！反省ゼロの舐めた態度に太陽社長ブチギ</a></td><td class='num' style='white-space:nowrap'>2026-05-16</td><td class='num'>35,347 回</td><td class='num'>48.7%</td><td class='num'>23:35</td></tr>
-<tr><td class='rank'>2</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/zw36I3xYhY0/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=zw36I3xYhY0" target="_blank">【ぶーちゃんねるコラボ】ホストクラブで初回接客恵中瞳ワールド全開…予測不能すぎる接客で空気が一変、翻</a></td><td class='num' style='white-space:nowrap'>2026-04-30</td><td class='num'>32,416 回</td><td class='num'>33.2%</td><td class='num'>28:57</td></tr>
-<tr><td class='rank'>3</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/3jn5Zn4TqWI/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=3jn5Zn4TqWI" target="_blank">【爆弾】昇格目前で“爆弾行為”が発覚…執行猶予付き処分で全て白紙に？</a></td><td class='num' style='white-space:nowrap'>2026-05-19</td><td class='num'>16,859 回</td><td class='num'>55.1%</td><td class='num'>17:28</td></tr>
-<tr><td class='rank'>4</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/4LuKWMCMQ2g/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=4LuKWMCMQ2g" target="_blank">【1日密着】売れないホストの寮へ行くとゴミ屋敷だったことが判明し密着どころではなくなってしまう…</a></td><td class='num' style='white-space:nowrap'>2026-05-26</td><td class='num'>15,600 回</td><td class='num'>49.5%</td><td class='num'>25:36</td></tr>
-<tr><td class='rank'>5</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/ZGrQInr6dfU/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=ZGrQInr6dfU" target="_blank">【修羅場】新人歓迎会で制御不能の大暴れ｜ホスト達のカバンの中身チェックしたらとんでもないモノが…また</a></td><td class='num' style='white-space:nowrap'>2026-05-10</td><td class='num'>14,744 回</td><td class='num'>50.6%</td><td class='num'>20:50</td></tr>
-<tr><td class='rank'>6</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/7ulBxWHPLGs/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=7ulBxWHPLGs" target="_blank">【限界】新人ホストが姫にボロクソ言われる地獄の現場…｜降格となりアドバイスを受けるが反応がなく…</a></td><td class='num' style='white-space:nowrap'>2026-05-08</td><td class='num'>14,082 回</td><td class='num'>50.6%</td><td class='num'>18:18</td></tr>
-<tr><td class='rank'>7</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/P6QitOYIfk0/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=P6QitOYIfk0" target="_blank">【前編】姫の不満が限界突破…コスプレイベントで告発、ホストに処分か</a></td><td class='num' style='white-space:nowrap'>2026-05-29</td><td class='num'>6,603 回</td><td class='num'>58.2%</td><td class='num'>17:35</td></tr>
-<tr><td class='rank'>8</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/mRAS7noFJ_k/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=mRAS7noFJ_k" target="_blank">【爆弾】またしても爆弾が発覚。舐めたホストに怒りが爆発し激怒…</a></td><td class='num' style='white-space:nowrap'>2024-07-26</td><td class='num'>5,915 回</td><td class='num'>43.4%</td><td class='num'>21:23</td></tr>
-<tr><td class='rank'>9</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/uBSZzVTLZ6o/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=uBSZzVTLZ6o" target="_blank">【タブー】先輩のお客様に手を出してしまった男をクビにしました。【爆弾】</a></td><td class='num' style='white-space:nowrap'>2023-07-09</td><td class='num'>5,670 回</td><td class='num'>39.8%</td><td class='num'>25:51</td></tr>
-<tr><td class='rank'>10</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/L-Mci7i5Nbs/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=L-Mci7i5Nbs" target="_blank">【麗】サプライズ来店、とんでもないプレゼントで後輩を祝福｜借金ホスト入店確定…過去の戦友と再会</a></td><td class='num' style='white-space:nowrap'>2026-03-13</td><td class='num'>4,756 回</td><td class='num'>40.6%</td><td class='num'>27:37</td></tr>
+    <tr><td class='rank'>1</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/TnhUkHycfx0/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=TnhUkHycfx0" target="_blank">【修羅場】ホストの異常な言動に姫が恐怖…幹部へ密告で爆弾発覚？！反省ゼロの舐めた態度に太陽社長ブチギ</a></td><td class='num' style='white-space:nowrap'>2026-05-16</td><td class='num' style='white-space:nowrap'>当月</td><td class='num'>35,342 回</td><td class='num'>48.7%</td><td class='num'>23:35</td></tr>
+<tr><td class='rank'>2</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/zw36I3xYhY0/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=zw36I3xYhY0" target="_blank">【ぶーちゃんねるコラボ】ホストクラブで初回接客恵中瞳ワールド全開…予測不能すぎる接客で空気が一変、翻</a></td><td class='num' style='white-space:nowrap'>2026-04-30</td><td class='num' style='white-space:nowrap'>1ヶ月</td><td class='num'>32,415 回</td><td class='num'>33.2%</td><td class='num'>28:57</td></tr>
+<tr><td class='rank'>3</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/3jn5Zn4TqWI/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=3jn5Zn4TqWI" target="_blank">【爆弾】昇格目前で“爆弾行為”が発覚…執行猶予付き処分で全て白紙に？</a></td><td class='num' style='white-space:nowrap'>2026-05-19</td><td class='num' style='white-space:nowrap'>当月</td><td class='num'>16,859 回</td><td class='num'>55.1%</td><td class='num'>17:28</td></tr>
+<tr><td class='rank'>4</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/4LuKWMCMQ2g/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=4LuKWMCMQ2g" target="_blank">【1日密着】売れないホストの寮へ行くとゴミ屋敷だったことが判明し密着どころではなくなってしまう…</a></td><td class='num' style='white-space:nowrap'>2026-05-26</td><td class='num' style='white-space:nowrap'>当月</td><td class='num'>15,598 回</td><td class='num'>49.5%</td><td class='num'>25:36</td></tr>
+<tr><td class='rank'>5</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/ZGrQInr6dfU/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=ZGrQInr6dfU" target="_blank">【修羅場】新人歓迎会で制御不能の大暴れ｜ホスト達のカバンの中身チェックしたらとんでもないモノが…また</a></td><td class='num' style='white-space:nowrap'>2026-05-10</td><td class='num' style='white-space:nowrap'>当月</td><td class='num'>14,744 回</td><td class='num'>50.6%</td><td class='num'>20:50</td></tr>
+<tr><td class='rank'>6</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/7ulBxWHPLGs/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=7ulBxWHPLGs" target="_blank">【限界】新人ホストが姫にボロクソ言われる地獄の現場…｜降格となりアドバイスを受けるが反応がなく…</a></td><td class='num' style='white-space:nowrap'>2026-05-08</td><td class='num' style='white-space:nowrap'>当月</td><td class='num'>14,082 回</td><td class='num'>50.6%</td><td class='num'>18:18</td></tr>
+<tr><td class='rank'>7</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/P6QitOYIfk0/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=P6QitOYIfk0" target="_blank">【前編】姫の不満が限界突破…コスプレイベントで告発、ホストに処分か</a></td><td class='num' style='white-space:nowrap'>2026-05-29</td><td class='num' style='white-space:nowrap'>当月</td><td class='num'>6,599 回</td><td class='num'>58.2%</td><td class='num'>17:35</td></tr>
+<tr style="background:#fffbeb"><td class='rank'>8</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/mRAS7noFJ_k/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=mRAS7noFJ_k" target="_blank">【爆弾】またしても爆弾が発覚。舐めたホストに怒りが爆発し激怒…</a> <span class="badge badge-asset">資産</span></td><td class='num' style='white-space:nowrap'>2024-07-26</td><td class='num' style='white-space:nowrap'>22ヶ月</td><td class='num'>5,915 回</td><td class='num'>43.4%</td><td class='num'>21:23</td></tr>
+<tr style="background:#fffbeb"><td class='rank'>9</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/uBSZzVTLZ6o/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=uBSZzVTLZ6o" target="_blank">【タブー】先輩のお客様に手を出してしまった男をクビにしました。【爆弾】</a> <span class="badge badge-asset">資産</span></td><td class='num' style='white-space:nowrap'>2023-07-09</td><td class='num' style='white-space:nowrap'>34ヶ月</td><td class='num'>5,670 回</td><td class='num'>39.8%</td><td class='num'>25:51</td></tr>
+<tr><td class='rank'>10</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/L-Mci7i5Nbs/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=L-Mci7i5Nbs" target="_blank">【麗】サプライズ来店、とんでもないプレゼントで後輩を祝福｜借金ホスト入店確定…過去の戦友と再会</a></td><td class='num' style='white-space:nowrap'>2026-03-13</td><td class='num' style='white-space:nowrap'>2ヶ月</td><td class='num'>4,756 回</td><td class='num'>40.6%</td><td class='num'>27:37</td></tr>
+<tr><td class='rank'>11</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/SdMBbJ9bViE/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=SdMBbJ9bViE" target="_blank">【修羅場】ホストのプレイヤー復帰した内勤の指導に批判の嵐…「全部お前の責任だよ」と社長から叱責。</a></td><td class='num' style='white-space:nowrap'>2026-04-10</td><td class='num' style='white-space:nowrap'>1ヶ月</td><td class='num'>4,592 回</td><td class='num'>45.7%</td><td class='num'>24:16</td></tr>
+<tr style="background:#fffbeb"><td class='rank'>12</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/lWteBG8Fcks/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=lWteBG8Fcks" target="_blank">「爆弾されなかったら1000万売ってた」仕事中にブチギレて帰ってしまう主役ホスト。そして大喧嘩する従</a> <span class="badge badge-asset">資産</span></td><td class='num' style='white-space:nowrap'>2025-04-18</td><td class='num' style='white-space:nowrap'>13ヶ月</td><td class='num'>4,228 回</td><td class='num'>50.7%</td><td class='num'>25:16</td></tr>
+<tr style="background:#fffbeb"><td class='rank'>13</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/B_VxhgFVWSA/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=B_VxhgFVWSA" target="_blank">【ホームレスまなみ】ホームレスがホスト来るんじゃねぇ。麗とまなみの初対戦</a> <span class="badge badge-asset">資産</span></td><td class='num' style='white-space:nowrap'>2024-03-08</td><td class='num' style='white-space:nowrap'>26ヶ月</td><td class='num'>4,179 回</td><td class='num'>39.4%</td><td class='num'>22:08</td></tr>
+<tr><td class='rank'>14</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/scYbkjn_WJ0/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=scYbkjn_WJ0" target="_blank">【緊迫】ホストクラブ締日の現実…ナンバー争いの裏で「失敗しろ」と言われる先輩…その結果はいかに…</a></td><td class='num' style='white-space:nowrap'>2026-04-25</td><td class='num' style='white-space:nowrap'>1ヶ月</td><td class='num'>4,104 回</td><td class='num'>44.4%</td><td class='num'>25:07</td></tr>
+<tr style="background:#fffbeb"><td class='rank'>15</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/ltzSaqc5jRM/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=ltzSaqc5jRM" target="_blank">【爆弾】「マジでムカつく、殺してぇ」問題児ホストが1000万使った姫の前で暴言を吐いてしまう…</a> <span class="badge badge-asset">資産</span></td><td class='num' style='white-space:nowrap'>2025-03-09</td><td class='num' style='white-space:nowrap'>14ヶ月</td><td class='num'>3,232 回</td><td class='num'>40.1%</td><td class='num'>26:23</td></tr>
 
   </table>
+  </div>
+  <div class="top-note-box"><h3>所感（長尺(Long)）</h3><p>上位はほぼ当月の新作で、上位に残る過去作も数千再生規模＝資産動画はまだ薄い。維持率は40〜58%と悪くなく、コンテンツの質は出ているが、絶対再生数は最大3.5万とぶーちゃんねるの約1/3規模で、露出と登録母数がボトルネックになっている。打ち手は、サムネ・タイトルのクリック導線を改善し、ぶーちゃんねるで当たった社会派フックを移植して天井（再生数の上限）を引き上げること。</p></div>
 </div>
 
       
 <div class="tab-content" id="tab-short">
+  <div class="table-scroll">
   <table class="top-table">
     <tr>
       <th style="width:40px">#</th>
       <th style="width:110px">サムネ</th>
       <th>タイトル</th>
       <th style="width:96px">公開日</th>
+      <th style="width:70px">経過</th>
       <th style="width:100px">当月再生</th>
       <th style="width:80px">視聴維持率</th>
       <th style="width:70px">尺</th>
     </tr>
-    <tr><td class='rank'>1</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/zOyJwQyYxu8/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=zOyJwQyYxu8" target="_blank">パワハラ指導、苦言の声　#歌舞伎町 #ホスト #ホスロジ</a></td><td class='num' style='white-space:nowrap'>2026-05-28</td><td class='num'>8,234 回</td><td class='num'>75.5%</td><td class='num'>1:01</td></tr>
-<tr><td class='rank'>2</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/eG1lRqTrehk/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=eG1lRqTrehk" target="_blank">歯がない新人ホスト　#ホスロジ #ホスト #歌舞伎町</a></td><td class='num' style='white-space:nowrap'>2025-04-27</td><td class='num'>4,819 回</td><td class='num'>85.2%</td><td class='num'>0:57</td></tr>
-<tr><td class='rank'>3</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/AqVPxzkjML0/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=AqVPxzkjML0" target="_blank">遠隔しか予定がない　#ホスロジ #ホスト #歌舞伎町</a></td><td class='num' style='white-space:nowrap'>2026-05-29</td><td class='num'>3,921 回</td><td class='num'>71.2%</td><td class='num'>1:02</td></tr>
-<tr><td class='rank'>4</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/x5x6F7pQcBA/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=x5x6F7pQcBA" target="_blank">5年ぶりの大台　#ホスロジ #ホスト #歌舞伎町</a></td><td class='num' style='white-space:nowrap'>2026-05-31</td><td class='num'>3,123 回</td><td class='num'>63.2%</td><td class='num'>0:47</td></tr>
-<tr><td class='rank'>5</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/ngwgt50mu9Q/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=ngwgt50mu9Q" target="_blank">大成功のバースデー　#ホスト #ホスロジ #歌舞伎町</a></td><td class='num' style='white-space:nowrap'>2026-05-30</td><td class='num'>2,736 回</td><td class='num'>54.6%</td><td class='num'>1:09</td></tr>
+    <tr><td class='rank'>1</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/zOyJwQyYxu8/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=zOyJwQyYxu8" target="_blank">パワハラ指導、苦言の声　#歌舞伎町 #ホスト #ホスロジ</a></td><td class='num' style='white-space:nowrap'>2026-05-28</td><td class='num' style='white-space:nowrap'>当月</td><td class='num'>8,230 回</td><td class='num'>75.5%</td><td class='num'>1:01</td></tr>
+<tr style="background:#fffbeb"><td class='rank'>2</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/eG1lRqTrehk/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=eG1lRqTrehk" target="_blank">歯がない新人ホスト　#ホスロジ #ホスト #歌舞伎町</a> <span class="badge badge-asset">資産</span></td><td class='num' style='white-space:nowrap'>2025-04-27</td><td class='num' style='white-space:nowrap'>13ヶ月</td><td class='num'>4,819 回</td><td class='num'>85.2%</td><td class='num'>0:57</td></tr>
+<tr><td class='rank'>3</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/AqVPxzkjML0/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=AqVPxzkjML0" target="_blank">遠隔しか予定がない　#ホスロジ #ホスト #歌舞伎町</a></td><td class='num' style='white-space:nowrap'>2026-05-29</td><td class='num' style='white-space:nowrap'>当月</td><td class='num'>3,919 回</td><td class='num'>71.2%</td><td class='num'>1:02</td></tr>
+<tr><td class='rank'>4</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/x5x6F7pQcBA/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=x5x6F7pQcBA" target="_blank">5年ぶりの大台　#ホスロジ #ホスト #歌舞伎町</a></td><td class='num' style='white-space:nowrap'>2026-05-31</td><td class='num' style='white-space:nowrap'>当月</td><td class='num'>3,123 回</td><td class='num'>63.2%</td><td class='num'>0:47</td></tr>
+<tr><td class='rank'>5</td><td class='thumb-cell'><img src="https://i.ytimg.com/vi/ngwgt50mu9Q/hqdefault.jpg" alt="thumb" style="width:100px;border-radius:6px"></td><td><a href="https://www.youtube.com/watch?v=ngwgt50mu9Q" target="_blank">大成功のバースデー　#ホスト #ホスロジ #歌舞伎町</a></td><td class='num' style='white-space:nowrap'>2026-05-30</td><td class='num' style='white-space:nowrap'>当月</td><td class='num'>2,736 回</td><td class='num'>54.6%</td><td class='num'>1:09</td></tr>
 
   </table>
+  </div>
+  <div class="top-note-box"><h3>所感（短尺(Short)）</h3><p>ショートが月5本前後と投下量が少なく、資産が育つ母数にまだ達していない。出ている数本は維持率70〜85%と数字自体は良好で、素材の質は問題ない。打ち手は、まず長尺からの切り抜きでショートの本数を増やすこと。母数が増えれば資産化の確率も上がる、伸びしろの大きいフォーマット。</p></div>
 </div>
 
     </div>
