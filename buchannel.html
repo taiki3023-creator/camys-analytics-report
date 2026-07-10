@@ -93,6 +93,13 @@ h3{font-size:20px;font-weight:600;line-height:1.5;margin:32px 0 16px;color:#1e3a
 .top-table a{color:#0369a1;text-decoration:none}
 .top-table a:hover{text-decoration:underline}
 
+/* 個別分析 長尺/ショート タブ切替 */
+.indiv-tabs{display:flex;gap:12px;margin:20px 0 28px;flex-wrap:wrap}
+.indiv-tab{padding:12px 32px;border-radius:999px;border:2px solid #06b6d4;background:#ffffff;color:#1e3a5f;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+.indiv-tab:hover{background:#ecfeff}
+.indiv-tab.active{background:linear-gradient(135deg,#1e3a5f,#06b6d4);color:#ffffff;border-color:transparent}
+.indiv-pane{display:none}
+.indiv-pane.active{display:block}
 /* 動画カード（個別分析） */
 .video-analysis-card{background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;margin-bottom:32px;box-shadow:0 4px 16px rgba(30,58,95,.08);overflow:hidden}
 .vcard-header{display:flex;gap:20px;padding:24px;align-items:flex-start;border-bottom:1px solid #e2e8f0}
@@ -472,6 +479,11 @@ document.getElementById('tab-long').classList.add('active');
     <p class="note">考察は考察_202606.json（CEO手書き）から読み込み。
       JSONに該当動画IDがない場合は「（CEO考察 準備中）」と表示。
       サムネCTRはAPI取得不可のためStudio参照。</p>
+    <div class="indiv-tabs">
+      <button type="button" class="indiv-tab active" data-pane="indiv-long" onclick="switchIndivTab(this)">長尺（9本）</button>
+      <button type="button" class="indiv-tab" data-pane="indiv-short" onclick="switchIndivTab(this)">ショート（18本）</button>
+    </div>
+    <div id="indiv-long" class="indiv-pane active">
 
 <div class="video-analysis-card">
   <div class="vcard-header">
@@ -503,6 +515,256 @@ document.getElementById('tab-long').classList.add('active');
   </div>
 </div>
 
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/a71TQH9iK4o/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=a71TQH9iK4o" target="_blank">【ゆきの】「お父さんがパーキンソン病。延命治療はしてほしいけど…」ゆきのさんの生活が苦しいそうなので話を聞きに行ったら…</a></h3>
+      <p class="vcard-meta">公開日: 2026-06-21 &nbsp;|&nbsp; 尺: 38:55</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">117,150 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">45.3%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">17:36</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">48 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">592</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">1,009</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">67</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      ゆきのの父がパーキンソン病で、生活が苦しいという話を聞きに自宅を訪問。まなみが手作りカレーで迎える生活密着回。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生117,252回・登録純増+49は当月長尺で上位。『親の重病×生活の苦しさ』という社会性の強いテーマと、まなみの手料理でのもてなしという温かい絵が組み合わさり、新規のファン化に繋がった。維持率45.3%は長尺として上位クラス。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      親の病気・介護問題は視聴者の共感を強く引く鉄板テーマ。ゆきのの家庭事情シリーズの中核として、父の病状の経過を継続的に追うと登録の柱になる。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/z34gXmBApCk/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=z34gXmBApCk" target="_blank">【近況】マック食べながらマンジャロの話やゆうたの手術の話、ゆきのさんの話など！</a></h3>
+      <p class="vcard-meta">公開日: 2026-06-20 &nbsp;|&nbsp; 尺: 47:31</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">91,309 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">39.6%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">18:49</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">41 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">503</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">855</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">29</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      マックを食べながらの近況雑談回。まなみのオンラインクリニック（マンジャロ＝痩身薬）の話、ゆきのが路上に立っているという噂、ゆうたの手術の話などを扱う。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生91,463回・登録純増+39は当月長尺で上位。『ゆきのが路上に立っている』という穏やかでない噂話が視聴者の心配・好奇心を引いた。維持率39.6%は長尺として標準。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      近況雑談は話題が多く散漫になりがちなので、『ゆきのの噂の真相』など1テーマに絞って深掘りする回を別途作ると、雑談回とは違う強いフックになる。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/ZSr721QvtaI/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=ZSr721QvtaI" target="_blank">【糖尿病】「まなみちゃんの足がなくなったら悲しいよ」必死に治療を勧めるアイラだが…</a></h3>
+      <p class="vcard-meta">公開日: 2026-06-14 &nbsp;|&nbsp; 尺: 37:01</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">119,797 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">40.7%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">15:04</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">70 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">840</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">1,174</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">72</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      糖尿病治療をめぐり、アイラがまなみに『足がなくなったら悲しいよ』と必死に説得する回。合間にコンカフェ関係者（最強ちゃん）の噂話やサムギョプサル雑談も。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生119,802回・登録純増+68は当月全体で最高。『糖尿病で足を失うかもしれない』という身体的リスクの生々しさと、アイラの本気の心配というキャラクターの掛け合いが視聴者の感情を強く動かした。維持率40.7%は長尺として標準。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      当月最大のヒット企画。健康問題×演者同士の本気の感情ぶつかり合いという型を横展開し、他の演者の持病・体調不安もシリーズ化すると登録の柱になる。中盤の関係のない雑談（噂話等）を削ると維持率もさらに伸びる。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/APoDYIid5qo/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=APoDYIid5qo" target="_blank">【健康診断】まなみちゃんにヤバい病魔の影が…結果を発表したら二人とも落ち込んでしまう | PolyBuzz</a></h3>
+      <p class="vcard-meta">公開日: 2026-06-13 &nbsp;|&nbsp; 尺: 48:56</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">104,622 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">35.9%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">17:34</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">35 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">546</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">1,050</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">40</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      健康診断本編。まなみが人生初の健康診断を受け、結果発表で二人とも落ち込む展開。PolyBuzz（AIチャットアプリ）とのタイアップ企画。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生104,622回は当月長尺で上位。『人生初の健康診断』という素朴な引きと、結果への不安というリアルな緊張感が再生を牽引した。ただし維持率35.9%は長尺で下位＝冒頭のAIチャットアプリ紹介パートが本編と無関係な広告色が強く、離脱を招いたとみられる。登録純増+35は中の上。※Analytics APIの取得エラーにより平均視聴時間・コメント数・高評価・共有・広告収益の数値は取得できず、考察は再生数・維持率・登録純増のみで実施。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      タイアップ紹介パートは冒頭でなく本編の合間や後半に差し込み、健康診断そのものの緊張感（結果が出るまでの間）を冒頭フックに使うと維持率が改善する。データ欠損分は次回レポート生成時に再取得を試みる。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/BLVv5rJQwUE/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=BLVv5rJQwUE" target="_blank">【作曲打合せ】「生で見ると迫力ありますね」初対面の相手の前でも動じず鼻をほじるまなみ達！</a></h3>
+      <p class="vcard-meta">公開日: 2026-06-10 &nbsp;|&nbsp; 尺: 42:48</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">49,757 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">34.2%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">14:39</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">7 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">287</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">560</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">20</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      作曲家（サワさん）との初対面の打ち合わせに密着。楽曲提供実績の自己紹介が中心の回。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生49,757回・維持34.2%・登録純増+7は当月長尺で最低クラス。初対面ゲストの経歴紹介という対外PR色の強い構成で、まなみ・アイラ側の素の掛け合いが薄く視聴者が感情移入しにくかった。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      タイアップ・打ち合わせ系は経歴紹介パートを大幅に圧縮し、まなみ達の飾らない反応（緊張せず鼻をほじる等）を前半に持ってくると離脱を防げる。ゲスト回は『まなみ・アイラ視点でどう面白かったか』を軸に再構成する。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/LpiHQ0fbWKA/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=LpiHQ0fbWKA" target="_blank">【お疲れ会】税金、子供、将来の話！健康診断終わりにみんなでご飯会！</a></h3>
+      <p class="vcard-meta">公開日: 2026-06-06 &nbsp;|&nbsp; 尺: 45:00</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">94,349 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">42.0%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">18:52</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">40 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">346</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">993</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">30</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      健康診断終わりのご飯会（スペイン料理店）で、税金・子供・将来設計を語り合う回。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生94,349回・登録純増40人は当月長尺で上位。『税金』『将来』という生活に直結するリアルな話題が複数演者の本音を引き出し新規登録に繋がった。維持率42.0%は長尺として標準。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      複数人の雑談は話題が飛びやすいので、テロップで『今何の話をしているか』を都度明示すると視聴維持がさらに上がる。税金・将来という金銭リアルトークは当月共通のヒット軸なので次月も定例化する。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/ySLS82RkHs0/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=ySLS82RkHs0" target="_blank">ゆきのさん離婚と子供との再会 | そして今後の生活について語る【ホームレスまなみ】</a></h3>
+      <p class="vcard-meta">公開日: 2026-06-01 &nbsp;|&nbsp; 尺: 41:29</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">124,897 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">45.6%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">18:54</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">59 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">541</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">1,242</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">61</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      ゆきのが子供（息子）との数ヶ月ぶりの面会が決まった経緯を語る密着回。同居人と部屋を模様替えした話や、まなみが手作りカレーで出迎える生活密着シーンも絡める。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生124,897回・登録純増59人は当月の長尺で最上位クラス。『離婚した母が我が子と再会できるか』という当事者性の強いテーマが視聴者の同情と応援を強く引いた。維持率45.6%・平均視聴時間18:54は当月長尺の中で上位で、子供に会える経緯を段階的に明かす構成が最後まで見せた。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      『再会できるかどうか』という結果待ちの引きが効いたので、実際に面会した後編（会えたか、子供の反応）を早い月内に投下すると追いかけ視聴を作れる。ゆきのの家庭事情は本人の当事者性が強い分、演出を足さず本人の言葉をそのまま拾う編集を継続する。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/9abr1L6o9WE/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=9abr1L6o9WE" target="_blank">怖いです💦○○予告の話とついでにホームレスまなみの買い物ルーティン密着！</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-29 &nbsp;|&nbsp; 尺: 24:37</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span> <span class="badge badge-carry">前月末公開・確定反映</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">90,980 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">53.7%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">13:13</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">49 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">399</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">1,090</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">39</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      『怖いです』という予告めいた話（ゆきのの悪口・チャンネル内のゴタゴタ）と、まなみの買い物ルーティン密着を組み合わせた長尺（5月29日公開・確定反映）。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      確定値で7日再生90,980回・登録純増+49・維持53.7%は長尺として非常に高い水準。内輪の不穏な予告というコアファン向けフックと、まなみの飾らない買い物密着が組み合わさり、維持・登録の両方を高い水準で達成した。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      『不穏な予告×素の密着』の組み合わせは長尺の中でも高維持・高登録を両立した成功パターン。同様の『意味深な予告＋日常密着』の二段構成を定例化する。
+    </div>
+  </div>
+</div>
+
+    </div>
+    <div id="indiv-short" class="indiv-pane">
 
 <div class="video-analysis-card">
   <div class="vcard-header">
@@ -693,68 +955,6 @@ document.getElementById('tab-long').classList.add('active');
 <div class="video-analysis-card">
   <div class="vcard-header">
     <div class="vcard-thumb">
-      <img src="https://i.ytimg.com/vi/a71TQH9iK4o/hqdefault.jpg" alt="thumb">
-    </div>
-    <div class="vcard-info">
-      <h3><a href="https://www.youtube.com/watch?v=a71TQH9iK4o" target="_blank">【ゆきの】「お父さんがパーキンソン病。延命治療はしてほしいけど…」ゆきのさんの生活が苦しいそうなので話を聞きに行ったら…</a></h3>
-      <p class="vcard-meta">公開日: 2026-06-21 &nbsp;|&nbsp; 尺: 38:55</p>
-      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
-    </div>
-  </div>
-  <div class="vcard-metrics">
-    <div class="metrics-grid"><div class="metric-item"><div class="m-val">117,150 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">45.3%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">17:36</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">48 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">592</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">1,009</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">67</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
-  </div>
-  <div class="vcard-analysis">
-    <div class="vcard-summary">
-      <span class="vcard-label vcard-label-blue">内容サマリー</span>
-      ゆきのの父がパーキンソン病で、生活が苦しいという話を聞きに自宅を訪問。まなみが手作りカレーで迎える生活密着回。
-    </div>
-    <div class="vcard-reason">
-      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
-      7日再生117,252回・登録純増+49は当月長尺で上位。『親の重病×生活の苦しさ』という社会性の強いテーマと、まなみの手料理でのもてなしという温かい絵が組み合わさり、新規のファン化に繋がった。維持率45.3%は長尺として上位クラス。
-    </div>
-    <div class="vcard-improve">
-      <span class="vcard-label vcard-label-orange">改善点</span>
-      親の病気・介護問題は視聴者の共感を強く引く鉄板テーマ。ゆきのの家庭事情シリーズの中核として、父の病状の経過を継続的に追うと登録の柱になる。
-    </div>
-  </div>
-</div>
-
-
-<div class="video-analysis-card">
-  <div class="vcard-header">
-    <div class="vcard-thumb">
-      <img src="https://i.ytimg.com/vi/z34gXmBApCk/hqdefault.jpg" alt="thumb">
-    </div>
-    <div class="vcard-info">
-      <h3><a href="https://www.youtube.com/watch?v=z34gXmBApCk" target="_blank">【近況】マック食べながらマンジャロの話やゆうたの手術の話、ゆきのさんの話など！</a></h3>
-      <p class="vcard-meta">公開日: 2026-06-20 &nbsp;|&nbsp; 尺: 47:31</p>
-      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
-    </div>
-  </div>
-  <div class="vcard-metrics">
-    <div class="metrics-grid"><div class="metric-item"><div class="m-val">91,309 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">39.6%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">18:49</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">41 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">503</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">855</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">29</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
-  </div>
-  <div class="vcard-analysis">
-    <div class="vcard-summary">
-      <span class="vcard-label vcard-label-blue">内容サマリー</span>
-      マックを食べながらの近況雑談回。まなみのオンラインクリニック（マンジャロ＝痩身薬）の話、ゆきのが路上に立っているという噂、ゆうたの手術の話などを扱う。
-    </div>
-    <div class="vcard-reason">
-      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
-      7日再生91,463回・登録純増+39は当月長尺で上位。『ゆきのが路上に立っている』という穏やかでない噂話が視聴者の心配・好奇心を引いた。維持率39.6%は長尺として標準。
-    </div>
-    <div class="vcard-improve">
-      <span class="vcard-label vcard-label-orange">改善点</span>
-      近況雑談は話題が多く散漫になりがちなので、『ゆきのの噂の真相』など1テーマに絞って深掘りする回を別途作ると、雑談回とは違う強いフックになる。
-    </div>
-  </div>
-</div>
-
-
-<div class="video-analysis-card">
-  <div class="vcard-header">
-    <div class="vcard-thumb">
       <img src="https://i.ytimg.com/vi/PySHm4jpvZQ/hqdefault.jpg" alt="thumb">
     </div>
     <div class="vcard-info">
@@ -848,37 +1048,6 @@ document.getElementById('tab-long').classList.add('active');
 <div class="video-analysis-card">
   <div class="vcard-header">
     <div class="vcard-thumb">
-      <img src="https://i.ytimg.com/vi/ZSr721QvtaI/hqdefault.jpg" alt="thumb">
-    </div>
-    <div class="vcard-info">
-      <h3><a href="https://www.youtube.com/watch?v=ZSr721QvtaI" target="_blank">【糖尿病】「まなみちゃんの足がなくなったら悲しいよ」必死に治療を勧めるアイラだが…</a></h3>
-      <p class="vcard-meta">公開日: 2026-06-14 &nbsp;|&nbsp; 尺: 37:01</p>
-      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
-    </div>
-  </div>
-  <div class="vcard-metrics">
-    <div class="metrics-grid"><div class="metric-item"><div class="m-val">119,797 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">40.7%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">15:04</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">70 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">840</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">1,174</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">72</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
-  </div>
-  <div class="vcard-analysis">
-    <div class="vcard-summary">
-      <span class="vcard-label vcard-label-blue">内容サマリー</span>
-      糖尿病治療をめぐり、アイラがまなみに『足がなくなったら悲しいよ』と必死に説得する回。合間にコンカフェ関係者（最強ちゃん）の噂話やサムギョプサル雑談も。
-    </div>
-    <div class="vcard-reason">
-      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
-      7日再生119,802回・登録純増+68は当月全体で最高。『糖尿病で足を失うかもしれない』という身体的リスクの生々しさと、アイラの本気の心配というキャラクターの掛け合いが視聴者の感情を強く動かした。維持率40.7%は長尺として標準。
-    </div>
-    <div class="vcard-improve">
-      <span class="vcard-label vcard-label-orange">改善点</span>
-      当月最大のヒット企画。健康問題×演者同士の本気の感情ぶつかり合いという型を横展開し、他の演者の持病・体調不安もシリーズ化すると登録の柱になる。中盤の関係のない雑談（噂話等）を削ると維持率もさらに伸びる。
-    </div>
-  </div>
-</div>
-
-
-<div class="video-analysis-card">
-  <div class="vcard-header">
-    <div class="vcard-thumb">
       <img src="https://i.ytimg.com/vi/FyXepl8vgvU/hqdefault.jpg" alt="thumb">
     </div>
     <div class="vcard-info">
@@ -902,37 +1071,6 @@ document.getElementById('tab-long').classList.add('active');
     <div class="vcard-improve">
       <span class="vcard-label vcard-label-orange">改善点</span>
       アイラの『育てたかった』という本音は掘り下げ甲斐のあるテーマ。単発の後悔で終わらせず、なぜそう思うに至ったかの背景を長尺で深掘りすると登録に繋がる。
-    </div>
-  </div>
-</div>
-
-
-<div class="video-analysis-card">
-  <div class="vcard-header">
-    <div class="vcard-thumb">
-      <img src="https://i.ytimg.com/vi/APoDYIid5qo/hqdefault.jpg" alt="thumb">
-    </div>
-    <div class="vcard-info">
-      <h3><a href="https://www.youtube.com/watch?v=APoDYIid5qo" target="_blank">【健康診断】まなみちゃんにヤバい病魔の影が…結果を発表したら二人とも落ち込んでしまう | PolyBuzz</a></h3>
-      <p class="vcard-meta">公開日: 2026-06-13 &nbsp;|&nbsp; 尺: 48:56</p>
-      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
-    </div>
-  </div>
-  <div class="vcard-metrics">
-    <div class="metrics-grid"><div class="metric-item"><div class="m-val">104,622 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">35.9%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">17:34</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">35 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">546</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">1,050</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">40</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
-  </div>
-  <div class="vcard-analysis">
-    <div class="vcard-summary">
-      <span class="vcard-label vcard-label-blue">内容サマリー</span>
-      健康診断本編。まなみが人生初の健康診断を受け、結果発表で二人とも落ち込む展開。PolyBuzz（AIチャットアプリ）とのタイアップ企画。
-    </div>
-    <div class="vcard-reason">
-      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
-      7日再生104,622回は当月長尺で上位。『人生初の健康診断』という素朴な引きと、結果への不安というリアルな緊張感が再生を牽引した。ただし維持率35.9%は長尺で下位＝冒頭のAIチャットアプリ紹介パートが本編と無関係な広告色が強く、離脱を招いたとみられる。登録純増+35は中の上。※Analytics APIの取得エラーにより平均視聴時間・コメント数・高評価・共有・広告収益の数値は取得できず、考察は再生数・維持率・登録純増のみで実施。
-    </div>
-    <div class="vcard-improve">
-      <span class="vcard-label vcard-label-orange">改善点</span>
-      タイアップ紹介パートは冒頭でなく本編の合間や後半に差し込み、健康診断そのものの緊張感（結果が出るまでの間）を冒頭フックに使うと維持率が改善する。データ欠損分は次回レポート生成時に再取得を試みる。
     </div>
   </div>
 </div>
@@ -1034,37 +1172,6 @@ document.getElementById('tab-long').classList.add('active');
 <div class="video-analysis-card">
   <div class="vcard-header">
     <div class="vcard-thumb">
-      <img src="https://i.ytimg.com/vi/BLVv5rJQwUE/hqdefault.jpg" alt="thumb">
-    </div>
-    <div class="vcard-info">
-      <h3><a href="https://www.youtube.com/watch?v=BLVv5rJQwUE" target="_blank">【作曲打合せ】「生で見ると迫力ありますね」初対面の相手の前でも動じず鼻をほじるまなみ達！</a></h3>
-      <p class="vcard-meta">公開日: 2026-06-10 &nbsp;|&nbsp; 尺: 42:48</p>
-      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
-    </div>
-  </div>
-  <div class="vcard-metrics">
-    <div class="metrics-grid"><div class="metric-item"><div class="m-val">49,757 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">34.2%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">14:39</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">7 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">287</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">560</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">20</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
-  </div>
-  <div class="vcard-analysis">
-    <div class="vcard-summary">
-      <span class="vcard-label vcard-label-blue">内容サマリー</span>
-      作曲家（サワさん）との初対面の打ち合わせに密着。楽曲提供実績の自己紹介が中心の回。
-    </div>
-    <div class="vcard-reason">
-      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
-      7日再生49,757回・維持34.2%・登録純増+7は当月長尺で最低クラス。初対面ゲストの経歴紹介という対外PR色の強い構成で、まなみ・アイラ側の素の掛け合いが薄く視聴者が感情移入しにくかった。
-    </div>
-    <div class="vcard-improve">
-      <span class="vcard-label vcard-label-orange">改善点</span>
-      タイアップ・打ち合わせ系は経歴紹介パートを大幅に圧縮し、まなみ達の飾らない反応（緊張せず鼻をほじる等）を前半に持ってくると離脱を防げる。ゲスト回は『まなみ・アイラ視点でどう面白かったか』を軸に再構成する。
-    </div>
-  </div>
-</div>
-
-
-<div class="video-analysis-card">
-  <div class="vcard-header">
-    <div class="vcard-thumb">
       <img src="https://i.ytimg.com/vi/9HI_PMAoakc/hqdefault.jpg" alt="thumb">
     </div>
     <div class="vcard-info">
@@ -1088,37 +1195,6 @@ document.getElementById('tab-long').classList.add('active');
     <div class="vcard-improve">
       <span class="vcard-label vcard-label-orange">改善点</span>
       恋愛・交際相手との関係性は登録貢献が高いテーマ。アイラの交際に関する続報をシリーズ化し、視聴者が経過を追いたくなる構成にする。
-    </div>
-  </div>
-</div>
-
-
-<div class="video-analysis-card">
-  <div class="vcard-header">
-    <div class="vcard-thumb">
-      <img src="https://i.ytimg.com/vi/LpiHQ0fbWKA/hqdefault.jpg" alt="thumb">
-    </div>
-    <div class="vcard-info">
-      <h3><a href="https://www.youtube.com/watch?v=LpiHQ0fbWKA" target="_blank">【お疲れ会】税金、子供、将来の話！健康診断終わりにみんなでご飯会！</a></h3>
-      <p class="vcard-meta">公開日: 2026-06-06 &nbsp;|&nbsp; 尺: 45:00</p>
-      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
-    </div>
-  </div>
-  <div class="vcard-metrics">
-    <div class="metrics-grid"><div class="metric-item"><div class="m-val">94,349 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">42.0%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">18:52</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">40 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">346</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">993</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">30</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
-  </div>
-  <div class="vcard-analysis">
-    <div class="vcard-summary">
-      <span class="vcard-label vcard-label-blue">内容サマリー</span>
-      健康診断終わりのご飯会（スペイン料理店）で、税金・子供・将来設計を語り合う回。
-    </div>
-    <div class="vcard-reason">
-      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
-      7日再生94,349回・登録純増40人は当月長尺で上位。『税金』『将来』という生活に直結するリアルな話題が複数演者の本音を引き出し新規登録に繋がった。維持率42.0%は長尺として標準。
-    </div>
-    <div class="vcard-improve">
-      <span class="vcard-label vcard-label-orange">改善点</span>
-      複数人の雑談は話題が飛びやすいので、テロップで『今何の話をしているか』を都度明示すると視聴維持がさらに上がる。税金・将来という金銭リアルトークは当月共通のヒット軸なので次月も定例化する。
     </div>
   </div>
 </div>
@@ -1158,37 +1234,6 @@ document.getElementById('tab-long').classList.add('active');
 <div class="video-analysis-card">
   <div class="vcard-header">
     <div class="vcard-thumb">
-      <img src="https://i.ytimg.com/vi/ySLS82RkHs0/hqdefault.jpg" alt="thumb">
-    </div>
-    <div class="vcard-info">
-      <h3><a href="https://www.youtube.com/watch?v=ySLS82RkHs0" target="_blank">ゆきのさん離婚と子供との再会 | そして今後の生活について語る【ホームレスまなみ】</a></h3>
-      <p class="vcard-meta">公開日: 2026-06-01 &nbsp;|&nbsp; 尺: 41:29</p>
-      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
-    </div>
-  </div>
-  <div class="vcard-metrics">
-    <div class="metrics-grid"><div class="metric-item"><div class="m-val">124,897 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">45.6%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">18:54</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">59 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">541</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">1,242</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">61</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
-  </div>
-  <div class="vcard-analysis">
-    <div class="vcard-summary">
-      <span class="vcard-label vcard-label-blue">内容サマリー</span>
-      ゆきのが子供（息子）との数ヶ月ぶりの面会が決まった経緯を語る密着回。同居人と部屋を模様替えした話や、まなみが手作りカレーで出迎える生活密着シーンも絡める。
-    </div>
-    <div class="vcard-reason">
-      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
-      7日再生124,897回・登録純増59人は当月の長尺で最上位クラス。『離婚した母が我が子と再会できるか』という当事者性の強いテーマが視聴者の同情と応援を強く引いた。維持率45.6%・平均視聴時間18:54は当月長尺の中で上位で、子供に会える経緯を段階的に明かす構成が最後まで見せた。
-    </div>
-    <div class="vcard-improve">
-      <span class="vcard-label vcard-label-orange">改善点</span>
-      『再会できるかどうか』という結果待ちの引きが効いたので、実際に面会した後編（会えたか、子供の反応）を早い月内に投下すると追いかけ視聴を作れる。ゆきのの家庭事情は本人の当事者性が強い分、演出を足さず本人の言葉をそのまま拾う編集を継続する。
-    </div>
-  </div>
-</div>
-
-
-<div class="video-analysis-card">
-  <div class="vcard-header">
-    <div class="vcard-thumb">
       <img src="https://i.ytimg.com/vi/FxqT34S19Xs/hqdefault.jpg" alt="thumb">
     </div>
     <div class="vcard-info">
@@ -1212,37 +1257,6 @@ document.getElementById('tab-long').classList.add('active');
     <div class="vcard-improve">
       <span class="vcard-label vcard-label-orange">改善点</span>
       事件系の超短尺は視聴維持は取れるが登録に繋がりにくい。本編（対応・顛末）への誘導テロップを必ず入れ、長尺への送客と登録訴求をセットにする。
-    </div>
-  </div>
-</div>
-
-
-<div class="video-analysis-card">
-  <div class="vcard-header">
-    <div class="vcard-thumb">
-      <img src="https://i.ytimg.com/vi/9abr1L6o9WE/hqdefault.jpg" alt="thumb">
-    </div>
-    <div class="vcard-info">
-      <h3><a href="https://www.youtube.com/watch?v=9abr1L6o9WE" target="_blank">怖いです💦○○予告の話とついでにホームレスまなみの買い物ルーティン密着！</a></h3>
-      <p class="vcard-meta">公開日: 2026-05-29 &nbsp;|&nbsp; 尺: 24:37</p>
-      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span> <span class="badge badge-carry">前月末公開・確定反映</span>
-    </div>
-  </div>
-  <div class="vcard-metrics">
-    <div class="metrics-grid"><div class="metric-item"><div class="m-val">90,980 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">53.7%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">13:13</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">49 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">399</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">1,090</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">39</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
-  </div>
-  <div class="vcard-analysis">
-    <div class="vcard-summary">
-      <span class="vcard-label vcard-label-blue">内容サマリー</span>
-      『怖いです』という予告めいた話（ゆきのの悪口・チャンネル内のゴタゴタ）と、まなみの買い物ルーティン密着を組み合わせた長尺（5月29日公開・確定反映）。
-    </div>
-    <div class="vcard-reason">
-      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
-      確定値で7日再生90,980回・登録純増+49・維持53.7%は長尺として非常に高い水準。内輪の不穏な予告というコアファン向けフックと、まなみの飾らない買い物密着が組み合わさり、維持・登録の両方を高い水準で達成した。
-    </div>
-    <div class="vcard-improve">
-      <span class="vcard-label vcard-label-orange">改善点</span>
-      『不穏な予告×素の密着』の組み合わせは長尺の中でも高維持・高登録を両立した成功パターン。同様の『意味深な予告＋日常密着』の二段構成を定例化する。
     </div>
   </div>
 </div>
@@ -1308,7 +1322,20 @@ document.getElementById('tab-long').classList.add('active');
     </div>
   </div>
 </div>
-</div></section>
+
+    </div>
+  </div>
+</section>
+
+<script>
+function switchIndivTab(btn){
+  document.querySelectorAll('.indiv-tab').forEach(function(b){b.classList.remove('active');});
+  document.querySelectorAll('.indiv-pane').forEach(function(p){p.classList.remove('active');});
+  btn.classList.add('active');
+  document.getElementById(btn.getAttribute('data-pane')).classList.add('active');
+}
+</script>
+
 
 <section class="sec-grad-rev">
   <div class="container">

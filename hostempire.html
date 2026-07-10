@@ -93,6 +93,13 @@ h3{font-size:20px;font-weight:600;line-height:1.5;margin:32px 0 16px;color:#1e3a
 .top-table a{color:#0369a1;text-decoration:none}
 .top-table a:hover{text-decoration:underline}
 
+/* 個別分析 長尺/ショート タブ切替 */
+.indiv-tabs{display:flex;gap:12px;margin:20px 0 28px;flex-wrap:wrap}
+.indiv-tab{padding:12px 32px;border-radius:999px;border:2px solid #06b6d4;background:#ffffff;color:#1e3a5f;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+.indiv-tab:hover{background:#ecfeff}
+.indiv-tab.active{background:linear-gradient(135deg,#1e3a5f,#06b6d4);color:#ffffff;border-color:transparent}
+.indiv-pane{display:none}
+.indiv-pane.active{display:block}
 /* 動画カード（個別分析） */
 .video-analysis-card{background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;margin-bottom:32px;box-shadow:0 4px 16px rgba(30,58,95,.08);overflow:hidden}
 .vcard-header{display:flex;gap:20px;padding:24px;align-items:flex-start;border-bottom:1px solid #e2e8f0}
@@ -474,6 +481,11 @@ document.getElementById('tab-long').classList.add('active');
     <p class="note">考察は考察_202606.json（CEO手書き）から読み込み。
       JSONに該当動画IDがない場合は「（CEO考察 準備中）」と表示。
       サムネCTRはAPI取得不可のためStudio参照。</p>
+    <div class="indiv-tabs">
+      <button type="button" class="indiv-tab active" data-pane="indiv-long" onclick="switchIndivTab(this)">長尺（7本）</button>
+      <button type="button" class="indiv-tab" data-pane="indiv-short" onclick="switchIndivTab(this)">ショート（6本）</button>
+    </div>
+    <div id="indiv-long" class="indiv-pane active">
 
 <div class="video-analysis-card">
   <div class="vcard-header">
@@ -509,99 +521,6 @@ document.getElementById('tab-long').classList.add('active');
 <div class="video-analysis-card">
   <div class="vcard-header">
     <div class="vcard-thumb">
-      <img src="https://i.ytimg.com/vi/JwHTo2Oh4CU/hqdefault.jpg" alt="thumb">
-    </div>
-    <div class="vcard-info">
-      <h3><a href="https://www.youtube.com/watch?v=JwHTo2Oh4CU" target="_blank">社長に殴られました  #ホスロジ #ホスト #歌舞伎町</a></h3>
-      <p class="vcard-meta">公開日: 2026-06-30 &nbsp;|&nbsp; 尺: 1:19</p>
-      <span class="badge badge-short">Short（短尺）</span>
-    </div>
-  </div>
-  <div class="vcard-metrics">
-    <div class="metrics-grid"><div class="metric-item"><div class="m-val">2,813 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">45.2%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">0:35</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">0 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">0</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">27</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">0</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
-  </div>
-  <div class="vcard-analysis">
-    <div class="vcard-summary">
-      <span class="vcard-label vcard-label-blue">内容サマリー</span>
-      『社長に殴られました』という穏やかでない一言を切り出した短尺（6月30日公開・確定反映）。
-    </div>
-    <div class="vcard-reason">
-      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
-      確定値で7日再生2,813回・維持率45.2%は当月短尺の標準クラス。暴力を匂わせる強いワードの割に伸び切らなかったのは、文脈（冗談なのか本気なのか）が短尺単体では伝わらず、拡散に乗る前に消費された可能性がある。登録純増±0。
-    </div>
-    <div class="vcard-improve">
-      <span class="vcard-label vcard-label-orange">改善点</span>
-      事件系ワードの短尺は、本編のどの回の出来事かをテロップで明示して長尺へ誘導する導線を必ず付ける。単体で驚かせて終わるとチャンネルへの回遊が生まれない。
-    </div>
-  </div>
-</div>
-
-
-<div class="video-analysis-card">
-  <div class="vcard-header">
-    <div class="vcard-thumb">
-      <img src="https://i.ytimg.com/vi/LH8i-aghbMw/hqdefault.jpg" alt="thumb">
-    </div>
-    <div class="vcard-info">
-      <h3><a href="https://www.youtube.com/watch?v=LH8i-aghbMw" target="_blank">ホスラブにち〇ち〇晒しました  #ホスロジ #ホスト #歌舞伎町</a></h3>
-      <p class="vcard-meta">公開日: 2026-06-29 &nbsp;|&nbsp; 尺: 1:23</p>
-      <span class="badge badge-short">Short（短尺）</span>
-    </div>
-  </div>
-  <div class="vcard-metrics">
-    <div class="metrics-grid"><div class="metric-item"><div class="m-val">423 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">68.6%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">0:56</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">0 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">0</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">12</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">0</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
-  </div>
-  <div class="vcard-analysis">
-    <div class="vcard-summary">
-      <span class="vcard-label vcard-label-blue">内容サマリー</span>
-      ホスラブ（掲示板）への下ネタ暴露を扱った短尺（6月29日公開・確定反映）。
-    </div>
-    <div class="vcard-reason">
-      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
-      確定値で7日再生423回は当月全体で最低。維持率68.6%自体は高いが母数が極端に少ない＝下ネタ・伏せ字を含む題材でフィードに載りにくく、露出自体が絞られたとみられる。登録純増±0。
-    </div>
-    <div class="vcard-improve">
-      <span class="vcard-label vcard-label-orange">改善点</span>
-      下ネタ系のタイトル・サムネはレコメンド露出が制限されるリスクが高い。同じ出来事を扱うなら『掲示板に書き込まれた衝撃の内容とは』のように直接表現を避けた言い換えでフィードに載る形に整える。
-    </div>
-  </div>
-</div>
-
-
-<div class="video-analysis-card">
-  <div class="vcard-header">
-    <div class="vcard-thumb">
-      <img src="https://i.ytimg.com/vi/bJKIJFQXnYo/hqdefault.jpg" alt="thumb">
-    </div>
-    <div class="vcard-info">
-      <h3><a href="https://www.youtube.com/watch?v=bJKIJFQXnYo" target="_blank">姫が激怒...  #ホスロジ #ホスト #歌舞伎町</a></h3>
-      <p class="vcard-meta">公開日: 2026-06-27 &nbsp;|&nbsp; 尺: 1:12</p>
-      <span class="badge badge-short">Short（短尺）</span>
-    </div>
-  </div>
-  <div class="vcard-metrics">
-    <div class="metrics-grid"><div class="metric-item"><div class="m-val">4,055 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">53.8%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">0:38</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">1 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">1</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">17</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">0</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
-  </div>
-  <div class="vcard-analysis">
-    <div class="vcard-summary">
-      <span class="vcard-label vcard-label-blue">内容サマリー</span>
-      短尺シリーズ『ホスロジ』の一本。ホストの言動に対して姫（客）が激怒する一幕を切り取った回。
-    </div>
-    <div class="vcard-reason">
-      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
-      尺72秒と当月最短ながら登録純増+1はショートで唯一のプラス。『姫の激怒』という短尺完結のリアルな対立の瞬間が、最短時間で最も強い感情の起伏を見せ、フォローしたくなる衝動を作った。
-    </div>
-    <div class="vcard-improve">
-      <span class="vcard-label vcard-label-orange">改善点</span>
-      短尺は『尺の短さ×感情の起伏の強さ』が登録に直結することが実証された。今後のホスロジは怒り・嫉妬・涙など瞬間的な強い感情のピークシーンを冒頭0.5秒で見せる編集を徹底し、この回のフォーマットを型として横展開する。
-    </div>
-  </div>
-</div>
-
-
-<div class="video-analysis-card">
-  <div class="vcard-header">
-    <div class="vcard-thumb">
       <img src="https://i.ytimg.com/vi/jmVzV-NeQDE/hqdefault.jpg" alt="thumb">
     </div>
     <div class="vcard-info">
@@ -625,99 +544,6 @@ document.getElementById('tab-long').classList.add('active');
     <div class="vcard-improve">
       <span class="vcard-label vcard-label-orange">改善点</span>
       『危うい過去を持つ新人』×『店内序列（守るチーム）』の掛け合わせは登録に直結する強い型と実証された。続編で本人が『守るチーム』を脱出できるか、過去の言動が新しい店で再発しないかを追うと、視聴者の懸念と期待の両方を回収できる。サムネは『前職でトラブルを起こした新人がホスト業界へ』のように過去の具体的な事件性を一文で見せ、戦慄タイトルとサムネの一致度を高める。
-    </div>
-  </div>
-</div>
-
-
-<div class="video-analysis-card">
-  <div class="vcard-header">
-    <div class="vcard-thumb">
-      <img src="https://i.ytimg.com/vi/3-ojJXQtiyw/hqdefault.jpg" alt="thumb">
-    </div>
-    <div class="vcard-info">
-      <h3><a href="https://www.youtube.com/watch?v=3-ojJXQtiyw" target="_blank">ホストが行方不明... #ホスロジ  #ホスト #歌舞伎町</a></h3>
-      <p class="vcard-meta">公開日: 2026-06-26 &nbsp;|&nbsp; 尺: 1:40</p>
-      <span class="badge badge-short">Short（短尺）</span>
-    </div>
-  </div>
-  <div class="vcard-metrics">
-    <div class="metrics-grid"><div class="metric-item"><div class="m-val">2,584 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">46.2%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">0:46</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">0 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">0</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">23</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">0</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
-  </div>
-  <div class="vcard-analysis">
-    <div class="vcard-summary">
-      <span class="vcard-label vcard-label-blue">内容サマリー</span>
-      短尺シリーズ『ホスロジ』の一本。ホストが連絡もなく行方不明になった騒動を扱う一本。
-    </div>
-    <div class="vcard-reason">
-      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
-      維持率46.2%・再生2,557回は当月ショートで中位。『行方不明』というフックは一定の興味を引くが、結末の分からない不安・謎の要素が短尺の中で回収し切れず、標準的な離脱に留まった。
-    </div>
-    <div class="vcard-improve">
-      <span class="vcard-label vcard-label-orange">改善点</span>
-      『行方不明→発見・復帰』の顛末が分かる続編ショートを翌日以内に出し、2本セットで完結する構成にする。単発の『事件発生』報告で終わらせず、短尺内で『気になる→解決』のミニストーリーを完結させると維持が伸びる。
-    </div>
-  </div>
-</div>
-
-
-<div class="video-analysis-card">
-  <div class="vcard-header">
-    <div class="vcard-thumb">
-      <img src="https://i.ytimg.com/vi/MUBePZuEONw/hqdefault.jpg" alt="thumb">
-    </div>
-    <div class="vcard-info">
-      <h3><a href="https://www.youtube.com/watch?v=MUBePZuEONw" target="_blank">油断してるおじさんホスト　#ホスロジ #ホスト #歌舞伎町</a></h3>
-      <p class="vcard-meta">公開日: 2026-06-25 &nbsp;|&nbsp; 尺: 1:43</p>
-      <span class="badge badge-short">Short（短尺）</span>
-    </div>
-  </div>
-  <div class="vcard-metrics">
-    <div class="metrics-grid"><div class="metric-item"><div class="m-val">5,051 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">31.3%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">0:33</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">0 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">0</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">24</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">0</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
-  </div>
-  <div class="vcard-analysis">
-    <div class="vcard-summary">
-      <span class="vcard-label vcard-label-blue">内容サマリー</span>
-      短尺シリーズ『ホスロジ』の一本。隙・油断を見せた瞬間を切り取ったおじさんホストのコミカルな一本。
-    </div>
-    <div class="vcard-reason">
-      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
-      再生5,031回は当月全動画で最多だが、維持率31.1%は当月で最も低い。サムネ・タイトルの『油断』というフックでクリックは強く取れたが、本編がそのフックに応えきれず早期離脱を招いた。瞬間的なバズ狙いのタイトルと中身のギャップが最大の課題。
-    </div>
-    <div class="vcard-improve">
-      <span class="vcard-label vcard-label-orange">改善点</span>
-      クリックを取れるフック力は証明済みなので、タイトルで煽った『油断』の中身（何にどう油断していたか）を冒頭2〜3秒で即座に見せる編集に変える。オチを後半に温存せず先出しすることで、高いクリック率をそのまま維持率に転換できる。
-    </div>
-  </div>
-</div>
-
-
-<div class="video-analysis-card">
-  <div class="vcard-header">
-    <div class="vcard-thumb">
-      <img src="https://i.ytimg.com/vi/IssNZGhzKR4/hqdefault.jpg" alt="thumb">
-    </div>
-    <div class="vcard-info">
-      <h3><a href="https://www.youtube.com/watch?v=IssNZGhzKR4" target="_blank">ホームレスホスト躍進 #ホスロジ #ホスト #歌舞伎町</a></h3>
-      <p class="vcard-meta">公開日: 2026-06-24 &nbsp;|&nbsp; 尺: 1:37</p>
-      <span class="badge badge-short">Short（短尺）</span>
-    </div>
-  </div>
-  <div class="vcard-metrics">
-    <div class="metrics-grid"><div class="metric-item"><div class="m-val">2,654 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">57.8%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">0:56</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">0 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">1</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">22</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">1</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
-  </div>
-  <div class="vcard-analysis">
-    <div class="vcard-summary">
-      <span class="vcard-label vcard-label-blue">内容サマリー</span>
-      短尺シリーズ『ホスロジ』の一本。ホームレス出身とされるホストの活躍・躍進の瞬間を切り取った回。
-    </div>
-    <div class="vcard-reason">
-      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
-      維持率57.8%は当月ショート4本で最も高い。再生2,654回は中位だが、97秒という短い尺の中で最後まで見せ切れており、『ホームレス→ホスト』という肩書きギャップが最後まで興味を持続させた。
-    </div>
-    <div class="vcard-improve">
-      <span class="vcard-label vcard-label-orange">改善点</span>
-      肩書きギャップは短尺の維持率を生む型なので、『ホームレスホスト』を継続キャラとして固定しシリーズ化する。ショートは単発消費されやすいため、動画内テロップに『ホスロジ#〇』と回数を明示し、シリーズ通し視聴への誘導を作る。
     </div>
   </div>
 </div>
@@ -876,7 +702,208 @@ document.getElementById('tab-long').classList.add('active');
     </div>
   </div>
 </div>
-</div></section>
+
+    </div>
+    <div id="indiv-short" class="indiv-pane">
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/JwHTo2Oh4CU/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=JwHTo2Oh4CU" target="_blank">社長に殴られました  #ホスロジ #ホスト #歌舞伎町</a></h3>
+      <p class="vcard-meta">公開日: 2026-06-30 &nbsp;|&nbsp; 尺: 1:19</p>
+      <span class="badge badge-short">Short（短尺）</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">2,813 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">45.2%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">0:35</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">0 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">0</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">27</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">0</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      『社長に殴られました』という穏やかでない一言を切り出した短尺（6月30日公開・確定反映）。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      確定値で7日再生2,813回・維持率45.2%は当月短尺の標準クラス。暴力を匂わせる強いワードの割に伸び切らなかったのは、文脈（冗談なのか本気なのか）が短尺単体では伝わらず、拡散に乗る前に消費された可能性がある。登録純増±0。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      事件系ワードの短尺は、本編のどの回の出来事かをテロップで明示して長尺へ誘導する導線を必ず付ける。単体で驚かせて終わるとチャンネルへの回遊が生まれない。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/LH8i-aghbMw/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=LH8i-aghbMw" target="_blank">ホスラブにち〇ち〇晒しました  #ホスロジ #ホスト #歌舞伎町</a></h3>
+      <p class="vcard-meta">公開日: 2026-06-29 &nbsp;|&nbsp; 尺: 1:23</p>
+      <span class="badge badge-short">Short（短尺）</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">423 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">68.6%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">0:56</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">0 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">0</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">12</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">0</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      ホスラブ（掲示板）への下ネタ暴露を扱った短尺（6月29日公開・確定反映）。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      確定値で7日再生423回は当月全体で最低。維持率68.6%自体は高いが母数が極端に少ない＝下ネタ・伏せ字を含む題材でフィードに載りにくく、露出自体が絞られたとみられる。登録純増±0。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      下ネタ系のタイトル・サムネはレコメンド露出が制限されるリスクが高い。同じ出来事を扱うなら『掲示板に書き込まれた衝撃の内容とは』のように直接表現を避けた言い換えでフィードに載る形に整える。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/bJKIJFQXnYo/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=bJKIJFQXnYo" target="_blank">姫が激怒...  #ホスロジ #ホスト #歌舞伎町</a></h3>
+      <p class="vcard-meta">公開日: 2026-06-27 &nbsp;|&nbsp; 尺: 1:12</p>
+      <span class="badge badge-short">Short（短尺）</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">4,055 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">53.8%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">0:38</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">1 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">1</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">17</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">0</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      短尺シリーズ『ホスロジ』の一本。ホストの言動に対して姫（客）が激怒する一幕を切り取った回。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      尺72秒と当月最短ながら登録純増+1はショートで唯一のプラス。『姫の激怒』という短尺完結のリアルな対立の瞬間が、最短時間で最も強い感情の起伏を見せ、フォローしたくなる衝動を作った。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      短尺は『尺の短さ×感情の起伏の強さ』が登録に直結することが実証された。今後のホスロジは怒り・嫉妬・涙など瞬間的な強い感情のピークシーンを冒頭0.5秒で見せる編集を徹底し、この回のフォーマットを型として横展開する。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/3-ojJXQtiyw/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=3-ojJXQtiyw" target="_blank">ホストが行方不明... #ホスロジ  #ホスト #歌舞伎町</a></h3>
+      <p class="vcard-meta">公開日: 2026-06-26 &nbsp;|&nbsp; 尺: 1:40</p>
+      <span class="badge badge-short">Short（短尺）</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">2,584 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">46.2%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">0:46</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">0 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">0</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">23</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">0</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      短尺シリーズ『ホスロジ』の一本。ホストが連絡もなく行方不明になった騒動を扱う一本。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      維持率46.2%・再生2,557回は当月ショートで中位。『行方不明』というフックは一定の興味を引くが、結末の分からない不安・謎の要素が短尺の中で回収し切れず、標準的な離脱に留まった。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      『行方不明→発見・復帰』の顛末が分かる続編ショートを翌日以内に出し、2本セットで完結する構成にする。単発の『事件発生』報告で終わらせず、短尺内で『気になる→解決』のミニストーリーを完結させると維持が伸びる。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/MUBePZuEONw/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=MUBePZuEONw" target="_blank">油断してるおじさんホスト　#ホスロジ #ホスト #歌舞伎町</a></h3>
+      <p class="vcard-meta">公開日: 2026-06-25 &nbsp;|&nbsp; 尺: 1:43</p>
+      <span class="badge badge-short">Short（短尺）</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">5,051 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">31.3%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">0:33</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">0 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">0</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">24</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">0</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      短尺シリーズ『ホスロジ』の一本。隙・油断を見せた瞬間を切り取ったおじさんホストのコミカルな一本。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      再生5,031回は当月全動画で最多だが、維持率31.1%は当月で最も低い。サムネ・タイトルの『油断』というフックでクリックは強く取れたが、本編がそのフックに応えきれず早期離脱を招いた。瞬間的なバズ狙いのタイトルと中身のギャップが最大の課題。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      クリックを取れるフック力は証明済みなので、タイトルで煽った『油断』の中身（何にどう油断していたか）を冒頭2〜3秒で即座に見せる編集に変える。オチを後半に温存せず先出しすることで、高いクリック率をそのまま維持率に転換できる。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/IssNZGhzKR4/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=IssNZGhzKR4" target="_blank">ホームレスホスト躍進 #ホスロジ #ホスト #歌舞伎町</a></h3>
+      <p class="vcard-meta">公開日: 2026-06-24 &nbsp;|&nbsp; 尺: 1:37</p>
+      <span class="badge badge-short">Short（短尺）</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">2,654 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">57.8%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">0:56</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">0 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">1</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">22</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">1</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      短尺シリーズ『ホスロジ』の一本。ホームレス出身とされるホストの活躍・躍進の瞬間を切り取った回。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      維持率57.8%は当月ショート4本で最も高い。再生2,654回は中位だが、97秒という短い尺の中で最後まで見せ切れており、『ホームレス→ホスト』という肩書きギャップが最後まで興味を持続させた。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      肩書きギャップは短尺の維持率を生む型なので、『ホームレスホスト』を継続キャラとして固定しシリーズ化する。ショートは単発消費されやすいため、動画内テロップに『ホスロジ#〇』と回数を明示し、シリーズ通し視聴への誘導を作る。
+    </div>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+function switchIndivTab(btn){
+  document.querySelectorAll('.indiv-tab').forEach(function(b){b.classList.remove('active');});
+  document.querySelectorAll('.indiv-pane').forEach(function(p){p.classList.remove('active');});
+  btn.classList.add('active');
+  document.getElementById(btn.getAttribute('data-pane')).classList.add('active');
+}
+</script>
+
 
 <section class="sec-grad-rev">
   <div class="container">

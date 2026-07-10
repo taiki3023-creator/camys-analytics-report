@@ -93,6 +93,13 @@ h3{font-size:20px;font-weight:600;line-height:1.5;margin:32px 0 16px;color:#1e3a
 .top-table a{color:#0369a1;text-decoration:none}
 .top-table a:hover{text-decoration:underline}
 
+/* 個別分析 長尺/ショート タブ切替 */
+.indiv-tabs{display:flex;gap:12px;margin:20px 0 28px;flex-wrap:wrap}
+.indiv-tab{padding:12px 32px;border-radius:999px;border:2px solid #06b6d4;background:#ffffff;color:#1e3a5f;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+.indiv-tab:hover{background:#ecfeff}
+.indiv-tab.active{background:linear-gradient(135deg,#1e3a5f,#06b6d4);color:#ffffff;border-color:transparent}
+.indiv-pane{display:none}
+.indiv-pane.active{display:block}
 /* 動画カード（個別分析） */
 .video-analysis-card{background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;margin-bottom:32px;box-shadow:0 4px 16px rgba(30,58,95,.08);overflow:hidden}
 .vcard-header{display:flex;gap:20px;padding:24px;align-items:flex-start;border-bottom:1px solid #e2e8f0}
@@ -473,6 +480,11 @@ document.getElementById('tab-long').classList.add('active');
     <p class="note">考察は考察_202606.json（CEO手書き）から読み込み。
       JSONに該当動画IDがない場合は「（CEO考察 準備中）」と表示。
       サムネCTRはAPI取得不可のためStudio参照。</p>
+    <div class="indiv-tabs">
+      <button type="button" class="indiv-tab active" data-pane="indiv-long" onclick="switchIndivTab(this)">長尺（8本）</button>
+      <button type="button" class="indiv-tab" data-pane="indiv-short" onclick="switchIndivTab(this)">ショート（12本）</button>
+    </div>
+    <div id="indiv-long" class="indiv-pane active">
 
 <div class="video-analysis-card">
   <div class="vcard-header">
@@ -539,37 +551,6 @@ document.getElementById('tab-long').classList.add('active');
 <div class="video-analysis-card">
   <div class="vcard-header">
     <div class="vcard-thumb">
-      <img src="https://i.ytimg.com/vi/x4xe9ZsAZS8/hqdefault.jpg" alt="thumb">
-    </div>
-    <div class="vcard-info">
-      <h3><a href="https://www.youtube.com/watch?v=x4xe9ZsAZS8" target="_blank">問題児ホスト自己中な思想　#ホスト #ホス狂い #歌舞伎町</a></h3>
-      <p class="vcard-meta">公開日: 2026-06-25 &nbsp;|&nbsp; 尺: 2:59</p>
-      <span class="badge badge-short">Short（短尺）</span>
-    </div>
-  </div>
-  <div class="vcard-metrics">
-    <div class="metrics-grid"><div class="metric-item"><div class="m-val">22,059 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">23.2%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">0:42</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">3 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">7</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">104</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">4</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
-  </div>
-  <div class="vcard-analysis">
-    <div class="vcard-summary">
-      <span class="vcard-label vcard-label-blue">内容サマリー</span>
-      問題児ホストの自己中心的な考え方が浮き彫りになる短尺回。
-    </div>
-    <div class="vcard-reason">
-      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
-      d7再生21,971は当月全体でも最多だが、維持率22.86%は当月の短尺で最低水準。サムネ・タイトルの煽りで大量の初動クリックを獲得した一方、本編内容が期待と合わず早期離脱が起きている可能性が高い。登録純増3は再生規模に対して極端に少なく、クリック先行型の再生であることを裏付ける。
-    </div>
-    <div class="vcard-improve">
-      <span class="vcard-label vcard-label-orange">改善点</span>
-      再生数の絶対値だけを見ると当月最高だが、維持率22.86%は要注意水準。タイトル・サムネの煽りと中身のギャップを埋める（自己中エピソードの具体を冒頭に前倒しする）ことで、この再生ボリュームを維持率・登録にも転化できる。クリック詐欺的な煽りは短期的には再生を稼ぐが、チャンネルの信頼を下げるリスクがあるため多用は避ける。
-    </div>
-  </div>
-</div>
-
-
-<div class="video-analysis-card">
-  <div class="vcard-header">
-    <div class="vcard-thumb">
       <img src="https://i.ytimg.com/vi/ProPdGT5jNg/hqdefault.jpg" alt="thumb">
     </div>
     <div class="vcard-info">
@@ -593,6 +574,194 @@ document.getElementById('tab-long').classList.add('active');
     <div class="vcard-improve">
       <span class="vcard-label vcard-label-orange">改善点</span>
       高い維持率を生む『過去の失敗→リベンジ成功』の型は、サムネ・冒頭で『過去に何度失敗したか』を数字や一言で明示しないと新規に伝わらない。例えば『バースデー3連続失敗からのリベンジ』のように前提を最初に提示し、感動の着地までを新規にも追える設計にする。過去の失敗回を予告・リンクづけして連続視聴を作るのも有効。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/_M1fwJVQmI0/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=_M1fwJVQmI0" target="_blank">【緊迫】王者ホストがまさかの劣勢｜姫に「適当じゃない？」と言われ、先輩からも厳しい現実を突きつけられる</a></h3>
+      <p class="vcard-meta">公開日: 2026-06-14 &nbsp;|&nbsp; 尺: 17:22</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">13,397 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">52.6%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">9:08</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">20 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">42</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">185</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">2</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      チーム再編・ナンバー争いの緊張が続く中、客（姫）から『ヘルプの対応が適当』と指摘された若手ホストに対し、先輩が『1万円払って来てくれる女の子への感謝が足りない』『そんな接客ならホストをやめてしまえ』と本気で叱責する指導回。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      登録純増20は当月の長尺で最高。d7再生13,397・維持52.63%も上位級。『姫の告発→先輩の本気の叱責』という権力ドラマ＋指導の型が5月に続き当月も最強フックであることを裏付けた。叱責の中身が『金と時間を払って来てくれる客への感謝』という筋の通った説教で、視聴者が“正しい指導”として納得しやすかったことが登録増に直結したとみられる。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      『姫の告発→先輩の説教』の型は登録の最大レバーであることが5月・6月と連続して確認できた。この型を主軸企画として月2〜3本は確保する。サムネ・タイトルで『何を指摘されたか』を具体的に見せ（例：『対応が適当』と一言）、冒頭で告発シーンに即入ることで新規流入をさらに増やせる。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/pCKJnu6I40o/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=pCKJnu6I40o" target="_blank">【元ホス狂い】ぶーちゃんねるでおなじみ「ここなし」の初回接客…禁断の初出し暴露連発で大暴走…収拾不能の展開に</a></h3>
+      <p class="vcard-meta">公開日: 2026-06-07 &nbsp;|&nbsp; 尺: 24:20</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">20,696 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">45.1%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">10:58</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">6 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">146</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">290</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">11</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      ぶーちゃんねる出演でおなじみの「ここなし」がハングオーバーに初回接客で来店し、枕営業疑惑や過去のナンパエピソードなど禁断の初出し暴露を連発、収拾がつかなくなるコラボ回。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      d7再生20,696は当月の長尺トップ。他チャンネル（ぶーちゃんねる）のファンを引き込むコラボ×初出し暴露という強い引きが機能した。維持率45.08%は標準域だが、複数ホストとの掛け合いで長尺全体を通して飽きさせない構成になっている。登録純増6は再生規模に対しては控えめで、内輪の掛け合いが長く、新規の登録動機（このチャンネルを見続けたい理由）まで届き切っていない。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      コラボ×暴露は再生の起爆剤として有効なフォーマット。次回以降は『暴露の核心』を冒頭30秒に凝縮し、残りの尺で複数ホストとの絡みを見せる構成にすると、離脱を抑えつつ新規登録の動機（このチャンネルの魅力）も伝わる。ぶーちゃんねる側の概要欄・エンドカードでの相互送客も強化する。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/Y6KchCUGBY0/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=Y6KchCUGBY0" target="_blank">【後編】売上あったホストが一気にどん底へ…「このままだとクビ」宣告</a></h3>
+      <p class="vcard-meta">公開日: 2026-06-03 &nbsp;|&nbsp; 尺: 23:40</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">17,692 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">50.6%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">11:59</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">10 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">36</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">243</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">10</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      売上急落した問題児ホスト「流星」の自己本位な接客態度を、幹部・先輩ホストたちが会議形式で一丸となって指導し立て直しを図る後編。「クビ宣告」ギリギリの緊迫描写と、周囲が見放さず更生を後押しする組織愛が同居する回。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      d7再生17,692・登録純増10は長尺として当月上位級。『クビ宣告』という強い煽り言葉に対し、中身は幹部・先輩が一丸となって流星を立て直そうとする“組織の指導ドラマ”で、視聴者は個人の転落だけでなく組織として本気で向き合う姿勢に反応した。維持率50.64%は長尺として標準〜やや上位で、会議シーンの生々しいやりとりが最後まで視聴を引っ張った。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      『クビ宣告』級の危機タイトルに対し、実際は“見放さず育てる”組織ドラマである落差を逆手に取り、サムネ・冒頭で危機を煽りつつ本編で結末（この後どうなったか）まで見せ切ると新規登録にもっと変換できる。流星のその後（改善したか/されなかったか）を追う続編を用意し、視聴者の“更生を見届けたい”欲求を刺激する。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/P6QitOYIfk0/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=P6QitOYIfk0" target="_blank">【前編】姫の不満が限界突破…コスプレイベントで告発、ホストに処分か</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-29 &nbsp;|&nbsp; 尺: 17:35</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span> <span class="badge badge-carry">前月末公開・確定反映</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">12,683 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">57.6%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">10:07</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">4 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">39</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">180</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">8</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      学生服コスプレイベントで、姫（客）がホスト・タイヨウへの不満を限界突破させ告発。ホストに処分が下るかという“前編”。店内の権力関係とトラブルの行方を追う長尺回。（5月末公開・6月レポートに確定反映）
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      d7再生9,953・維持59.0%は長尺として当月トップ級。コメント38・高評価163とエンゲージも高い。『姫の告発→処分』という権力ドラマがコア層の関心を強く掴み最後まで見られた。登録純増+2は低めで、内輪の人間関係が主題のため新規には入りにくい。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      高い維持を生む“告発・処分”の権力ドラマは主力型。後編・その後を必ず用意しコア層の連続視聴に育てる。新規登録を取るにはサムネ・タイトルで『誰が何をやらかし、どう裁かれるか』を一般視聴者にも伝わる形にする。
+    </div>
+  </div>
+</div>
+
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/4LuKWMCMQ2g/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=4LuKWMCMQ2g" target="_blank">【1日密着】売れないホストの寮へ行くとゴミ屋敷だったことが判明し密着どころではなくなってしまう…</a></h3>
+      <p class="vcard-meta">公開日: 2026-05-26 &nbsp;|&nbsp; 尺: 25:36</p>
+      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span> <span class="badge badge-carry">前月末公開・確定反映</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">16,355 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">49.0%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">12:33</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">6 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">63</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">219</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">3</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      売れないホストの寮へ1日密着したらゴミ屋敷だったことが判明し、密着どころではなくなる生活密着系の回。（5月末公開・6月レポートに確定反映）
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      7日再生16,361・維持49.03%・登録純増6は当月で堅調。伸びた本質は『寮密着』という企画ではなく、演者・大樹のキャラにある＝ポンコツすぎるホストの一日密着で、私生活そのものに奇妙さ（ゴミ屋敷・独特の生活習慣）がにじみ出ていた点。視聴者はその“ツッコミどころ”を覗き見る面白さに反応した。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      横展開（買い物・休日・寮など）は大樹本人で組むのが前提。企画フォーマットだけ真似て別ホストでやっても再現しない。そして展開時は毎回この回と同等の“ツッコミどころ”を必ず仕込む＝事前ヒアリングで本人の奇妙な習慣・行動を洗い出し、絵的に弱ければ演出で誇張してでもツッコミポイントを作る（面白くなりそうになければ誇張マスト）。
+    </div>
+  </div>
+</div>
+
+    </div>
+    <div id="indiv-short" class="indiv-pane">
+
+<div class="video-analysis-card">
+  <div class="vcard-header">
+    <div class="vcard-thumb">
+      <img src="https://i.ytimg.com/vi/x4xe9ZsAZS8/hqdefault.jpg" alt="thumb">
+    </div>
+    <div class="vcard-info">
+      <h3><a href="https://www.youtube.com/watch?v=x4xe9ZsAZS8" target="_blank">問題児ホスト自己中な思想　#ホスト #ホス狂い #歌舞伎町</a></h3>
+      <p class="vcard-meta">公開日: 2026-06-25 &nbsp;|&nbsp; 尺: 2:59</p>
+      <span class="badge badge-short">Short（短尺）</span>
+    </div>
+  </div>
+  <div class="vcard-metrics">
+    <div class="metrics-grid"><div class="metric-item"><div class="m-val">22,059 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">23.2%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">0:42</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">3 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">7</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">104</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">4</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
+  </div>
+  <div class="vcard-analysis">
+    <div class="vcard-summary">
+      <span class="vcard-label vcard-label-blue">内容サマリー</span>
+      問題児ホストの自己中心的な考え方が浮き彫りになる短尺回。
+    </div>
+    <div class="vcard-reason">
+      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
+      d7再生21,971は当月全体でも最多だが、維持率22.86%は当月の短尺で最低水準。サムネ・タイトルの煽りで大量の初動クリックを獲得した一方、本編内容が期待と合わず早期離脱が起きている可能性が高い。登録純増3は再生規模に対して極端に少なく、クリック先行型の再生であることを裏付ける。
+    </div>
+    <div class="vcard-improve">
+      <span class="vcard-label vcard-label-orange">改善点</span>
+      再生数の絶対値だけを見ると当月最高だが、維持率22.86%は要注意水準。タイトル・サムネの煽りと中身のギャップを埋める（自己中エピソードの具体を冒頭に前倒しする）ことで、この再生ボリュームを維持率・登録にも転化できる。クリック詐欺的な煽りは短期的には再生を稼ぐが、チャンネルの信頼を下げるリスクがあるため多用は避ける。
     </div>
   </div>
 </div>
@@ -694,37 +863,6 @@ document.getElementById('tab-long').classList.add('active');
 <div class="video-analysis-card">
   <div class="vcard-header">
     <div class="vcard-thumb">
-      <img src="https://i.ytimg.com/vi/_M1fwJVQmI0/hqdefault.jpg" alt="thumb">
-    </div>
-    <div class="vcard-info">
-      <h3><a href="https://www.youtube.com/watch?v=_M1fwJVQmI0" target="_blank">【緊迫】王者ホストがまさかの劣勢｜姫に「適当じゃない？」と言われ、先輩からも厳しい現実を突きつけられる</a></h3>
-      <p class="vcard-meta">公開日: 2026-06-14 &nbsp;|&nbsp; 尺: 17:22</p>
-      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
-    </div>
-  </div>
-  <div class="vcard-metrics">
-    <div class="metrics-grid"><div class="metric-item"><div class="m-val">13,397 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">52.6%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">9:08</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">20 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">42</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">185</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">2</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
-  </div>
-  <div class="vcard-analysis">
-    <div class="vcard-summary">
-      <span class="vcard-label vcard-label-blue">内容サマリー</span>
-      チーム再編・ナンバー争いの緊張が続く中、客（姫）から『ヘルプの対応が適当』と指摘された若手ホストに対し、先輩が『1万円払って来てくれる女の子への感謝が足りない』『そんな接客ならホストをやめてしまえ』と本気で叱責する指導回。
-    </div>
-    <div class="vcard-reason">
-      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
-      登録純増20は当月の長尺で最高。d7再生13,397・維持52.63%も上位級。『姫の告発→先輩の本気の叱責』という権力ドラマ＋指導の型が5月に続き当月も最強フックであることを裏付けた。叱責の中身が『金と時間を払って来てくれる客への感謝』という筋の通った説教で、視聴者が“正しい指導”として納得しやすかったことが登録増に直結したとみられる。
-    </div>
-    <div class="vcard-improve">
-      <span class="vcard-label vcard-label-orange">改善点</span>
-      『姫の告発→先輩の説教』の型は登録の最大レバーであることが5月・6月と連続して確認できた。この型を主軸企画として月2〜3本は確保する。サムネ・タイトルで『何を指摘されたか』を具体的に見せ（例：『対応が適当』と一言）、冒頭で告発シーンに即入ることで新規流入をさらに増やせる。
-    </div>
-  </div>
-</div>
-
-
-<div class="video-analysis-card">
-  <div class="vcard-header">
-    <div class="vcard-thumb">
       <img src="https://i.ytimg.com/vi/8VDD2kphBq8/hqdefault.jpg" alt="thumb">
     </div>
     <div class="vcard-info">
@@ -748,37 +886,6 @@ document.getElementById('tab-long').classList.add('active');
     <div class="vcard-improve">
       <span class="vcard-label vcard-label-orange">改善点</span>
       この『新人×修羅場説教』は短尺の勝ちパターンとして定番化する。長尺の指導シーンのハイライト部分を切り出して短尺化する運用を継続・強化する。
-    </div>
-  </div>
-</div>
-
-
-<div class="video-analysis-card">
-  <div class="vcard-header">
-    <div class="vcard-thumb">
-      <img src="https://i.ytimg.com/vi/pCKJnu6I40o/hqdefault.jpg" alt="thumb">
-    </div>
-    <div class="vcard-info">
-      <h3><a href="https://www.youtube.com/watch?v=pCKJnu6I40o" target="_blank">【元ホス狂い】ぶーちゃんねるでおなじみ「ここなし」の初回接客…禁断の初出し暴露連発で大暴走…収拾不能の展開に</a></h3>
-      <p class="vcard-meta">公開日: 2026-06-07 &nbsp;|&nbsp; 尺: 24:20</p>
-      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
-    </div>
-  </div>
-  <div class="vcard-metrics">
-    <div class="metrics-grid"><div class="metric-item"><div class="m-val">20,696 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">45.1%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">10:58</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">6 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">146</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">290</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">11</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
-  </div>
-  <div class="vcard-analysis">
-    <div class="vcard-summary">
-      <span class="vcard-label vcard-label-blue">内容サマリー</span>
-      ぶーちゃんねる出演でおなじみの「ここなし」がハングオーバーに初回接客で来店し、枕営業疑惑や過去のナンパエピソードなど禁断の初出し暴露を連発、収拾がつかなくなるコラボ回。
-    </div>
-    <div class="vcard-reason">
-      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
-      d7再生20,696は当月の長尺トップ。他チャンネル（ぶーちゃんねる）のファンを引き込むコラボ×初出し暴露という強い引きが機能した。維持率45.08%は標準域だが、複数ホストとの掛け合いで長尺全体を通して飽きさせない構成になっている。登録純増6は再生規模に対しては控えめで、内輪の掛け合いが長く、新規の登録動機（このチャンネルを見続けたい理由）まで届き切っていない。
-    </div>
-    <div class="vcard-improve">
-      <span class="vcard-label vcard-label-orange">改善点</span>
-      コラボ×暴露は再生の起爆剤として有効なフォーマット。次回以降は『暴露の核心』を冒頭30秒に凝縮し、残りの尺で複数ホストとの絡みを見せる構成にすると、離脱を抑えつつ新規登録の動機（このチャンネルの魅力）も伝わる。ぶーちゃんねる側の概要欄・エンドカードでの相互送客も強化する。
     </div>
   </div>
 </div>
@@ -841,37 +948,6 @@ document.getElementById('tab-long').classList.add('active');
     <div class="vcard-improve">
       <span class="vcard-label vcard-label-orange">改善点</span>
       『新人が指摘される』単発で終わらせず、翌週以降の“その後どうなったか”を必ず匂わせる一言をエンドに入れる。継続視聴の入口を短尺でも作る。
-    </div>
-  </div>
-</div>
-
-
-<div class="video-analysis-card">
-  <div class="vcard-header">
-    <div class="vcard-thumb">
-      <img src="https://i.ytimg.com/vi/Y6KchCUGBY0/hqdefault.jpg" alt="thumb">
-    </div>
-    <div class="vcard-info">
-      <h3><a href="https://www.youtube.com/watch?v=Y6KchCUGBY0" target="_blank">【後編】売上あったホストが一気にどん底へ…「このままだとクビ」宣告</a></h3>
-      <p class="vcard-meta">公開日: 2026-06-03 &nbsp;|&nbsp; 尺: 23:40</p>
-      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span>
-    </div>
-  </div>
-  <div class="vcard-metrics">
-    <div class="metrics-grid"><div class="metric-item"><div class="m-val">17,692 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">50.6%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">11:59</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">10 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">36</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">243</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">10</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
-  </div>
-  <div class="vcard-analysis">
-    <div class="vcard-summary">
-      <span class="vcard-label vcard-label-blue">内容サマリー</span>
-      売上急落した問題児ホスト「流星」の自己本位な接客態度を、幹部・先輩ホストたちが会議形式で一丸となって指導し立て直しを図る後編。「クビ宣告」ギリギリの緊迫描写と、周囲が見放さず更生を後押しする組織愛が同居する回。
-    </div>
-    <div class="vcard-reason">
-      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
-      d7再生17,692・登録純増10は長尺として当月上位級。『クビ宣告』という強い煽り言葉に対し、中身は幹部・先輩が一丸となって流星を立て直そうとする“組織の指導ドラマ”で、視聴者は個人の転落だけでなく組織として本気で向き合う姿勢に反応した。維持率50.64%は長尺として標準〜やや上位で、会議シーンの生々しいやりとりが最後まで視聴を引っ張った。
-    </div>
-    <div class="vcard-improve">
-      <span class="vcard-label vcard-label-orange">改善点</span>
-      『クビ宣告』級の危機タイトルに対し、実際は“見放さず育てる”組織ドラマである落差を逆手に取り、サムネ・冒頭で危機を煽りつつ本編で結末（この後どうなったか）まで見せ切ると新規登録にもっと変換できる。流星のその後（改善したか/されなかったか）を追う続編を用意し、視聴者の“更生を見届けたい”欲求を刺激する。
     </div>
   </div>
 </div>
@@ -973,37 +1049,6 @@ document.getElementById('tab-long').classList.add('active');
 <div class="video-analysis-card">
   <div class="vcard-header">
     <div class="vcard-thumb">
-      <img src="https://i.ytimg.com/vi/P6QitOYIfk0/hqdefault.jpg" alt="thumb">
-    </div>
-    <div class="vcard-info">
-      <h3><a href="https://www.youtube.com/watch?v=P6QitOYIfk0" target="_blank">【前編】姫の不満が限界突破…コスプレイベントで告発、ホストに処分か</a></h3>
-      <p class="vcard-meta">公開日: 2026-05-29 &nbsp;|&nbsp; 尺: 17:35</p>
-      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span> <span class="badge badge-carry">前月末公開・確定反映</span>
-    </div>
-  </div>
-  <div class="vcard-metrics">
-    <div class="metrics-grid"><div class="metric-item"><div class="m-val">12,683 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">57.6%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">10:07</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">4 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">39</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">180</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">8</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
-  </div>
-  <div class="vcard-analysis">
-    <div class="vcard-summary">
-      <span class="vcard-label vcard-label-blue">内容サマリー</span>
-      学生服コスプレイベントで、姫（客）がホスト・タイヨウへの不満を限界突破させ告発。ホストに処分が下るかという“前編”。店内の権力関係とトラブルの行方を追う長尺回。（5月末公開・6月レポートに確定反映）
-    </div>
-    <div class="vcard-reason">
-      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
-      d7再生9,953・維持59.0%は長尺として当月トップ級。コメント38・高評価163とエンゲージも高い。『姫の告発→処分』という権力ドラマがコア層の関心を強く掴み最後まで見られた。登録純増+2は低めで、内輪の人間関係が主題のため新規には入りにくい。
-    </div>
-    <div class="vcard-improve">
-      <span class="vcard-label vcard-label-orange">改善点</span>
-      高い維持を生む“告発・処分”の権力ドラマは主力型。後編・その後を必ず用意しコア層の連続視聴に育てる。新規登録を取るにはサムネ・タイトルで『誰が何をやらかし、どう裁かれるか』を一般視聴者にも伝わる形にする。
-    </div>
-  </div>
-</div>
-
-
-<div class="video-analysis-card">
-  <div class="vcard-header">
-    <div class="vcard-thumb">
       <img src="https://i.ytimg.com/vi/AqVPxzkjML0/hqdefault.jpg" alt="thumb">
     </div>
     <div class="vcard-info">
@@ -1062,37 +1107,19 @@ document.getElementById('tab-long').classList.add('active');
   </div>
 </div>
 
+    </div>
+  </div>
+</section>
 
-<div class="video-analysis-card">
-  <div class="vcard-header">
-    <div class="vcard-thumb">
-      <img src="https://i.ytimg.com/vi/4LuKWMCMQ2g/hqdefault.jpg" alt="thumb">
-    </div>
-    <div class="vcard-info">
-      <h3><a href="https://www.youtube.com/watch?v=4LuKWMCMQ2g" target="_blank">【1日密着】売れないホストの寮へ行くとゴミ屋敷だったことが判明し密着どころではなくなってしまう…</a></h3>
-      <p class="vcard-meta">公開日: 2026-05-26 &nbsp;|&nbsp; 尺: 25:36</p>
-      <span class="badge badge-long">Long（長尺）</span> <span class="badge badge-tr">文字起こしあり</span> <span class="badge badge-carry">前月末公開・確定反映</span>
-    </div>
-  </div>
-  <div class="vcard-metrics">
-    <div class="metrics-grid"><div class="metric-item"><div class="m-val">16,355 回</div><div class="m-lbl">再生回数(7日)</div></div><div class="metric-item"><div class="m-val">49.0%</div><div class="m-lbl">視聴維持率</div></div><div class="metric-item"><div class="m-val">12:33</div><div class="m-lbl">平均視聴時間</div></div><div class="metric-item"><div class="m-val">6 人</div><div class="m-lbl">登録純増</div></div><div class="metric-item"><div class="m-val">63</div><div class="m-lbl">コメント数</div></div><div class="metric-item"><div class="m-val">219</div><div class="m-lbl">高評価数</div></div><div class="metric-item"><div class="m-val">3</div><div class="m-lbl">共有数</div></div><div class="metric-item"><div class="m-val">—(Studio参照)</div><div class="m-lbl">サムネCTR</div></div></div>
-  </div>
-  <div class="vcard-analysis">
-    <div class="vcard-summary">
-      <span class="vcard-label vcard-label-blue">内容サマリー</span>
-      売れないホストの寮へ1日密着したらゴミ屋敷だったことが判明し、密着どころではなくなる生活密着系の回。（5月末公開・6月レポートに確定反映）
-    </div>
-    <div class="vcard-reason">
-      <span class="vcard-label vcard-label-green">この数値になった理由・原因</span>
-      7日再生16,361・維持49.03%・登録純増6は当月で堅調。伸びた本質は『寮密着』という企画ではなく、演者・大樹のキャラにある＝ポンコツすぎるホストの一日密着で、私生活そのものに奇妙さ（ゴミ屋敷・独特の生活習慣）がにじみ出ていた点。視聴者はその“ツッコミどころ”を覗き見る面白さに反応した。
-    </div>
-    <div class="vcard-improve">
-      <span class="vcard-label vcard-label-orange">改善点</span>
-      横展開（買い物・休日・寮など）は大樹本人で組むのが前提。企画フォーマットだけ真似て別ホストでやっても再現しない。そして展開時は毎回この回と同等の“ツッコミどころ”を必ず仕込む＝事前ヒアリングで本人の奇妙な習慣・行動を洗い出し、絵的に弱ければ演出で誇張してでもツッコミポイントを作る（面白くなりそうになければ誇張マスト）。
-    </div>
-  </div>
-</div>
-</div></section>
+<script>
+function switchIndivTab(btn){
+  document.querySelectorAll('.indiv-tab').forEach(function(b){b.classList.remove('active');});
+  document.querySelectorAll('.indiv-pane').forEach(function(p){p.classList.remove('active');});
+  btn.classList.add('active');
+  document.getElementById(btn.getAttribute('data-pane')).classList.add('active');
+}
+</script>
+
 
 <section class="sec-grad-rev">
   <div class="container">
