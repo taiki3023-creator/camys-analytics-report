@@ -1,7 +1,7 @@
 """Batch-transcribe every video in a directory with 4 parallel workers.
 
-Walks <videos_dir> for common video extensions, runs ElevenLabs Scribe on
-each, writes transcripts to <videos_dir>/edit/transcripts/<name>.json.
+Walks <videos_dir> for common video extensions, runs ElevenLabs Scribe (or
+local Whisper, see transcribe.py --engine) on each, writes transcripts to <videos_dir>/edit/transcripts/<name>.json.
 
 Cached per-file: any source that already has a transcript is skipped.
 
@@ -20,7 +20,7 @@ import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
-from transcribe import load_api_key, transcribe_one, transcript_path
+from transcribe import ENGINES, resolve_engine, transcribe_one, transcript_path
 
 
 VIDEO_EXTS = {".mp4", ".MP4", ".mov", ".MOV", ".mkv", ".MKV", ".avi", ".AVI", ".m4v"}
@@ -43,7 +43,12 @@ def main() -> None:
         default=None,
         help="Edit output directory (default: <videos_dir>/edit)",
     )
-    ap.add_argument("--workers", type=int, default=4, help="Parallel workers (default: 4)")
+    ap.add_argument("--workers", type=int, default=4,
+                    help="Parallel workers (default: 4; forced to 1 for --engine whisper)")
+    ap.add_argument("--engine", choices=ENGINES, default=None,
+                    help="auto | scribe | whisper (see transcribe.py)")
+    ap.add_argument("--whisper-model", default=None,
+                    help="faster-whisper model for --engine whisper")
     ap.add_argument(
         "--language",
         type=str,
@@ -84,13 +89,17 @@ def main() -> None:
         print("nothing to do")
         return
 
-    api_key = load_api_key()
+    engine, api_key = resolve_engine(args.engine)
+    workers = args.workers
+    if engine == "whisper":
+        # One model in memory at a time; the GPU/CPU is the bottleneck, not the network.
+        workers = 1
 
-    print(f"transcribing {len(pending)} files with {args.workers} parallel workers")
+    print(f"transcribing {len(pending)} files with {workers} parallel workers ({engine})")
     t0 = time.time()
 
     errors: list[tuple[Path, str]] = []
-    with ThreadPoolExecutor(max_workers=args.workers) as pool:
+    with ThreadPoolExecutor(max_workers=workers) as pool:
         futures = {
             pool.submit(
                 transcribe_one,
@@ -101,6 +110,8 @@ def main() -> None:
                 num_speakers=args.num_speakers,
                 verbose=False,
                 audio_track=args.audio_track,
+                engine=engine,
+                whisper_model=args.whisper_model,
             ): v
             for v in pending
         }

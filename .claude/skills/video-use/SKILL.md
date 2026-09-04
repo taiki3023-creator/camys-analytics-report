@@ -59,7 +59,7 @@ The skill lives in `video-use/`. User footage lives wherever they put it. All se
 
 First-time install lives in `install.md` (clone, deps, ffmpeg, skill registration, API key). Don't re-run it every session; on cold start just verify:
 
-- `ELEVENLABS_API_KEY` resolves — either in the environment or in `.env` at the video-use repo root. If missing, ask the user to paste one and write it to `.env` (never to the user's `<videos_dir>`).
+- Transcription engine. `transcribe.py` / `transcribe_batch.py` accept `--engine scribe|whisper|auto` (env `VIDEO_USE_TRANSCRIBER`). Default `auto` = Scribe when `ELEVENLABS_API_KEY` resolves (environment or `.env` at the video-use root), otherwise local faster-whisper (`pip install faster-whisper`, models download once from Hugging Face; `--whisper-model small` on slow CPUs). If neither is available, ask the user which they want; do not silently block on an API key. Whisper caveats: no speaker diarization (everything is `S0`), no audio events, fillers are only partially kept, timestamps drift a bit more (pad cuts toward the 200ms end). Whisper mis-recognitions are cheap to fix: correct the `text` fields in `edit/transcripts/*.json` (keep the timings) or edit `takes_packed.md` before cutting, and the subtitles pick the fix up.
 - `ffmpeg` + `ffprobe` on PATH.
 - Python deps installed (`uv sync` or `pip install -e .` inside the repo).
 - Node.js + npm available if the session needs HyperFrames or Remotion slots. HyperFrames currently requires Node.js 22+.
@@ -71,8 +71,9 @@ Helpers (`helpers/transcribe.py`, `helpers/render.py`, etc.) live alongside this
 
 ## Helpers
 
-- **`transcribe.py <video>`** — single-file Scribe call. `--num-speakers N` optional. Cached.
-- **`transcribe_batch.py <videos_dir>`** — 4-worker parallel transcription. Use for multi-take.
+- **`transcribe.py <video>`** — single-file Scribe call, or local Whisper with `--engine whisper` (`--whisper-model`, `--language ja`). `--num-speakers N` optional (Scribe only). Cached.
+- **`transcribe_batch.py <videos_dir>`** — 4-worker parallel transcription (1 worker for Whisper). Use for multi-take.
+- **`transcribe_whisper.py <wav> -o <json>`** — the faster-whisper backend itself; emits Scribe-shaped JSON. Normally reached through `transcribe.py`.
 - **`pack_transcripts.py --edit-dir <dir>`** — `transcripts/*.json` → `takes_packed.md` (phrase-level, break on silence ≥ 0.5s).
 - **`timeline_view.py <video> <start> <end>`** — filmstrip + waveform PNG. On-demand visual drill-down. **Not a scan tool** — use it at decision points, not constantly.
 - **`render.py <edl.json> -o <out>`** — per-segment extract → concat → overlays (PTS-shifted) → subtitles LAST. `--preview` for 720p fast. `--build-subtitles` to generate master.srt inline.
@@ -181,7 +182,7 @@ Subtitles have three dimensions worth reasoning about: **chunking** (1/2/3/sente
 
 **Worked styles** — pick, adapt, or invent:
 
-**`bold-overlay`** — short-form tech launch, fast-paced social. 2-word chunks, UPPERCASE, break on punctuation, Helvetica 18 Bold, white-on-outline, `MarginV=35`. `render.py` ships with this as `SUB_FORCE_STYLE`.
+**`bold-overlay`** — short-form tech launch, fast-paced social. 2-word chunks, UPPERCASE, break on punctuation, Helvetica 18 Bold, white-on-outline, `MarginV=35`. `render.py` ships with this as `SUB_FORCE_STYLE`. For Japanese/Chinese transcripts `--build-subtitles` switches to character-count chunks (`CJK_MAX_CHARS`, 14) with no spaces and breaks on `。、！？`; Helvetica has no kana/kanji, so change `FontName` in `SUB_FORCE_STYLE` (e.g. `Hiragino Sans` on macOS) or write your own `master.srt`.
 
 ```
 FontName=Helvetica,FontSize=18,Bold=1,

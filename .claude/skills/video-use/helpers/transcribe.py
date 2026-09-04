@@ -1,15 +1,22 @@
-"""Transcribe a video with ElevenLabs Scribe.
+"""Transcribe a video with ElevenLabs Scribe or local Whisper.
 
-Extracts mono 16kHz audio via ffmpeg, uploads to Scribe with verbatim +
-diarize + audio events + word-level timestamps, writes the full response
-to <edit_dir>/transcripts/<video_stem>.json.
+Extracts mono 16kHz audio via ffmpeg, then either uploads to Scribe
+(verbatim + diarize + audio events + word-level timestamps) or runs
+faster-whisper locally (see transcribe_whisper.py), and writes the
+Scribe-shaped response to <edit_dir>/transcripts/<video_stem>.json.
 
-Cached: if the output file already exists, the upload is skipped.
+Engine selection (--engine, or VIDEO_USE_TRANSCRIBER env var):
+    auto     (default) Scribe if an ElevenLabs key is configured, else whisper
+    scribe   ElevenLabs Scribe (needs ELEVENLABS_API_KEY; paid, diarization)
+    whisper  faster-whisper on this machine (free, offline, no diarization)
+
+Cached: if the output file already exists, transcription is skipped.
 
 Usage:
     python helpers/transcribe.py <video_path>
+    python helpers/transcribe.py <video_path> --engine whisper --whisper-model small
     python helpers/transcribe.py <video_path> --edit-dir /custom/edit
-    python helpers/transcribe.py <video_path> --language en
+    python helpers/transcribe.py <video_path> --language ja
     python helpers/transcribe.py <video_path> --num-speakers 2
 """
 
@@ -33,7 +40,11 @@ import requests
 SCRIBE_URL = "https://api.elevenlabs.io/v1/speech-to-text"
 
 
-def load_api_key() -> str:
+ENGINES = ("auto", "scribe", "whisper")
+
+
+def find_api_key() -> str:
+    """ELEVENLABS_API_KEY from .env (repo root or cwd) or the environment. '' if absent."""
     for candidate in [Path(__file__).resolve().parent.parent / ".env", Path(".env")]:
         if candidate.exists():
             for line in candidate.read_text().splitlines():
@@ -43,10 +54,30 @@ def load_api_key() -> str:
                 k, v = line.split("=", 1)
                 if k.strip() == "ELEVENLABS_API_KEY":
                     return v.strip().strip('"').strip("'")
-    v = os.environ.get("ELEVENLABS_API_KEY", "")
+    return os.environ.get("ELEVENLABS_API_KEY", "")
+
+
+def load_api_key() -> str:
+    v = find_api_key()
     if not v:
-        sys.exit("ELEVENLABS_API_KEY not found in .env or environment")
+        sys.exit("ELEVENLABS_API_KEY not found in .env or environment "
+                 "(or pass --engine whisper to transcribe locally)")
     return v
+
+
+def resolve_engine(engine: str | None = None) -> tuple[str, str]:
+    """Return (engine, api_key). api_key is '' for whisper."""
+    engine = (engine or os.environ.get("VIDEO_USE_TRANSCRIBER") or "auto").lower()
+    if engine not in ENGINES:
+        sys.exit(f"unknown engine {engine!r}; choose one of {', '.join(ENGINES)}")
+    if engine == "whisper":
+        return "whisper", ""
+    key = find_api_key()
+    if engine == "scribe":
+        if not key:
+            load_api_key()  # exits with the standard message
+        return "scribe", key
+    return ("scribe", key) if key else ("whisper", "")
 
 
 def count_audio_tracks(video_path: Path) -> int:
@@ -133,8 +164,13 @@ def transcribe_one(
     num_speakers: int | None = None,
     verbose: bool = True,
     audio_track: int = 0,
+    engine: str = "scribe",
+    whisper_model: str | None = None,
 ) -> Path:
     """Transcribe a single video. Returns path to transcript JSON.
+
+    engine is "scribe" (upload to ElevenLabs, api_key required) or "whisper"
+    (local faster-whisper; api_key ignored). Use resolve_engine() to pick.
 
     Cached: returns existing path immediately if the transcript already exists.
     """
@@ -172,12 +208,20 @@ def transcribe_one(
                    if n_tracks > 1 else "Check the source audio.")
             )
 
-        size_mb = audio.stat().st_size / (1024 * 1024)
-        if verbose:
-            print(f"  uploading {video.stem}.wav ({size_mb:.1f} MB)", flush=True)
-        payload = call_scribe(audio, api_key, language, num_speakers)
+        if engine == "whisper":
+            from transcribe_whisper import DEFAULT_MODEL, call_whisper
 
-    out_path.write_text(json.dumps(payload, indent=2))
+            model_name = whisper_model or os.environ.get("VIDEO_USE_WHISPER_MODEL") or DEFAULT_MODEL
+            if verbose:
+                print(f"  transcribing {video.stem}.wav locally (faster-whisper {model_name})", flush=True)
+            payload = call_whisper(audio, language=language, model_name=model_name)
+        else:
+            size_mb = audio.stat().st_size / (1024 * 1024)
+            if verbose:
+                print(f"  uploading {video.stem}.wav ({size_mb:.1f} MB)", flush=True)
+            payload = call_scribe(audio, api_key, language, num_speakers)
+
+    out_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2))
     dt = time.time() - t0
 
     if verbose:
@@ -190,8 +234,21 @@ def transcribe_one(
 
 
 def main() -> None:
-    ap = argparse.ArgumentParser(description="Transcribe a video with ElevenLabs Scribe")
+    ap = argparse.ArgumentParser(description="Transcribe a video with ElevenLabs Scribe or local Whisper")
     ap.add_argument("video", type=Path, help="Path to video file")
+    ap.add_argument(
+        "--engine",
+        choices=ENGINES,
+        default=None,
+        help="auto (default: Scribe if a key exists, else whisper) | scribe | whisper. "
+             "Env VIDEO_USE_TRANSCRIBER overrides the default.",
+    )
+    ap.add_argument(
+        "--whisper-model",
+        default=None,
+        help="faster-whisper model for --engine whisper (default large-v3-turbo; "
+             "env VIDEO_USE_WHISPER_MODEL). Try 'small' on a slow CPU.",
+    )
     ap.add_argument(
         "--edit-dir",
         type=Path,
@@ -225,7 +282,7 @@ def main() -> None:
         sys.exit(f"video not found: {video}")
 
     edit_dir = (args.edit_dir or (video.parent / "edit")).resolve()
-    api_key = load_api_key()
+    engine, api_key = resolve_engine(args.engine)
 
     transcribe_one(
         video=video,
@@ -234,6 +291,8 @@ def main() -> None:
         language=args.language,
         num_speakers=args.num_speakers,
         audio_track=args.audio_track,
+        engine=engine,
+        whisper_model=args.whisper_model,
     )
 
 

@@ -390,7 +390,16 @@ def concat_segments(segment_paths: list[Path], out_path: Path, edit_dir: Path) -
 # -------- Master SRT (Rule 5) ------------------------------------------------
 
 
-PUNCT_BREAK = set(".,!?;:")
+PUNCT_BREAK = set(".,!?;:。、！？")
+# Japanese / Chinese transcripts (Whisper emits 1-3 character chunks): chunk by
+# character count instead of word count and never insert spaces.
+CJK_MAX_CHARS = 14
+_CJK_RE = re.compile(r"[぀-ヿ㐀-䶿一-鿿ｦ-ﾟ]")
+
+
+def _is_cjk(words: list[dict]) -> bool:
+    text = "".join((w.get("text") or "") for w in words)
+    return bool(text) and len(_CJK_RE.findall(text)) * 2 >= len(text.replace(" ", ""))
 
 
 def _srt_timestamp(seconds: float) -> str:
@@ -444,19 +453,29 @@ def build_master_srt(edl: dict, edit_dir: Path, out_path: Path) -> None:
         transcript = json.loads(tr_path.read_text())
         words_in_seg = _words_in_range(transcript, seg_start, seg_end)
 
-        # Group into 2-word chunks, break on punctuation
+        cjk = _is_cjk(words_in_seg)
+        joiner = "" if cjk else " "
+
+        # Group into 2-word chunks (CJK: up to CJK_MAX_CHARS characters), break on punctuation
         chunks: list[list[dict]] = []
         current: list[dict] = []
+        current_chars = 0
         for w in words_in_seg:
             text = (w.get("text") or "").strip()
             if not text:
                 continue
-            current.append(w)
-            # Break if the current text ends in punctuation or we hit 2 words
-            ends_in_punct = bool(text) and text[-1] in PUNCT_BREAK
-            if len(current) >= 2 or ends_in_punct:
+            if cjk and current and current_chars + len(text) > CJK_MAX_CHARS:
                 chunks.append(current)
                 current = []
+                current_chars = 0
+            current.append(w)
+            current_chars += len(text)
+            # Break if the current text ends in punctuation or we hit the chunk limit
+            ends_in_punct = bool(text) and text[-1] in PUNCT_BREAK
+            if (not cjk and len(current) >= 2) or ends_in_punct:
+                chunks.append(current)
+                current = []
+                current_chars = 0
         if current:
             chunks.append(current)
 
@@ -467,10 +486,10 @@ def build_master_srt(edl: dict, edit_dir: Path, out_path: Path) -> None:
             out_end = max(0.0, local_end - seg_start) + seg_offset
             if out_end <= out_start:
                 out_end = out_start + 0.4
-            text = " ".join((w.get("text") or "").strip() for w in chunk)
+            text = joiner.join((w.get("text") or "").strip() for w in chunk)
             text = re.sub(r"\s+", " ", text).strip()
             # Strip trailing punctuation for cleaner uppercase look
-            text = text.rstrip(",;:")
+            text = text.rstrip(",;:。、")
             text = text.upper()
             entries.append((out_start, out_end, text))
 

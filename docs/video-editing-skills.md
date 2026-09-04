@@ -38,7 +38,8 @@
 - 必要なもの
   - `ffmpeg` / `ffprobe`（必須）
   - Python 3.10+ と `uv`（または pip）
-  - **ElevenLabs API キー（必須・有料）** 文字起こしに使う。これがないと何も始まらない
+  - 文字起こしエンジン。**このリポジトリ版は ElevenLabs なしでも動く**（下記「ローカル Whisper 対応」参照）。
+    本家のままなら ElevenLabs API キー（有料）が必須
   - `yt-dlp`（任意、URL から素材を取る場合）
   - Node.js 22+（任意、HyperFrames / Remotion のアニメーションを使う場合）
 - 注意点
@@ -76,6 +77,39 @@ claude
 # > edit these into a launch video
 # > この素材で1分のダイジェストを作って。無音カットと字幕付きで
 ```
+
+### ローカル Whisper 対応（このリポジトリで加えた変更）
+
+本家は ElevenLabs Scribe 固定だが、Scribe が担っているのは「単語ごとの時刻付き文字起こし」だけ。
+JSON の形さえ合えば後段（`pack_transcripts.py` / `timeline_view.py` / `render.py` の字幕生成）はそのまま動くので、
+同じ形式を吐く faster-whisper バックエンドを足した。
+
+- `helpers/transcribe_whisper.py` を新設。faster-whisper（ローカル・無料・オフライン）で単語タイムスタンプ付き JSON を出す
+- `transcribe.py` / `transcribe_batch.py` に `--engine auto|scribe|whisper` を追加。
+  `auto`（既定）は ElevenLabs キーがあれば Scribe、なければ Whisper。環境変数 `VIDEO_USE_TRANSCRIBER=whisper` で固定可
+- `--whisper-model`（既定 `large-v3-turbo`、遅い Mac なら `small`）
+- `render.py --build-subtitles` は日本語なら「14 文字ごと・スペースなし・句読点で改行」に切り替わる
+- Whisper が拾い損ねたフィラー（えー、あの）は、日本語・英語用の初期プロンプトで残りやすくしている
+
+```bash
+pip install faster-whisper
+python helpers/transcribe.py 素材.mp4 --engine whisper --language ja
+python helpers/pack_transcripts.py --edit-dir ./edit
+```
+
+Scribe との違い（割り切りポイント）:
+
+| 項目 | Scribe（ElevenLabs） | ローカル Whisper |
+| --- | --- | --- |
+| 料金 | 従量課金 | 無料（初回にモデル DL 約 1.6GB） |
+| 話者分離 | あり | なし（全部 S0）。対談は Scribe 向き |
+| フィラー | 逐語で残る | 一部落ちる。プロンプトで補強 |
+| 笑い・拍手などのタグ | あり | なし |
+| 時刻精度 | 50〜100ms のずれ | もう少しずれる。カット余白を 200ms 寄りに |
+| 誤字 | 少ない | 固有名詞で出る。`takes_packed.md` か transcripts の `text` を AI で直せば字幕にも反映される |
+
+補足: この環境は Hugging Face が遮断されていて実モデルを落とせなかったため、
+疑似モデルで JSON 生成 → パック → 字幕生成までの結合テストのみ実施。実音声での精度は Mac で要確認。
 
 ## 2. Remotion 公式 Agent Skills（remotion-dev/skills）
 

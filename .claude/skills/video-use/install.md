@@ -89,9 +89,23 @@ Figure out which agent you are running under, and register once. A symlink of th
 
 If you can't tell which agent you're in, ask the user once: "which agent am I running under — Claude Code, Codex, or something else?" Then pick the right target.
 
-### 5. ElevenLabs API key
+### 5. Transcription: ElevenLabs API key, or local Whisper instead
 
-Scribe (ElevenLabs) does all transcription. Without a key, nothing transcribes.
+Transcription is either ElevenLabs Scribe (paid, needs a key, has speaker
+diarization) or local faster-whisper (free, offline, single speaker). Ask the
+user once which they want. For Whisper, skip the key and instead run:
+
+```bash
+pip install faster-whisper          # or: uv pip install faster-whisper
+# optional default so every session uses it:
+echo 'VIDEO_USE_TRANSCRIBER=whisper' >> ~/.zshrc
+```
+
+The first `--engine whisper` run downloads the model (`large-v3-turbo`, ~1.6 GB)
+from Hugging Face. On an Apple Silicon Mac it runs on CPU via CTranslate2;
+`--whisper-model small` is the fast fallback. Then continue at step 6.
+
+For Scribe: without a key, nothing transcribes.
 
 1. Check existing state in this order and stop at the first hit:
 

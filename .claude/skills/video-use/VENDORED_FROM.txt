@@ -1,2 +1,10 @@
 # Vendored snapshot of https://github.com/browser-use/video-use (MIT). Commit / date:
 9575612f066aa517354790a645fd90f9f95a743b 2026-08-30
+
+Local changes on top of upstream (keep when pulling a newer snapshot):
+- helpers/transcribe_whisper.py: new faster-whisper backend emitting Scribe-shaped JSON
+- helpers/transcribe.py, transcribe_batch.py: --engine auto|scribe|whisper, VIDEO_USE_TRANSCRIBER,
+  --whisper-model / VIDEO_USE_WHISPER_MODEL; ElevenLabs key no longer required
+- helpers/render.py: --build-subtitles chunks CJK text by character count without spaces
+- SKILL.md / install.md: document the engine switch
+- pyproject.toml: optional extra `whisper`
