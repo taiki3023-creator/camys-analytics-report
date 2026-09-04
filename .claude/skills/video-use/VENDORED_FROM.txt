@@ -1,0 +1,2 @@
+# Vendored snapshot of https://github.com/browser-use/video-use (MIT). Commit / date:
+9575612f066aa517354790a645fd90f9f95a743b 2026-08-30

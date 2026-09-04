@@ -1,0 +1,11 @@
+# Secrets (video-use skill reads ELEVENLABS_API_KEY from .env)
+.env
+.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Editors
+.DS_Store
