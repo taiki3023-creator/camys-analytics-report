@@ -74,6 +74,7 @@ Helpers (`helpers/transcribe.py`, `helpers/render.py`, etc.) live alongside this
 - **`transcribe.py <video>`** — single-file Scribe call, or local Whisper with `--engine whisper` (`--whisper-model`, `--language ja`). `--num-speakers N` optional (Scribe only). Cached.
 - **`transcribe_batch.py <videos_dir>`** — 4-worker parallel transcription (1 worker for Whisper). Use for multi-take.
 - **`transcribe_whisper.py <wav> -o <json>`** — the faster-whisper backend itself; emits Scribe-shaped JSON. Normally reached through `transcribe.py`.
+- **`lyrics_align.py <transcript.json> <lyrics.txt> -o <base>`** — when the user already has the exact text (song lyrics, a script): aligns it to the transcript's word timestamps phonetically (hiragana) and writes `.srt` + styled `.ass` + a per-line `.json` with confidence. `--display other.txt` shows different text (e.g. all-hiragana) with the same line breaks. Burn with `-vf ass=<base>.ass`. Use this instead of `--build-subtitles` whenever the words are known; ASR text is only used for timing.
 - **`pack_transcripts.py --edit-dir <dir>`** — `transcripts/*.json` → `takes_packed.md` (phrase-level, break on silence ≥ 0.5s).
 - **`timeline_view.py <video> <start> <end>`** — filmstrip + waveform PNG. On-demand visual drill-down. **Not a scan tool** — use it at decision points, not constantly.
 - **`render.py <edl.json> -o <out>`** — per-segment extract → concat → overlays (PTS-shifted) → subtitles LAST. `--preview` for 720p fast. `--build-subtitles` to generate master.srt inline.

@@ -7,4 +7,5 @@ Local changes on top of upstream (keep when pulling a newer snapshot):
   --whisper-model / VIDEO_USE_WHISPER_MODEL; ElevenLabs key no longer required
 - helpers/render.py: --build-subtitles chunks CJK text by character count without spaces
 - SKILL.md / install.md: document the engine switch
+- helpers/lyrics_align.py: align known lyrics/script to transcript timestamps -> SRT/ASS/JSON
 - pyproject.toml: optional extra `whisper`
